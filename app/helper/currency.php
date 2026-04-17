@@ -49,7 +49,12 @@ function get_default_currency() {
     global $conn;
     $r = $conn->prepare("SELECT site_base_currency FROM settings WHERE id=:id");
     $r->execute(["id" => 1]);
-    return $r->fetch(PDO::FETCH_ASSOC)["site_base_currency"];
+    $currency = $r->fetch(PDO::FETCH_ASSOC)["site_base_currency"] ?? '';
+    // [FIX GNF] Fallback Guinee : si USD ou vide, forcer GNF
+    if (empty($currency) || $currency === 'USD') {
+        return 'GNF';
+    }
+    return $currency;
 }
 
 function get_currency_hash_by_code($code) {

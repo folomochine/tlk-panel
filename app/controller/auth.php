@@ -82,7 +82,10 @@ exit();
   $conn->beginTransaction();
   $insert = $conn->prepare("INSERT INTO clients SET name=:name, username=:username, email=:email, password=:pass, lang=:lang, telephone=:phone, register_date=:date, apikey=:key , ref_code=:ref_code, email_type=:type, balance=:spent, spent=:spent,currency_type=:currency_type");
     // [SECURITE] Phase 1 — Google OAuth signup en bcrypt
-    $insert = $insert->execute(array("lang" => "en", "name" => $userinfo->name, "username" => $username, "email" => $userinfo->email, "pass" => toutlike_hash_password($pass), "phone" => "", "date" => date("Y.m.d H:i:s"), 'key' => $apikey, "ref_code" => $ref_code, "type"=> 2, "spent"=> "0.0000","currency_type"=>get_default_currency()));
+  // [FIX GNF] Forcer GNF pour les signups Google OAuth (marche meme si DB pas migree)
+  $_defaultCurrencyOAuth = get_default_currency();
+  if (empty($_defaultCurrencyOAuth) || $_defaultCurrencyOAuth === 'USD') { $_defaultCurrencyOAuth = 'GNF'; }
+  $insert = $insert->execute(array("lang" => "en", "name" => $userinfo->name, "username" => $username, "email" => $userinfo->email, "pass" => toutlike_hash_password($pass), "phone" => "", "date" => date("Y.m.d H:i:s"), 'key' => $apikey, "ref_code" => $ref_code, "type"=> 2, "spent"=> "0.0000","currency_type"=>$_defaultCurrencyOAuth));
   $conn->commit();
  $user =   $conn->prepare("SELECT * FROM clients WHERE email=:email");
  $user->execute([

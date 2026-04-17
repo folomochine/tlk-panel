@@ -1,13 +1,15 @@
-{
-  "version": "1.1.0",
+﻿{
+  "version": "1.1.1",
   "date": "2026-04-17",
-  "zip_url": "https://github.com/folomochine/tlk-panel/releases/download/v1.1.0/update-1.1.0.zip",
-  "sha256": "cd0a6e79f18460a2c8385f406e21400dc603cd0136efa4c5489c916ebe2f62c7",
+  "zip_url": "https://github.com/folomochine/tlk-panel/releases/download/v1.1.1/update-1.1.1.zip",
+  "sha256": "180c5b25bc938f97af435f85882a78e446843956cb6e2d01153e43335a12eb0c",
   "min_php": "7.4",
   "changelog": [
-    "Devise par defaut : GNF pour tous les nouveaux comptes",
-    "Correction : suppression barre mobile 'Se connecter maintenant' sur page login",
-    "Correction : formulaire d'inscription remonte en haut sur mobile",
-    "Tous les utilisateurs existants migres vers GNF"
+    "FIX : GNF force par defaut pour tous les nouveaux signups",
+    "FIX : Google OAuth signup utilise aussi GNF",
+    "Fonction get_default_currency robustifiee avec fallback GNF automatique",
+    "Devise par defaut GNF pour tous les nouveaux comptes",
+    "Suppression barre mobile 'Se connecter maintenant' sur login",
+    "Formulaire inscription remonte en haut sur mobile"
   ]
 }

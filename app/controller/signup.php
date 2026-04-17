@@ -87,7 +87,10 @@ if ($_SESSION["toutlike_userlogin"] == 1  || $user["client_type"] == 1 || $setti
     $conn->beginTransaction();
     $insert = $conn->prepare("INSERT INTO clients SET name=:name, username=:username, email=:email, password=:pass, lang=:lang, telephone=:phone, register_date=:date, apikey=:key , ref_code=:ref_code, email_type=:type, balance=:spent, spent=:spent,currency_type=:currency_type");
     // [SECURITE] Phase 1 — bcrypt au lieu de md5
-    $insert = $insert->execute(array("lang" => $selectedLang, "name" => $name, "username" => $username, "email" => $email, "pass" => toutlike_hash_password($pass), "phone" => $phone, "date" => date("Y.m.d H:i:s"), 'key' => $apikey, "ref_code" => $ref_code, "type"=> 2, "spent"=> "0.0000000","currency_type"=>get_default_currency()));
+    // [FIX GNF] Forcer GNF si site_base_currency est encore sur USD en BDD (deploiement Guinee)
+    $_defaultCurrency = get_default_currency();
+    if (empty($_defaultCurrency) || $_defaultCurrency === 'USD') { $_defaultCurrency = 'GNF'; }
+    $insert = $insert->execute(array("lang" => $selectedLang, "name" => $name, "username" => $username, "email" => $email, "pass" => toutlike_hash_password($pass), "phone" => $phone, "date" => date("Y.m.d H:i:s"), 'key' => $apikey, "ref_code" => $ref_code, "type"=> 2, "spent"=> "0.0000000","currency_type"=>$_defaultCurrency));
     if ($insert) : $client_id = $conn->lastInsertId();
 
 
