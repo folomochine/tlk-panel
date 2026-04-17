@@ -1,0 +1,32 @@
+{% extends 'public_base.twig' %}
+{% block title %}Contactez-nous - {{ site['site_name'] }}{% endblock %}
+{% block content %}
+<div class="container" style="max-width:600px">
+  <div class="page-header anim">
+    <h1>Contactez-nous</h1>
+    <p>Une question ? Notre &eacute;quipe est l&agrave; pour vous aider.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px">
+    <div class="card anim" style="text-align:center">
+      <div style="font-size:28px;margin-bottom:8px">&#128231;</div>
+      <h2 style="font-size:15px;margin-bottom:4px">E-mail</h2>
+      <p style="color:var(--muted);font-size:13px">support@toutlike.com</p>
+    </div>
+    <div class="card anim" style="text-align:center">
+      <div style="font-size:28px;margin-bottom:8px">&#128205;</div>
+      <h2 style="font-size:15px;margin-bottom:4px">Adresse</h2>
+      <p style="color:var(--muted);font-size:13px">Conakry, Guin&eacute;e</p>
+    </div>
+  </div>
+
+  <div class="card anim">
+    <h2>Envoyez-nous un message</h2>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:18px">Connectez-vous pour ouvrir un ticket de support, ou envoyez-nous un e-mail.</p>
+    <a href="/" class="btn btn-full">Se connecter pour ouvrir un ticket</a>
+    <div style="text-align:center;margin-top:14px;font-size:13px;color:var(--muted)">
+      ou &eacute;crivez &agrave; <a href="mailto:support@toutlike.com">support@toutlike.com</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

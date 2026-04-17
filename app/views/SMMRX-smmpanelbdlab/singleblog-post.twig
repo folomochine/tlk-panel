@@ -1,0 +1,23 @@
+{% extends 'public_base.twig' %}
+{% block title %}{{ blogtitle }} - {{ site['site_name'] }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div style="margin-bottom:24px">
+    <a href="/blog" style="font-size:13px;color:var(--muted)">&larr; Retour au blog</a>
+  </div>
+
+  <div class="card anim">
+    {% if blogimage %}
+      <img src="{{ blogimage }}" alt="{{ blogtitle }}" style="width:100%;border-radius:10px;margin-bottom:20px;max-height:400px;object-fit:cover">
+    {% endif %}
+    <h1 style="font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:16px">{{ blogtitle }}</h1>
+    <div style="color:var(--muted);font-size:14px;line-height:1.9">
+      {{ blogcontent|raw }}
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:24px">
+    <a href="/blog" class="btn">Voir tous les articles</a>
+  </div>
+</div>
+{% endblock %}

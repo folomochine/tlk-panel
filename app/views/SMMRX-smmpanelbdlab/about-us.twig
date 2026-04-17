@@ -1,0 +1,49 @@
+{% extends 'public_base.twig' %}
+{% block title %}A propos - {{ site['site_name'] }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="page-header anim">
+    <h1>&Agrave; propos de {{ site['site_name'] }}</h1>
+    <p>Votre partenaire de confiance pour le marketing sur les r&eacute;seaux sociaux en Guin&eacute;e.</p>
+  </div>
+
+  <div class="card anim">
+    <h2>Notre mission</h2>
+    <p style="color:var(--muted);font-size:14px;line-height:1.8">
+      {{ site['site_name'] }} est une plateforme de services de marketing en ligne bas&eacute;e &agrave; Conakry, Guin&eacute;e.
+      Nous aidons les entreprises, cr&eacute;ateurs de contenu et particuliers &agrave; d&eacute;velopper leur pr&eacute;sence
+      sur les r&eacute;seaux sociaux avec des services de qualit&eacute; &agrave; des prix abordables.
+    </p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:20px">
+    <div class="card anim" style="text-align:center">
+      <div style="font-size:32px;margin-bottom:8px">&#9889;</div>
+      <h2 style="font-size:16px">Livraison rapide</h2>
+      <p style="color:var(--muted);font-size:13px">Vos commandes d&eacute;marrent en quelques secondes.</p>
+    </div>
+    <div class="card anim" style="text-align:center">
+      <div style="font-size:32px;margin-bottom:8px">&#128274;</div>
+      <h2 style="font-size:16px">Paiement s&eacute;curis&eacute;</h2>
+      <p style="color:var(--muted);font-size:13px">Orange Money, MTN, PayCard via LengoPay.</p>
+    </div>
+    <div class="card anim" style="text-align:center">
+      <div style="font-size:32px;margin-bottom:8px">&#128172;</div>
+      <h2 style="font-size:16px">Support 24/7</h2>
+      <p style="color:var(--muted);font-size:13px">Notre &eacute;quipe est disponible pour vous aider.</p>
+    </div>
+  </div>
+
+  <div class="card anim">
+    <h2>Nous contacter</h2>
+    <p style="color:var(--muted);font-size:14px">
+      &#128205; Conakry, Guin&eacute;e<br>
+      &#128231; support@toutlike.com<br>
+    </p>
+  </div>
+
+  <div style="text-align:center;margin-top:24px">
+    <a href="/signup" class="btn">Cr&eacute;er un compte</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Restricted Area"
+AuthUserFile /home/smmpanelbdlab/.htpasswd
+Require valid-user

@@ -1,0 +1,34 @@
+{% extends 'public_base.twig' %}
+{% block title %}Blog - {{ site['site_name'] }}{% endblock %}
+{% block content %}
+<div class="container-lg">
+  <div class="page-header anim">
+    <h1>Blog</h1>
+    <p>Actualit&eacute;s, conseils et astuces pour vos r&eacute;seaux sociaux.</p>
+  </div>
+
+  {% if blogs|length > 0 %}
+  <div class="blog-grid anim">
+    {% for blog in blogs %}
+    <a href="/blog/{{ blog.blog_get }}" class="blog-card" style="text-decoration:none;color:inherit">
+      {% if blog.image_file %}
+        <img src="{{ blog.image_file }}" alt="{{ blog.title }}">
+      {% else %}
+        <div style="height:180px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:40px">&#128240;</div>
+      {% endif %}
+      <div class="content">
+        <h3>{{ blog.title }}</h3>
+        <p>{{ blog.content|striptags|slice(0,120) }}...</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card anim" style="text-align:center;padding:48px">
+    <div style="font-size:48px;margin-bottom:12px">&#128240;</div>
+    <h2>Aucun article pour le moment</h2>
+    <p style="color:var(--muted);font-size:14px">Revenez bient&ocirc;t pour d&eacute;couvrir nos conseils.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

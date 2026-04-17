@@ -1,0 +1,42 @@
+{% extends 'public_base.twig' %}
+{% block title %}Services - {{ site['site_name'] }}{% endblock %}
+{% block content %}
+<div class="container-lg">
+  <div class="page-header anim">
+    <h1>Nos services</h1>
+    <p>D&eacute;couvrez tous nos services pour booster vos r&eacute;seaux sociaux. Inscrivez-vous pour passer commande.</p>
+  </div>
+
+  {% for category in categories %}
+  <div class="card anim" style="margin-bottom:20px;overflow-x:auto">
+    <h2>{{ category.category_name }}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Service</th>
+          <th>Tarif / 1000</th>
+          <th>Min</th>
+          <th>Max</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for service in category.services %}
+        <tr>
+          <td><span class="badge-sm">{{ service.service_id }}</span></td>
+          <td>{{ service.service_name }}</td>
+          <td style="color:var(--primary);font-weight:600">{{ service.service_price }}</td>
+          <td>{{ service.service_min }}</td>
+          <td>{{ service.service_max }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+
+  <div style="text-align:center;margin-top:32px">
+    <a href="/signup" class="btn">Cr&eacute;er un compte pour commander</a>
+  </div>
+</div>
+{% endblock %}

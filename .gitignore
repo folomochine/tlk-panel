@@ -1,0 +1,53 @@
+# ================================
+#  ToutLike — .gitignore
+# ================================
+
+# Environnement & secrets
+.env
+.env.local
+.env.*.local
+app/database.php
+
+# Uploads & données utilisateur
+public/uploads/
+public/admin/uploads/
+img/panel/
+
+# Sauvegardes OTA
+public/backups/
+
+# Cache runtime
+currencies.json
+
+# Dossier de distribution (sauf version.json qui doit être poussé)
+dist/*
+!dist/version.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+error_log
+
+# Temporaires
+*.tmp
+*.bak
+*.backup
+*.orig
+
+# Node (si jamais ajouté)
+node_modules/
+npm-debug.log
+
+# Composer (dépendances déjà versionnées dans vendor/)
+composer.phar

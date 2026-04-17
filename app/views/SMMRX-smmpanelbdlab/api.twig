@@ -1,0 +1,801 @@
+{% include 'header.twig' %}
+{% if user['auth'] %}
+<!-- Main variables *content* -->
+        <main class="auth">
+                    <div class="about_us_effect">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/bg-img1.png"
+              class="img-fluid about_us_img_left"
+              alt=""
+            />
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/bg-img2.png"
+              class="img-fluid about_us_img_right"
+              alt=""
+            />
+          </div>
+          		    <section id="api_page">
+  <div class="about_us_effect">
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/about-us-page-left-image.png"
+      class="img-fluid about_us_img_left"
+      alt=""
+    />
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/about-us-page-right-image.png"
+      class="img-fluid about_us_img_right"
+      alt=""
+    />
+  </div>
+  <div
+    class=" container-fluid "
+  >
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card card_auth_1 mb-3">
+          <div class="card-header  d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Documentation API</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <td class="width-40">Methode HTTP</td>
+                  <td>POST</td>
+                </tr>
+                <tr>
+                  <td>URL API</td>
+                  <td>{{ site['url'] }}/api/v2</td>
+                </tr>
+                                <tr>
+                  <td>Cle API</td>
+                  <td>
+                    Obtenez une cle API depuis la page
+                    <a href="{{ site['url'] }}/account"
+                      >Compte</a
+                    >
+                    page
+                  </td>
+                </tr>
+                                <tr>
+                  <td>Format de reponse</td>
+                  <td>JSON</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+{% else %}
+<!-- Main variables *content* -->
+        <main class="no_auth">
+          		    <section id="api_page">
+  <div class="about_us_effect">
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/about-us-page-left-image.png"
+      class="img-fluid about_us_img_left"
+      alt=""
+    />
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/about-us-page-right-image.png"
+      class="img-fluid about_us_img_right"
+      alt=""
+    />
+  </div>
+  <div
+    class=" container "
+  >
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card card_auth_1 mb-3">
+          <div class="card-header  d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Documentation API</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <td class="width-40">HTTP Method</td>
+                  <td>POST</td>
+                </tr>
+                <tr>
+                  <td>URL API</td>
+                  <td>{{ site['url'] }}/api/v2</td>
+                </tr>
+                                <tr>
+                  <td>Format de reponse</td>
+                  <td>JSON</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+{% endif %}
+                <div class="card card_auth_1 mb-4 ">
+          <div class="card-header d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Liste des services</div>
+            </div>
+          </div>
+          <div class="card-body">
+                          <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="width-40">Parametres</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                                  <tr>
+                    <td>key</td>
+                    <td>Votre cle API</td>
+                  </tr>
+                                  <tr>
+                    <td>action</td>
+                    <td>services</td>
+                  </tr>
+                                </tbody>
+              </table>
+                        <p class="example_response"><strong>Exemple de reponse</strong></p>
+            <pre>[
+    {
+        "service": 1,
+        "name": "Followers",
+        "type": "Default",
+        "category": "First Category",
+        "rate": "0.90",
+        "min": "50",
+        "max": "10000",
+        "refill": true,
+        "cancel": true
+    },
+    {
+        "service": 2,
+        "name": "Comments",
+        "type": "Custom Comments",
+        "category": "Second Category",
+        "rate": "8",
+        "min": "10",
+        "max": "1500",
+        "refill": false,
+        "cancel": true
+    }
+]</pre>
+          </div>
+        </div>
+                  <div class="card card_auth_1 mb-4 ">
+          <div class="card-header d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Ajouter une commande</div>
+            </div>
+          </div>
+          <div class="card-body">
+                                          <p>
+                  <form class="form-inline">
+                {{ csrf_field() }}
+                    <div class="form-group">
+                      <select class="form-control input-sm" id="service_type">
+                                                  <option value="0">Par defaut</option>
+                                                  <option value="10">Pack</option>
+                                                  <option value="2">Commentaires personnalises</option>
+                                                  <option value="7">Mentions User Followers</option>
+                                                  <option value="17">Poll</option>
+                                                  <option value="100">Abonnements</option>
+                                              </select>
+                    </div>
+                  </form>
+                </p>
+                                               <div id="type_0" style="display:none;">
+                  <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th class="width-40">Parametres</th>
+                      <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                          <tr>
+                        <td>key</td>
+                        <td>Votre cle API</td>
+                      </tr>
+                                          <tr>
+                        <td>action</td>
+                        <td>add</td>
+                      </tr>
+                                          <tr>
+                        <td>service</td>
+                        <td>ID du service</td>
+                      </tr>
+                                          <tr>
+                        <td>link</td>
+                        <td>Lien vers la page</td>
+                      </tr>
+                                          <tr>
+                        <td>quantity</td>
+                        <td>Quantite necessaire</td>
+                      </tr>
+                                          <tr>
+                        <td>runs (facultatif)</td>
+                        <td>Livraisons a effectuer</td>
+                      </tr>
+                                          <tr>
+                        <td>interval (facultatif)</td>
+                        <td>Intervalle en minutes</td>
+                      </tr>
+                                        </tbody>
+                  </table>
+                </div>
+                              <div id="type_10" style="display:none;">
+                  <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th class="width-40">Parametres</th>
+                      <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                          <tr>
+                        <td>key</td>
+                        <td>Votre cle API</td>
+                      </tr>
+                                          <tr>
+                        <td>action</td>
+                        <td>add</td>
+                      </tr>
+                                          <tr>
+                        <td>service</td>
+                        <td>ID du service</td>
+                      </tr>
+                                          <tr>
+                        <td>link</td>
+                        <td>Lien vers la page</td>
+                      </tr>
+                                        </tbody>
+                  </table>
+                </div>
+                              <div id="type_2" style="display:none;">
+                  <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th class="width-40">Parametres</th>
+                      <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                          <tr>
+                        <td>key</td>
+                        <td>Votre cle API</td>
+                      </tr>
+                                          <tr>
+                        <td>action</td>
+                        <td>add</td>
+                      </tr>
+                                          <tr>
+                        <td>service</td>
+                        <td>ID du service</td>
+                      </tr>
+                                          <tr>
+                        <td>link</td>
+                        <td>Lien vers la page</td>
+                      </tr>
+                                          <tr>
+                        <td>comments</td>
+                        <td>Liste de commentaires separee par \r\n ou \n</td>
+                      </tr>
+                                        </tbody>
+                  </table>
+                </div>
+                              <div id="type_7" style="display:none;">
+                  <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th class="width-40">Parametres</th>
+                      <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                          <tr>
+                        <td>key</td>
+                        <td>Votre cle API</td>
+                      </tr>
+                                          <tr>
+                        <td>action</td>
+                        <td>add</td>
+                      </tr>
+                                          <tr>
+                        <td>service</td>
+                        <td>ID du service</td>
+                      </tr>
+                                          <tr>
+                        <td>link</td>
+                        <td>Lien vers la page</td>
+                      </tr>
+                                          <tr>
+                        <td>quantity</td>
+                        <td>Quantite necessaire</td>
+                      </tr>
+                                          <tr>
+                        <td>username</td>
+                        <td>URL pour recuperer les abonnes</td>
+                      </tr>
+                                        </tbody>
+                  </table>
+                </div>
+                              <div id="type_100" style="display:none;">
+                  <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th class="width-40">Parametres</th>
+                      <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                          <tr>
+                        <td>key</td>
+                        <td>Votre cle API</td>
+                      </tr>
+                                          <tr>
+                        <td>action</td>
+                        <td>add</td>
+                      </tr>
+                                          <tr>
+                        <td>service</td>
+                        <td>ID du service</td>
+                      </tr>
+                                          <tr>
+                        <td>username</td>
+                        <td>Nom dutilisateur</td>
+                      </tr>
+                                          <tr>
+                        <td>min</td>
+                        <td>Quantite min.</td>
+                      </tr>
+                                          <tr>
+                        <td>max</td>
+                        <td>Quantite max.</td>
+                      </tr>
+                                          <tr>
+                        <td>posts (optional)</td>
+                        <td>Utilisez ce parametre si vous souhaitez limiter le nombre de nouvelles publications (futures) qui seront analysees et pour lesquelles des commandes seront creees. Si le parametre posts nest pas defini, lbonnement sera cree pour un nombre illimite de publications.</td>
+                      </tr>
+                                          <tr>
+                        <td>old_posts (optional)</td>
+                        <td>Nombre de publications existantes qui seront analysees et pour lesquelles des commandes seront creees, peut etre utilise si cette option est disponible pour le service.</td>
+                      </tr>
+                                          <tr>
+                        <td>delay</td>
+                        <td>Delai en minutes. Valeurs possibles : 0, 5, 10, 15, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 360, 420, 480, 540, 600</td>
+                      </tr>
+                                          <tr>
+                        <td>expiry (optional)</td>
+                        <td>Date dexpiration. Format j/m/A</td>
+                      </tr>
+                                        </tbody>
+                  </table>
+                </div>
+                              <div id="type_17" style="display:none;">
+                  <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                      <th class="width-40">Parametres</th>
+                      <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                          <tr>
+                        <td>key</td>
+                        <td>Votre cle API</td>
+                      </tr>
+                                          <tr>
+                        <td>action</td>
+                        <td>add</td>
+                      </tr>
+                                          <tr>
+                        <td>service</td>
+                        <td>ID du service</td>
+                      </tr>
+                                          <tr>
+                        <td>link</td>
+                        <td>Lien vers la page</td>
+                      </tr>
+                                          <tr>
+                        <td>quantity</td>
+                        <td>Quantite necessaire</td>
+                      </tr>
+                                          <tr>
+                        <td>answer_number</td>
+                        <td>Numero de reponse du sondage</td>
+                      </tr>
+                                        </tbody>
+                  </table>
+                </div>
+                                      <p class="example_response"><strong>Exemple de reponse</strong></p>
+            <pre>{
+    "order": 23501
+}</pre>
+          </div>
+        </div>
+                  <div class="card card_auth_1 mb-4 ">
+          <div class="card-header d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Statut de la commande</div>
+            </div>
+          </div>
+          <div class="card-body">
+                          <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="width-40">Parametres</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                                  <tr>
+                    <td>key</td>
+                    <td>Votre cle API</td>
+                  </tr>
+                                  <tr>
+                    <td>action</td>
+                    <td>status</td>
+                  </tr>
+                                  <tr>
+                    <td>order</td>
+                    <td>ID de commande</td>
+                  </tr>
+                                </tbody>
+              </table>
+                        <p class="example_response"><strong>Exemple de reponse</strong></p>
+            <pre>{
+    "charge": "0.27819",
+    "start_count": "3572",
+    "status": "Partial",
+    "remains": "157",
+    "currency": "USD"
+}</pre>
+          </div>
+        </div>
+                  <div class="card card_auth_1 mb-4 ">
+          <div class="card-header d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Statut de commandes multiples</div>
+            </div>
+          </div>
+          <div class="card-body">
+                          <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="width-40">Parametres</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                                  <tr>
+                    <td>key</td>
+                    <td>Votre cle API</td>
+                  </tr>
+                                  <tr>
+                    <td>action</td>
+                    <td>status</td>
+                  </tr>
+                                  <tr>
+                    <td>orders</td>
+                    <td>IDs de commande (separes par une virgule, jusqu 100 IDs)</td>
+                  </tr>
+                                </tbody>
+              </table>
+                        <p class="example_response"><strong>Exemple de reponse</strong></p>
+            <pre>{
+    "1": {
+        "charge": "0.27819",
+        "start_count": "3572",
+        "status": "Partial",
+        "remains": "157",
+        "currency": "USD"
+    },
+    "10": {
+        "error": "Incorrect order ID"
+    },
+    "100": {
+        "charge": "1.44219",
+        "start_count": "234",
+        "status": "In progress",
+        "remains": "10",
+        "currency": "USD"
+    }
+}</pre>
+          </div>
+        </div>
+                  <div class="card card_auth_1 mb-4 ">
+          <div class="card-header d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Creer un rechargement</div>
+            </div>
+          </div>
+          <div class="card-body">
+                          <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="width-40">Parametres</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                                  <tr>
+                    <td>key</td>
+                    <td>Votre cle API</td>
+                  </tr>
+                                  <tr>
+                    <td>action</td>
+                    <td>refill</td>
+                  </tr>
+                                  <tr>
+                    <td>order</td>
+                    <td>ID de commande</td>
+                  </tr>
+                                </tbody>
+              </table>
+                        <p class="example_response"><strong>Exemple de reponse</strong></p>
+            <pre>{
+    "refill": "1"
+}</pre>
+          </div>
+        </div>
+                  <div class="card card_auth_1 mb-4 ">
+          <div class="card-header d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Creer des recharges multiples</div>
+            </div>
+          </div>
+          <div class="card-body">
+                          <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="width-40">Parametres</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                                  <tr>
+                    <td>key</td>
+                    <td>Votre cle API</td>
+                  </tr>
+                                  <tr>
+                    <td>action</td>
+                    <td>refill</td>
+                  </tr>
+                                  <tr>
+                    <td>orders</td>
+                    <td>IDs de commande (separes par une virgule, jusqu 100 IDs)</td>
+                  </tr>
+                                </tbody>
+              </table>
+                        <p class="example_response"><strong>Exemple de reponse</strong></p>
+            <pre>[
+    {
+        "order": 1,
+        "refill": 1
+    },
+    {
+        "order": 2,
+        "refill": 2
+    },
+    {
+        "order": 3,
+        "refill": {
+            "error": "Incorrect order ID"
+        }
+    }
+]</pre>
+          </div>
+        </div>
+                  <div class="card card_auth_1 mb-4 ">
+          <div class="card-header d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Obtenir le statut de rechargement</div>
+            </div>
+          </div>
+          <div class="card-body">
+                          <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="width-40">Parametres</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                                  <tr>
+                    <td>key</td>
+                    <td>Votre cle API</td>
+                  </tr>
+                                  <tr>
+                    <td>action</td>
+                    <td>refill_status</td>
+                  </tr>
+                                  <tr>
+                    <td>refill</td>
+                    <td>ID de rechargement</td>
+                  </tr>
+                                </tbody>
+              </table>
+                        <p class="example_response"><strong>Exemple de reponse</strong></p>
+            <pre>{
+    "status": "Completed"
+}</pre>
+          </div>
+        </div>
+                  <div class="card card_auth_1 mb-4 ">
+          <div class="card-header d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Obtenir le statut de recharges multiples</div>
+            </div>
+          </div>
+          <div class="card-body">
+                          <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="width-40">Parametres</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                                  <tr>
+                    <td>key</td>
+                    <td>Votre cle API</td>
+                  </tr>
+                                  <tr>
+                    <td>action</td>
+                    <td>refill_status</td>
+                  </tr>
+                                  <tr>
+                    <td>refills</td>
+                    <td>IDs de rechargement (separes par une virgule, jusqu 100 IDs)</td>
+                  </tr>
+                                </tbody>
+              </table>
+                        <p class="example_response"><strong>Exemple de reponse</strong></p>
+            <pre>[
+    {
+        "refill": 1,
+        "status": "Completed"
+    },
+    {
+        "refill": 2,
+        "status": "Rejected"
+    },
+    {
+        "refill": 3,
+        "status": {
+            "error": "Refill not found"
+        }
+    }
+]</pre>
+          </div>
+        </div>
+                  <div class="card card_auth_1 mb-4 ">
+          <div class="card-header d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Creer une annulation</div>
+            </div>
+          </div>
+          <div class="card-body">
+                          <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="width-40">Parametres</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                                  <tr>
+                    <td>key</td>
+                    <td>Votre cle API</td>
+                  </tr>
+                                  <tr>
+                    <td>action</td>
+                    <td>cancel</td>
+                  </tr>
+                                  <tr>
+                    <td>orders</td>
+                    <td>IDs de commande (separes par une virgule, jusqu 100 IDs)</td>
+                  </tr>
+                                </tbody>
+              </table>
+                        <p class="example_response"><strong>Exemple de reponse</strong></p>
+            <pre>[
+    {
+        "order": 9,
+        "cancel": {
+            "error": "Incorrect order ID"
+        }
+    },
+    {
+        "order": 2,
+        "cancel": 1
+    }
+]</pre>
+          </div>
+        </div>
+                  <div class="card card_auth_1 mb-4 ">
+          <div class="card-header d-flex align-items-center">
+            <div class="card_header_2">
+              <div class="icon">
+                <iconify-icon icon="ph:code-bold"></iconify-icon>
+              </div>
+              <div class="text">Solde utilisateur</div>
+            </div>
+          </div>
+          <div class="card-body">
+                          <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th class="width-40">Parametres</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                                  <tr>
+                    <td>key</td>
+                    <td>Votre cle API</td>
+                  </tr>
+                                  <tr>
+                    <td>action</td>
+                    <td>balance</td>
+                  </tr>
+                                </tbody>
+              </table>
+                        <p class="example_response"><strong>Exemple de reponse</strong></p>
+            <pre>{
+    "balance": "100.84292",
+    "currency": "USD"
+}</pre>
+          </div>
+        </div>
+                  <div class="pb-4">
+          <a href="/" class="btn btn-primary mt-3">Exemple de code PHP</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+        </main>
+
+{% include 'footer.twig' %}

@@ -1,0 +1,13 @@
+{
+  "version": "1.1.0",
+  "date": "2026-04-17",
+  "zip_url": "https://github.com/VOTRE-USER/VOTRE-REPO/releases/download/v1.1.0/update-1.1.0.zip",
+  "sha256": "",
+  "min_php": "7.4",
+  "changelog": [
+    "Nouveau : popup compact mobile-first pour la confirmation de commande",
+    "Amélioration : page /updates traduite en français avec badges colorés",
+    "Correction : modal des méthodes de paiement",
+    "Optimisation : interface responsive sur Android/iOS"
+  ]
+}

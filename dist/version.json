@@ -1,0 +1,10 @@
+﻿{
+    "version":  "1.0.0",
+    "date":  "2026-04-17",
+    "zip_url":  "https://github.com/folomochine/tlk-panel/releases/download/v1.0.0/update-1.0.0.zip",
+    "sha256":  "d46ccc125ebe45e33f519728137910fe94d2884a1aa1cbd82ae68a7ed841a78f",
+    "min_php":  "7.4",
+    "changelog":  [
+                      "Release initiale du panel ToutLike,Tableau de bord admin redesigné en GNF,Popup compact mobile-first pour la confirmation de commande,Page /updates traduite en français avec badges colorés,Modal méthodes de paiement corrigé,Système OTA de mise à jour intégré"
+                  ]
+}

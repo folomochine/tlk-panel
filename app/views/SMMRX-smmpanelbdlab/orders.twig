@@ -1,0 +1,239 @@
+{% include 'header.twig' %}
+	<!-- Main variables *content* -->
+        <main class="auth">
+                    <div class="about_us_effect">
+            <img
+              src="https://cdn.smmpanelbdlab.com/work/PerfectPanel/img/bg-img1.png"
+              class="img-fluid about_us_img_left"
+              alt=""
+            />
+            <img
+              src="https://cdn.smmpanelbdlab.com/work/PerfectPanel/img/bg-img2.png"
+              class="img-fluid about_us_img_right"
+              alt=""
+            />
+          </div>
+          		    <!-- Order Search Box -->
+<div class="search__box">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card card_v2 mb-3">
+          <div class="card-body">
+            <form action="" method="get" id="history-search">
+                {{ csrf_field() }}
+                <div class="search_inputs ">
+                    <div class="search">
+                        <input type="text" name="search" class="form-control" value="{{ search }}" placeholder="Rechercher">
+                        <button type="submit" class="icon" data-filter-serch-btn="true">
+                          <iconify-icon icon="material-symbols:search"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ### Order Search Box -->
+
+<style>
+.status_capsule{display:inline-flex;align-items:center;justify-content:center;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:800;text-align:center;white-space:nowrap;border:1px solid transparent;box-shadow:none!important}
+</style>
+<!-- Orders Filter Buttons -->
+
+<div class="orders__filter__btn mb-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-12">
+        <div class="order__filters">
+          <a {% if 'all' == status %}  class="btn__orders__filter active" {% endif %}
+            href="/orders"
+            class="btn btn__orders__filter "
+          >
+            <div class="icon">
+              <iconify-icon icon="mingcute:settings-6-line"></iconify-icon>
+            </div>
+            <div class="text">Tout</div>
+          </a>
+          <a {% if 'pending' == status %}  class="btn__orders__filter active" {% endif %}
+            href="/orders/pending"
+            class="btn btn__orders__filter "
+          >
+            <div class="icon">
+              <iconify-icon icon="ic:baseline-sync"></iconify-icon>
+            </div>
+            <div class="text">En attente</div>
+          </a>
+          <a {% if 'inprogress' == status %}  class="btn__orders__filter active" {% endif %}
+            href="/orders/inprogress"
+            class="btn btn__orders__filter "
+          >
+            <div class="icon">
+              <iconify-icon icon="ph:hourglass-high-duotone"></iconify-icon>
+            </div>
+            <div class="text">En cours</div>
+          </a>
+          <a {% if 'completed' == status %}  class="btn__orders__filter active" {% endif %}
+            href="/orders/completed"
+            class="btn btn__orders__filter "
+          >
+            <div class="icon">
+              <iconify-icon icon="solar:check-circle-broken"></iconify-icon>
+            </div>
+            <div class="text">Terminee</div>
+          </a>
+          <a {% if 'partial' == status %}  class="btn__orders__filter active" {% endif %}
+            href="/orders/partial"
+            class="btn btn__orders__filter "
+          >
+            <div class="icon">
+              <iconify-icon icon="solar:stop-circle-linear"></iconify-icon>
+            </div>
+            <div class="text">Partielle</div>
+          </a>
+          <a {% if 'processing' == status %}  class="btn__orders__filter active" {% endif %}
+            href="/orders/processing"
+            class="btn btn__orders__filter "
+          >
+            <div class="icon">
+              <iconify-icon icon="ic:baseline-sync-lock"></iconify-icon>
+            </div>
+            <div class="text">En traitement</div>
+          </a>
+          <a {% if 'canceled' == status %}  class="btn__orders__filter active" {% endif %}
+            href="/orders/canceled"
+            class="btn btn__orders__filter "
+          >
+            <div class="icon">
+              <iconify-icon icon="carbon:close-outline"></iconify-icon>
+            </div>
+            <div class="text">Annulee</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Orders Table -->
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-12">
+          <div class="order__table">
+              <div class="order_table_head">
+                  <div class="head__id">ID</div>
+                  <div class="head__date">Date</div>
+                  <div class="head__link">Lien</div>
+                  <div class="head__price">Montant</div>
+                  <div class="head__startcount">Depart</div>
+                  <div class="head__quantity">Quantite</div>
+                  <div class="head__remain">Restant</div>
+                  <div class="head__services">Service</div>
+                  <div class="head__status">Statut</div>
+                  <div class="head__quickaction">Action rapide</div>
+              </div>
+
+                            <!-- Table row -->
+                            {% for order in orders %}
+              <div class="order_table_row">
+                  <div class="body__id copyButton" data-value="{{ order['id'] }}" data-bs-toggle="popover" data-bs-content="Copie !" data-bs-trigger="manual">
+                      <span>{{ order['id'] }} <span><i class="far fa-copy"></i></span> </span>
+                 {% if order['order_where'] == "api"  %}<a class="btn btn-actions">Api</a>{% endif %} </div>
+                  <div class="body__date">
+                      {{ order['date'] }}
+                  </div>
+                  <div class="body__link">
+                      <div class="link__order">
+                          <span>
+                              <i class="fas fa-link"></i>
+                          </span>
+                          <a href="{{ order['link'] }}" target="_blank">{{ order['link'] }} 
+                          </a>
+                                                </div>
+                  </div>
+                  <div class="body__price">
+                     {{order["charge"]}}
+                  </div>
+                  <div class="body__startcount">
+                                           {{ order['start_count'] }}
+                                        </div>
+                  <div class="body__quantity">
+                      {{ order['quantity'] }}
+                  </div>
+                  <div class="body__remain">
+                      {{ order['remains'] }}
+                  </div>
+                  <div class="body__services">
+                   {{ order['service'] }}
+                  </div>
+                  <div class="body__status">
+                      {% set badge_bg = 'rgba(148,163,184,.16)' %}
+                      {% set badge_color = '#cbd5e1' %}
+                      {% set badge_border = 'rgba(148,163,184,.28)' %}
+                      {% if order['status_class']|default('pending') == 'completed' %}
+                        {% set badge_bg = 'rgba(16,185,129,.16)' %}
+                        {% set badge_color = '#10b981' %}
+                        {% set badge_border = 'rgba(16,185,129,.35)' %}
+                      {% elseif order['status_class']|default('pending') == 'pending' %}
+                        {% set badge_bg = 'rgba(245,158,11,.18)' %}
+                        {% set badge_color = '#f59e0b' %}
+                        {% set badge_border = 'rgba(245,158,11,.35)' %}
+                      {% elseif order['status_class']|default('pending') in ['inprogress', 'in_progress'] %}
+                        {% set badge_bg = 'rgba(59,130,246,.18)' %}
+                        {% set badge_color = '#3b82f6' %}
+                        {% set badge_border = 'rgba(59,130,246,.35)' %}
+                      {% elseif order['status_class']|default('pending') == 'processing' %}
+                        {% set badge_bg = 'rgba(139,92,246,.18)' %}
+                        {% set badge_color = '#8b5cf6' %}
+                        {% set badge_border = 'rgba(139,92,246,.35)' %}
+                      {% elseif order['status_class']|default('pending') == 'partial' %}
+                        {% set badge_bg = 'rgba(249,115,22,.18)' %}
+                        {% set badge_color = '#f97316' %}
+                        {% set badge_border = 'rgba(249,115,22,.35)' %}
+                      {% elseif order['status_class']|default('pending') in ['canceled', 'cancelled', 'failed', 'error'] %}
+                        {% set badge_bg = 'rgba(239,68,68,.18)' %}
+                        {% set badge_color = '#ef4444' %}
+                        {% set badge_border = 'rgba(239,68,68,.35)' %}
+                      {% endif %}
+                      <div class="status_capsule" style="background:{{ badge_bg }}!important;color:{{ badge_color }}!important;border-color:{{ badge_border }}!important;">
+                          {{ order['status'] }}</div>
+                  </div>
+                  <div class="body__quickaction">
+                    {% if order['status_raw'] == 'completed' and order['show_refill'] == 'true' %}
+                      {% if order["refillButton"] == "2" %}
+                        <a href="orders/refill/{{ order['id'] }}" class="btn btn-success btn-sm">Recharger</a>
+                        <br><br>
+                      {% elseif order["refillButton"] == "3" %}
+                        <button data-toggle="tooltip" data-placement="top" title="{{ order['refillTimeLeft'] }} {{ 'restant pour recharge' }}" class="btn btn-action dropdown-toggle">Recharger</button>
+                      {% elseif order["refillButton"] == "4" %}
+                        <button type="button" class="btn btn-info" disabled="true">Rechargement</button>
+                      {% endif %}
+                    {% endif %}
+
+                    {% if order['cancelButton'] == true %}
+                      <a href="orders/cancel/{{ order['id'] }}" class="btn btn-actions bg-danger">annuler</a>
+                    {% endif %}
+                  </div>
+              </div>
+            {% endfor %}
+                  </div>
+              </div>
+              <!-- ### Table row -->
+    </div>
+   </div></div>
+   </div></div></div></div></div>
+   </div</div></div>
+   </div></div></div>
+   </div>
+  {% if contentText2 %}
+{{ contentText2 }}
+{% endif %}
+
+{% include 'footer.twig' %}
+
+                
+
+                       

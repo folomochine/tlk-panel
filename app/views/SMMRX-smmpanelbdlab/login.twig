@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ site['site_name'] }} - Connexion</title>
+  <meta name="description" content="{{ pagedescription ? pagedescription : site['description'] }}">
+  <meta name="keywords" content="{{ pagekeywords ? pagekeywords : site['keywords'] }}">
+  <link rel="icon" href="{{ site['favicon'] }}" type="image/png">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#060b17;--bg2:#091223;--bg3:#101c34;
+      --card:#0f1729;--card2:rgba(15,23,41,.78);--soft:#111c31;
+      --border:rgba(148,163,184,.16);--border-strong:rgba(124,92,252,.26);
+      --primary:#5b8cff;--primary-2:#7c5cfc;--accent:#67e8f9;--success:#22c55e;--orange:#ff9800;
+      --text:#f8fbff;--muted:#98a9c0;--dim:#6f8298;
+      --input:#13203a;--input-b:#233557;--shadow:0 20px 60px rgba(0,0,0,.28);
+      --radius:24px;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      background:
+        radial-gradient(circle at top left,rgba(91,140,255,.18),transparent 28%),
+        radial-gradient(circle at top right,rgba(124,92,252,.15),transparent 25%),
+        linear-gradient(180deg,var(--bg) 0%,var(--bg2) 52%,var(--bg) 100%);
+      color:var(--text);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    body.light{
+      --bg:#f4f7fb;--bg2:#eef3fa;--bg3:#ffffff;
+      --card:#ffffff;--card2:rgba(255,255,255,.84);--soft:#f7f9fc;
+      --border:rgba(15,23,42,.09);--border-strong:rgba(91,140,255,.22);
+      --text:#0f172a;--muted:#5c6f86;--dim:#8192a8;
+      --input:#f7f9fd;--input-b:#d8e0ee;
+      background:
+        radial-gradient(circle at top left,rgba(91,140,255,.12),transparent 28%),
+        radial-gradient(circle at top right,rgba(124,92,252,.10),transparent 25%),
+        linear-gradient(180deg,#f5f8fd 0%,#edf3fb 55%,#f6f9fd 100%);
+    }
+    a{color:var(--primary);text-decoration:none}
+    a:hover{text-decoration:none}
+    .shell{max-width:1220px;margin:0 auto;padding:0 20px}
+
+    .site-nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,11,23,.72);border-bottom:1px solid var(--border);backdrop-filter:blur(18px);
+    }
+    body.light .site-nav{background:rgba(255,255,255,.84)}
+    .nav-inner{height:78px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand img{height:38px;display:block}
+    .brand-mark{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(91,140,255,.18),rgba(124,92,252,.2));border:1px solid var(--border);box-shadow:0 12px 24px rgba(91,140,255,.15);color:#fff;font-weight:800;font-size:15px}
+    .nav-links{display:flex;align-items:center;gap:8px}
+    .nav-link{padding:10px 14px;border-radius:999px;font-size:13px;font-weight:600;color:var(--muted);transition:.2s ease}
+    .nav-link:hover{color:var(--text);background:rgba(255,255,255,.04)}
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .theme-toggle,.burger{width:42px;height:42px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.2s ease;font-size:16px}
+    .theme-toggle:hover,.burger:hover{color:var(--text);border-color:var(--border-strong)}
+    .btn-outline,.btn-fill,.hero-scroll-btn,.hero-secondary-btn,.submit-btn,.hero-mobile-anchor,.mobile-login-bar a{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:18px;font-weight:800;transition:.22s ease;text-decoration:none}
+    .btn-outline,.btn-fill{padding:11px 18px;font-size:13px}
+    .btn-outline{border:1px solid var(--border);color:var(--text);background:rgba(255,255,255,.04)}
+    .btn-outline:hover{border-color:var(--border-strong);color:var(--primary)}
+    .btn-fill,.hero-scroll-btn,.submit-btn,.hero-mobile-anchor,.mobile-login-bar a{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2));box-shadow:0 14px 28px rgba(91,140,255,.24)}
+    .btn-fill:hover,.hero-scroll-btn:hover,.submit-btn:hover,.hero-mobile-anchor:hover,.mobile-login-bar a:hover{transform:translateY(-2px);box-shadow:0 18px 30px rgba(91,140,255,.3)}
+    .burger{display:none}
+
+    .mob-menu{display:none;position:fixed;top:79px;left:16px;right:16px;z-index:99;padding:16px;border-radius:22px;background:var(--card2);border:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:blur(18px);flex-direction:column;gap:10px}
+    .mob-menu.open{display:flex}
+    .mob-menu a{padding:12px 14px;border-radius:14px;color:var(--muted);font-size:14px;font-weight:600;background:rgba(255,255,255,.03)}
+    .mob-menu a:hover{color:var(--text);background:rgba(91,140,255,.08)}
+
+    .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:128px 0 72px}
+    .hero::before,.hero::after{content:"";position:absolute;pointer-events:none;filter:blur(70px);opacity:.45}
+    .hero::before{width:260px;height:260px;left:0;top:110px;background:radial-gradient(circle,rgba(91,140,255,.28) 0%,transparent 72%)}
+    .hero::after{width:240px;height:240px;right:0;bottom:120px;background:radial-gradient(circle,rgba(124,92,252,.24) 0%,transparent 72%)}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(360px,430px);gap:28px;align-items:start}
+    .hero-copy,.login-panel,.section-card,.faq-card,.cta-card,.testimonials-card{position:relative;z-index:1}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(91,140,255,.12);border:1px solid rgba(91,140,255,.18);color:#bfd6ff;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+    body.light .hero-badge{color:#365ea8}
+    .hero-title{font-size:clamp(36px,5vw,64px);line-height:1.02;font-weight:900;letter-spacing:-.05em;margin-bottom:18px;max-width:720px}
+    .hero-title span{background:linear-gradient(135deg,var(--primary),var(--accent),var(--primary-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero-text{max-width:650px;color:var(--muted);font-size:16px;line-height:1.85;margin-bottom:22px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+    .hero-scroll-btn,.hero-secondary-btn,.hero-mobile-anchor{min-height:52px;padding:14px 22px;font-size:14px}
+    .hero-secondary-btn{border:1px solid var(--border);color:var(--text);background:rgba(255,255,255,.04)}
+    .hero-secondary-btn:hover{border-color:var(--border-strong);color:var(--primary)}
+    .hero-mobile-anchor{display:none;margin-bottom:18px}
+    .hero-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:18px}
+    .metric-card{padding:18px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--border);box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+    .metric-card strong{display:block;font-size:18px;font-weight:900;color:var(--text);margin-bottom:6px}
+    .metric-card span{display:block;color:var(--muted);font-size:12px;line-height:1.7}
+
+    .hero-proof-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);gap:18px;align-items:stretch;margin-bottom:18px}
+    .visual-card,.countdown-card,.orange-money-card{border-radius:26px;border:1px solid var(--border);background:rgba(255,255,255,.04);box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+    .proof-side-stack{display:grid;grid-template-rows:auto 1fr;gap:18px}
+    .visual-card{padding:22px;overflow:hidden;min-height:520px;display:flex;flex-direction:column;gap:18px}
+    .visual-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+    .visual-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--border);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c8d7f0}
+    body.light .visual-chip{color:#47617f}
+    .visual-copy{display:flex;flex-direction:column;gap:10px}
+    .visual-title{font-size:24px;font-weight:900;line-height:1.08;letter-spacing:-.03em;color:var(--text)}
+    .visual-mini-note{max-width:220px;color:var(--muted);font-size:12px;line-height:1.7;text-align:right}
+    .visual-stage{position:relative;flex:1;min-height:360px;border-radius:24px;border:1px solid rgba(124,92,252,.18);background:radial-gradient(circle at 18% 18%,rgba(91,140,255,.16),transparent 30%),radial-gradient(circle at 82% 10%,rgba(124,92,252,.15),transparent 28%),linear-gradient(180deg,rgba(9,18,35,.98),rgba(10,18,34,.82));display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden}
+    body.light .visual-stage{background:radial-gradient(circle at 18% 18%,rgba(91,140,255,.12),transparent 30%),radial-gradient(circle at 82% 10%,rgba(124,92,252,.1),transparent 28%),linear-gradient(180deg,#fbfdff,#f0f5fd)}
+    .visual-stage::before,.visual-stage::after{content:"";position:absolute;border-radius:999px;pointer-events:none;opacity:.72}
+    .visual-stage::before{width:180px;height:180px;left:-50px;bottom:-40px;background:radial-gradient(circle,rgba(67,215,255,.28),transparent 72%)}
+    .visual-stage::after{width:200px;height:200px;right:-58px;top:-52px;background:radial-gradient(circle,rgba(255,74,120,.22),transparent 72%)}
+    .visual-image{position:relative;z-index:1;display:block;max-width:100%;max-height:360px;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 28px 45px rgba(0,0,0,.24))}
+    .visual-fallback{display:none;position:relative;z-index:1;max-width:320px;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center}
+    .visual-stage.no-image .visual-image{display:none}
+    .visual-stage.no-image .visual-fallback{display:flex}
+    .visual-fallback-mark{width:84px;height:84px;border-radius:24px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(91,140,255,.18),rgba(124,92,252,.16));border:1px solid rgba(124,92,252,.2);font-size:24px;font-weight:900;color:var(--text)}
+    .visual-fallback strong{display:block;color:var(--text);font-size:18px;font-weight:900;line-height:1.2}
+    .visual-fallback span{display:block;color:var(--muted);font-size:13px;line-height:1.8}
+    .visual-footer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .visual-mini-stat{padding:12px 10px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+    .visual-mini-stat strong{display:block;color:var(--text);font-size:14px;font-weight:800;margin-bottom:4px}
+    .visual-mini-stat span{display:block;color:var(--muted);font-size:11px;line-height:1.6}
+    .countdown-card{padding:22px;display:flex;flex-direction:column;justify-content:center}
+    .countdown-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .countdown-kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--border);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c8d7f0}
+    body.light .countdown-kicker{color:#47617f}
+    .countdown-title{font-size:22px;line-height:1.1;font-weight:900;color:var(--text);margin-bottom:8px;letter-spacing:-.03em}
+    .countdown-text{color:var(--muted);font-size:13px;line-height:1.75;margin-bottom:16px}
+    .countdown-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:12px}
+    .count-cell{padding:14px 10px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--border);text-align:center}
+    .count-cell strong{display:block;color:var(--text);font-size:24px;font-weight:900;line-height:1;margin-bottom:6px}
+    .count-cell span{display:block;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .countdown-note{color:var(--muted);font-size:12px;line-height:1.7}
+    .orange-money-card{padding:22px;display:flex;flex-direction:column;gap:18px;justify-content:space-between;border-color:rgba(255,152,0,.18);background:linear-gradient(180deg,rgba(255,152,0,.1),rgba(255,255,255,.03))}
+    .orange-money-head{display:flex;align-items:center;gap:16px}
+    .orange-money-visual{width:86px;height:86px;border-radius:24px;overflow:hidden;border:1px solid rgba(255,152,0,.18);background:#000;box-shadow:0 18px 32px rgba(0,0,0,.22);flex-shrink:0}
+    .orange-money-visual img{width:100%;height:100%;display:block;object-fit:cover}
+    .orange-money-summary strong{display:block;color:var(--text);font-size:18px;font-weight:900;line-height:1.1;margin-bottom:4px}
+    .orange-money-summary span{display:block;color:var(--muted);font-size:13px;line-height:1.7}
+    .orange-money-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .orange-money-meta div{padding:12px 10px;border-radius:14px;background:rgba(255,152,0,.08);border:1px solid rgba(255,152,0,.12);color:#ffd19a;font-size:12px;font-weight:700;text-align:center;line-height:1.4}
+
+    .login-panel{scroll-margin-top:96px;overflow:hidden;border-radius:28px;border:1px solid var(--border-strong);background:var(--card2);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.04);backdrop-filter:blur(18px)}
+    .login-panel::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(160deg,rgba(91,140,255,.12),transparent 40%),linear-gradient(330deg,rgba(124,92,252,.11),transparent 36%)}
+    .login-inner{position:relative;z-index:1;padding:28px}
+    .panel-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .panel-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--border);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c8d7f0}
+    body.light .panel-chip{color:#47617f}
+    .panel-pulse{width:12px;height:12px;border-radius:50%;background:var(--success);box-shadow:0 0 0 8px rgba(34,197,94,.14)}
+    .login-title{font-size:30px;line-height:1.08;font-weight:900;letter-spacing:-.04em;color:var(--text);margin-bottom:8px}
+    .login-sub{color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:22px}
+    .alert{padding:12px 14px;border-radius:16px;margin-bottom:14px;font-size:13px;font-weight:600}
+    .alert-d{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5}
+    .alert-s{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#86efac}
+    .fg{margin-bottom:14px}
+    .fg label{display:block;margin-bottom:7px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+    .input-shell{position:relative;display:flex;align-items:center;height:56px;border-radius:18px;border:1px solid var(--input-b);background:var(--input);transition:.22s ease}
+    .input-shell:focus-within{border-color:var(--border-strong);box-shadow:0 0 0 4px rgba(91,140,255,.12)}
+    .input-icon{width:52px;height:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#9db3cf}
+    .input-icon svg{width:18px;height:18px;display:block}
+    .input-shell input{flex:1;height:100%;border:none;background:transparent;outline:none;padding:0 16px 0 0;color:var(--text);font-size:15px;font-family:inherit}
+    .input-shell input::placeholder{color:var(--dim)}
+    .row-between{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:18px 0 20px;font-size:13px}
+    .remember{display:flex;align-items:center;gap:8px;color:var(--muted);cursor:pointer}
+    .remember input{width:16px;height:16px;accent-color:var(--primary)}
+    .forgot{color:var(--primary);font-weight:700}
+    .submit-btn{width:100%;height:54px;border:none;font-size:15px;cursor:pointer}
+    .secure-note{display:flex;align-items:center;gap:10px;margin-top:14px;color:var(--muted);font-size:12px;line-height:1.7}
+    .secure-note strong{color:var(--text)}
+    .secure-dot{width:11px;height:11px;border-radius:999px;background:linear-gradient(135deg,var(--success),#86efac);flex-shrink:0}
+    .divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--dim);font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+    .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--border)}
+    .google-btn{width:100%;height:52px;border-radius:18px;border:1px solid var(--input-b);background:rgba(255,255,255,.04);color:var(--text);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;transition:.2s ease}
+    .google-btn:hover{border-color:var(--border-strong);background:rgba(91,140,255,.08)}
+    .panel-bottom{margin-top:18px;padding-top:16px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:13px}
+    .panel-bottom a{font-weight:800}
+
+    .section{padding:0 0 26px}
+    .section-card,.faq-card,.testimonials-card{overflow:hidden;border-radius:28px;border:1px solid var(--border);background:rgba(255,255,255,.04);box-shadow:inset 0 1px 0 rgba(255,255,255,.03);padding:28px}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:24px}
+    .section-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(91,140,255,.1);border:1px solid rgba(91,140,255,.16);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c7d9ff;margin-bottom:12px}
+    body.light .section-eyebrow{color:#3c5ea1}
+    .section-head h2{font-size:30px;font-weight:900;line-height:1.08;letter-spacing:-.04em;color:var(--text);margin-bottom:8px}
+    .section-head p{color:var(--muted);font-size:14px;line-height:1.8;max-width:680px}
+    .benefits-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .benefit-card{padding:20px;border-radius:22px;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+    .benefit-icon{width:52px;height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(91,140,255,.22),rgba(124,92,252,.22));border:1px solid rgba(124,92,252,.16);margin-bottom:16px}
+    .benefit-icon svg{width:22px;height:22px;display:block;color:#fff}
+    .benefit-card h3{font-size:17px;font-weight:800;color:var(--text);margin-bottom:8px}
+    .benefit-card p{font-size:13px;line-height:1.8;color:var(--muted)}
+
+    .faq-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .faq-item{border-radius:20px;border:1px solid var(--border);background:rgba(255,255,255,.03);overflow:hidden}
+    .faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;border:none;background:transparent;color:var(--text);font-size:14px;font-weight:800;text-align:left;cursor:pointer}
+    .faq-question span:last-child{color:var(--dim);transition:.2s ease}
+    .faq-item.open .faq-question span:last-child{transform:rotate(180deg);color:var(--primary)}
+    .faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .faq-item.open .faq-answer{max-height:240px}
+    .faq-answer p{padding:0 18px 18px;color:var(--muted);font-size:13px;line-height:1.8}
+
+    .testimonial-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .testimonial-card{padding:22px;border-radius:22px;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+    .testimonial-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    .testimonial-photo{width:54px;height:54px;border-radius:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;box-shadow:0 12px 24px rgba(91,140,255,.18);background:linear-gradient(135deg,var(--primary),var(--primary-2))}
+    .testimonial-photo img{width:100%;height:100%;display:block;object-fit:cover}
+    .testimonial-meta strong{display:block;color:var(--text);font-size:15px;font-weight:800;margin-bottom:3px}
+    .testimonial-meta span{display:block;color:var(--muted);font-size:12px}
+    .testimonial-stars{color:#ffcc4d;font-size:14px;letter-spacing:2px;margin-bottom:10px}
+    .testimonial-card p{color:var(--muted);font-size:13px;line-height:1.8}
+
+    .cta-card{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px;margin-bottom:40px;border-radius:28px;background:linear-gradient(135deg,rgba(91,140,255,.12),rgba(124,92,252,.1));border:1px solid var(--border-strong)}
+    .cta-copy h2{font-size:32px;font-weight:900;line-height:1.08;letter-spacing:-.04em;color:var(--text);margin-bottom:10px}
+    .cta-copy p{color:var(--muted);font-size:14px;line-height:1.8;max-width:620px}
+
+    .mobile-login-bar{display:none;position:fixed;left:14px;right:14px;bottom:14px;z-index:120;padding:10px;border-radius:22px;background:rgba(6,11,23,.84);border:1px solid var(--border);box-shadow:0 18px 40px rgba(0,0,0,.3);backdrop-filter:blur(16px)}
+    body.light .mobile-login-bar{background:rgba(255,255,255,.88)}
+    .mobile-login-bar a{min-height:50px;font-size:14px}
+
+    footer{border-top:1px solid var(--border);padding:26px 0 34px;color:var(--dim);font-size:12px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .footer-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .footer-links a{color:var(--muted);font-size:12px;font-weight:600}
+    .footer-links a:hover{color:var(--primary)}
+
+    .anim{animation:fadeUp .7s ease both}
+    .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+    @media(max-width:1080px){
+      .hero-grid,.hero-proof-grid,.faq-list,.testimonial-grid{grid-template-columns:1fr}
+      .benefits-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .cta-card{flex-direction:column;align-items:flex-start}
+    }
+    @media(max-width:820px){
+      .nav-links,.nav-actions .btn-outline,.nav-actions .btn-fill{display:none}
+      .burger{display:inline-flex}
+      .hero{padding:116px 0 64px}
+      .login-panel{order:-1}
+      .hero-copy{order:2}
+      .hero-metrics,.hero-features,.benefits-grid,.testimonial-grid{grid-template-columns:1fr}
+      .mobile-login-bar{display:block}
+      .hero-mobile-anchor{display:inline-flex}
+    }
+    @media(max-width:640px){
+      .shell{padding:0 14px}
+      .nav-inner{height:72px}
+      .mob-menu{top:74px;left:14px;right:14px}
+      .login-inner,.section-card,.faq-card,.testimonials-card,.cta-card,.visual-card,.countdown-card{padding:22px 18px}
+      .hero-title{font-size:clamp(30px,10vw,42px)}
+      .section-head h2,.cta-copy h2{font-size:28px}
+      .row-between{flex-direction:column;align-items:flex-start}
+      .hero-actions{flex-direction:column}
+      .hero-scroll-btn,.hero-secondary-btn{width:100%}
+      .countdown-grid,.visual-footer,.orange-money-meta{grid-template-columns:1fr}
+      .visual-card-top{flex-direction:column}
+      .visual-mini-note{text-align:left;max-width:none}
+      .orange-money-head{align-items:flex-start;flex-direction:column}
+      .proof-side-stack{grid-template-rows:none}
+      .footer-inner{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+  {{ headerCode|raw }}
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="shell nav-inner">
+    <a href="/" class="brand" aria-label="{{ site['site_name'] }}">
+      {% if site['logo'] %}
+        <img src="{{ site['logo'] }}" alt="{{ site['site_name'] }}">
+      {% else %}
+        <span class="brand-mark">{{ site['site_name']|slice(0,2)|upper }}</span>
+      {% endif %}
+    </a>
+    <div class="nav-links">
+      <a href="/services" class="nav-link">Services</a>
+      <a href="/about-us" class="nav-link">À propos</a>
+      <a href="/faq" class="nav-link">FAQ</a>
+      <a href="/contact-us" class="nav-link">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Mode clair / sombre">☼</button>
+      <a href="/" class="btn-outline">Connexion</a>
+      <a href="/signup" class="btn-fill">S'inscrire</a>
+      <button class="burger" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <a href="/services">Services</a>
+  <a href="/about-us">À propos</a>
+  <a href="/faq">FAQ</a>
+  <a href="/contact-us">Contact</a>
+  <a href="/" class="btn-outline" style="justify-content:center">Connexion</a>
+  <a href="/signup" class="btn-fill" style="justify-content:center">S'inscrire</a>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy anim d1">
+        <div class="hero-badge">TikTok · Facebook · Instagram · YouTube</div>
+        <h1 class="hero-title">Boostez vos <span>réseaux sociaux</span> depuis la Guinée</h1>
+        <p class="hero-text">Likes, followers, vues, commentaires — tout ce qu'il faut pour exploser sur TikTok, Facebook, Instagram et YouTube. Livraison rapide, paiement Orange Money, prix imbattables. Connectez-vous et lancez votre première commande en moins de 2 minutes.</p>
+
+        <a href="#loginPanel" class="hero-mobile-anchor">Se connecter maintenant</a>
+
+        <div class="hero-actions">
+          <a href="#loginPanel" class="hero-scroll-btn">Accéder à la connexion</a>
+          <a href="/signup" class="hero-secondary-btn">Créer un compte</a>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <strong>10 000+</strong>
+            <span>Créateurs et entreprises en Guinée boostent déjà leurs réseaux avec nous.</span>
+          </div>
+          <div class="metric-card">
+            <strong>1,2M+</strong>
+            <span>Likes, vues et abonnés livrés sur TikTok, Facebook, Instagram et YouTube.</span>
+          </div>
+          <div class="metric-card">
+            <strong>~2 min</strong>
+            <span>Temps moyen entre la commande et le début de la livraison.</span>
+          </div>
+        </div>
+
+        <div class="hero-proof-grid">
+          <div class="visual-card">
+            <div class="visual-card-top">
+              <div class="visual-copy">
+                <div class="visual-chip">Réseaux sociaux Guinée</div>
+                <h3 class="visual-title">Le N°1 des services réseaux sociaux en Guinée</h3>
+              </div>
+              <div class="visual-mini-note">Rejoignez des milliers de créateurs guinéens qui boostent leur présence en ligne chaque jour.</div>
+            </div>
+
+            <div class="visual-stage">
+              <img src="/img/login-tiktok-guinee.png" alt="Visuel TikTok Guinée" class="visual-image" onerror="this.closest('.visual-stage').classList.add('no-image')">
+              <div class="visual-fallback">
+                <div class="visual-fallback-mark">GN</div>
+                <strong>Emplacement prêt pour l’image réelle</strong>
+                <span>Le faux visuel généré a été retiré pour garder une intégration plus propre. Le vrai visuel TikTok / Guinée pourra s’afficher ici dès qu’il sera branché.</span>
+              </div>
+            </div>
+
+            <div class="visual-footer">
+              <div class="visual-mini-stat">
+                <strong>TikTok & Insta</strong>
+                <span>Likes, followers et vues livrés en quelques minutes</span>
+              </div>
+              <div class="visual-mini-stat">
+                <strong>Facebook</strong>
+                <span>Réactions, partages et abonnés pour vos pages</span>
+              </div>
+              <div class="visual-mini-stat">
+                <strong>YouTube</strong>
+                <span>Vues, abonnés et likes pour vos vidéos</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proof-side-stack">
+            <div class="orange-money-card">
+              <div class="orange-money-head">
+                <div class="orange-money-visual">
+                  <img src="/img/orange-money.png" alt="Orange Money">
+                </div>
+                <div class="orange-money-summary">
+                  <strong>Orange Money</strong>
+                  <span>Rechargez votre solde directement depuis votre téléphone. Aucun compte bancaire requis, paiement en GNF.</span>
+                </div>
+              </div>
+              <div class="orange-money-meta">
+                <div>Recharge rapide</div>
+                <div>Usage mobile local</div>
+                <div>Paiement simple</div>
+              </div>
+            </div>
+
+            <div class="countdown-card">
+              <div class="countdown-top">
+                <div class="countdown-kicker">Boost likes du jour</div>
+              </div>
+            <h3 class="countdown-title">Promo du jour : -20% sur les likes TikTok</h3>
+            <p class="countdown-text">Connectez-vous maintenant pour profiter de la réduction avant la fin du compteur. Offre valable uniquement aujourd'hui.</p>
+              <div class="countdown-grid">
+                <div class="count-cell"><strong id="countHours">00</strong><span>Heures</span></div>
+                <div class="count-cell"><strong id="countMinutes">00</strong><span>Minutes</span></div>
+                <div class="count-cell"><strong id="countSeconds">00</strong><span>Secondes</span></div>
+              </div>
+            <div class="countdown-note">Les prix remontent automatiquement à minuit. Ne ratez pas cette offre.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-panel anim d2" id="loginPanel">
+        <div class="login-inner">
+          <div class="panel-top">
+            <div class="panel-chip">Connexion à votre compte</div>
+            <div class="panel-pulse"></div>
+          </div>
+          <h2 class="login-title">Se connecter</h2>
+          <p class="login-sub">Accédez à votre tableau de bord pour commander des likes, followers et vues sur TikTok, Facebook, Instagram et YouTube.</p>
+
+          {% if error %}<div class="alert alert-d">{{ errorText }}</div>{% endif %}
+          {% if success %}<div class="alert alert-s">{{ successText }}</div>{% endif %}
+
+          <form method="post" action="/" id="loginForm">
+            {{ csrf_field() }}
+
+            <div class="fg">
+              <label for="username">Nom d'utilisateur ou e-mail</label>
+              <div class="input-shell">
+                <span class="input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+                <input type="text" id="username" name="username" placeholder="Votre identifiant" required>
+              </div>
+            </div>
+
+            <div class="fg">
+              <label for="password">Mot de passe</label>
+              <div class="input-shell">
+                <span class="input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0 1 10 0v3"/></svg>
+                </span>
+                <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
+              </div>
+            </div>
+
+            <div class="row-between">
+              <label class="remember"><input type="checkbox" name="LoginForm[remember]" value="1"> Se souvenir de moi</label>
+              <a href="/resetpassword" class="forgot">Mot de passe oublié ?</a>
+            </div>
+
+            {% if captcha %}
+              <div class="fg">
+                <div class="g-recaptcha" data-sitekey="{{ captchaKey }}"></div>
+                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+              </div>
+            {% endif %}
+
+            <button type="submit" class="submit-btn">Se connecter</button>
+
+            <div class="secure-note">
+              <span class="secure-dot"></span>
+              <span><strong>Connexion sécurisée</strong> — vos commandes, votre solde et votre historique restent protégés.</span>
+            </div>
+          </form>
+
+          {% if google_login_content %}
+            <div class="divider">ou</div>
+            <a href="?login-with-google" class="google-btn">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/><path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
+              Continuer avec Google
+            </a>
+          {% endif %}
+
+          <div class="panel-bottom">Pas encore de compte ? <a href="/signup">Créer un compte</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-card anim d2">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">Nos services</div>
+            <h2>Tout pour vos 4 plateformes</h2>
+            <p>Des services testés et livrés chaque jour pour TikTok, Facebook, Instagram et YouTube. Commandez en quelques clics depuis votre téléphone.</p>
+          </div>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <h3>Likes & Followers</h3>
+            <p>Des vrais likes et followers pour TikTok, Instagram, Facebook et YouTube. Livraison automatique dès que vous passez commande.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg>
+            </div>
+            <h3>Vues & Commentaires</h3>
+            <p>Boostez vos vidéos TikTok et YouTube avec des vues réelles. Ajoutez des commentaires pour rendre vos publications plus crédibles.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>Abonnés & Partages</h3>
+            <p>Faites grossir votre communauté sur les 4 plateformes. Plus vous avez d'abonnés, plus l'algorithme pousse votre contenu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="faq-card anim d3">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">FAQ</div>
+            <h2>Questions fréquemment posées</h2>
+            <p>Tout ce que vous devez savoir avant de passer votre première commande.</p>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item open">
+            <button class="faq-question" type="button"><span>Qu'est-ce que {{ site['site_name'] }} ?</span><span>⌄</span></button>
+            <div class="faq-answer"><p>{{ site['site_name'] }} est une plateforme de services réseaux sociaux qui vous permet d'acheter des likes, followers, vues et commentaires pour TikTok, Facebook, Instagram et YouTube. Vous passez commande, on livre automatiquement.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button"><span>Vos services sont-ils sûrs ?</span><span>⌄</span></button>
+            <div class="faq-answer"><p>Oui. Nous utilisons des méthodes conformes aux conditions d'utilisation des plateformes. Aucun mot de passe n'est demandé, il suffit de fournir le lien de votre profil ou de votre publication.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button"><span>Combien de temps prend la livraison ?</span><span>⌄</span></button>
+            <div class="faq-answer"><p>La plupart des commandes commencent à être livrées en moins de 2 minutes. Pour les grosses commandes (10K+ likes ou followers), la livraison peut prendre quelques heures pour rester naturelle.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button"><span>Comment je paie depuis la Guinée ?</span><span>⌄</span></button>
+            <div class="faq-answer"><p>Vous rechargez votre solde par Orange Money directement depuis votre téléphone. Aucun compte bancaire ou carte Visa n'est nécessaire. Le solde est crédité en quelques minutes.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="testimonials-card anim d3">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">Avis clients</div>
+            <h2>Ce que disent nos clients à Conakry</h2>
+            <p>Des créateurs et des commerçants guinéens qui utilisent {{ site['site_name'] }} chaque semaine pour booster leurs réseaux.</p>
+          </div>
+        </div>
+
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-head">
+              <div class="testimonial-photo">
+                <img src="/img/testimonials/mamadou-b.jpg" alt="Photo de Mamadou B.">
+              </div>
+              <div class="testimonial-meta">
+                <strong>Mamadou B.</strong>
+                <span>Conakry Centre, Guinée</span>
+              </div>
+            </div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p>"J'ai commandé 5 000 followers TikTok pour ma page de vente. En 3 heures tout était livré. Mes vidéos ont commencé à toucher 10x plus de monde. Je recommande à 100%."</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-head">
+              <div class="testimonial-photo">
+                <img src="/img/testimonials/aissatou-d.jpg" alt="Photo de Aïssatou D.">
+              </div>
+              <div class="testimonial-meta">
+                <strong>Aïssatou D.</strong>
+                <span>Ratoma, Conakry</span>
+              </div>
+            </div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p>"Je vends des habits sur Instagram et Facebook. Depuis que j'achète des likes et des commentaires ici, mes publications attirent beaucoup plus de clients. Le paiement Orange Money c'est trop facile."</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-head">
+              <div class="testimonial-photo">
+                <img src="/img/testimonials/ibrahima-k.jpg" alt="Photo de Ibrahima K.">
+              </div>
+              <div class="testimonial-meta">
+                <strong>Ibrahima K.</strong>
+                <span>Matoto, Conakry</span>
+              </div>
+            </div>
+            <div class="testimonial-stars">★★★★★</div>
+            <p>"J'ai une chaîne YouTube et je galérais à dépasser les 100 vues. Avec {{ site['site_name'] }} j'ai boosté mes 5 dernières vidéos et l'algorithme a commencé à me pousser tout seul. Résultat : 3x plus d'abonnés en un mois."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="cta-card anim d3">
+        <div class="cta-copy">
+          <h2>Prêt à exploser sur les réseaux ?</h2>
+          <p>Créez votre compte gratuitement, rechargez par Orange Money et passez votre première commande en moins de 2 minutes. TikTok, Facebook, Instagram, YouTube — tout est disponible.</p>
+        </div>
+        <a href="/signup" class="btn-fill">Créer un compte gratuitement</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="mobile-login-bar">
+  <a href="#loginPanel">Se connecter maintenant</a>
+</div>
+
+<footer>
+  <div class="shell footer-inner">
+    <div>© {{ "now"|date("Y") }} {{ site['site_name'] }}. Tous droits réservés.</div>
+    <div class="footer-links">
+      <a href="/services">Services</a>
+      <a href="/about-us">À propos</a>
+      <a href="/faq">FAQ</a>
+      <a href="/contact-us">Contact</a>
+      <a href="/terms">Conditions</a>
+    </div>
+  </div>
+</footer>
+
+{{ footerCode|raw }}
+<script>
+  function toggleTheme(){
+    document.body.classList.toggle('light');
+    var t=document.body.classList.contains('light')?'light':'dark';
+    localStorage.setItem('tl_theme',t);
+    var b=document.querySelector('.theme-toggle');
+    if(b){ b.innerHTML=t==='light'?'☾':'☼'; }
+  }
+  (function(){
+    if(localStorage.getItem('tl_theme')==='light'){
+      document.body.classList.add('light');
+    }
+    var b=document.querySelector('.theme-toggle');
+    if(b && document.body.classList.contains('light')){ b.innerHTML='☾'; }
+  })();
+  function toggleMobileMenu(){
+    var m=document.getElementById('mobMenu');
+    if(m){ m.classList.toggle('open'); }
+  }
+  function updateCountdown(){
+    var now = new Date();
+    var end = new Date();
+    end.setHours(23,59,59,999);
+    var diff = end - now;
+    if(diff < 0){ diff = 0; }
+    var hours = Math.floor(diff / 3600000);
+    var minutes = Math.floor((diff % 3600000) / 60000);
+    var seconds = Math.floor((diff % 60000) / 1000);
+    var h = document.getElementById('countHours');
+    var m = document.getElementById('countMinutes');
+    var s = document.getElementById('countSeconds');
+    if(h){ h.textContent = String(hours).padStart(2,'0'); }
+    if(m){ m.textContent = String(minutes).padStart(2,'0'); }
+    if(s){ s.textContent = String(seconds).padStart(2,'0'); }
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+  document.querySelectorAll('.faq-question').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      this.parentElement.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>

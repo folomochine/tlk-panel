@@ -1,0 +1,727 @@
+{% include 'header.twig' %}
+<style>
+		#service_avg_time {
+			padding: 13px;
+		}
+		.daymode .dropdown-menu {
+    background: #8f8f8f;
+}
+/* Contours colorés cartes stats */
+.neworder_statistics_row .col-lg-3:nth-child(1) .statics_card { border: 2px solid #22c55e !important; }
+.neworder_statistics_row .col-lg-3:nth-child(2) .statics_card { border: 2px solid #f97316 !important; }
+.neworder_statistics_row .col-lg-3:nth-child(3) .statics_card { border: 2px solid #3b82f6 !important; }
+.neworder_statistics_row .col-lg-3:nth-child(4) .statics_card { border: 2px solid #a855f7 !important; }
+</style>
+<style>
+  .d-bl {
+    display: block !important;
+  }
+  html body .text-blue {
+    color: var(--primary-color) !important;
+    font-size: 26px;font-weight: bold;
+    border-bottom: 3px solid var(--primary-color);
+    width: auto !important;
+  }
+</style>
+ <!-- Main variables *content* -->
+        <main class="auth">
+                    <div class="about_us_effect">
+            <img
+              src="https://cdn.smmpanelbdlab.com/work/PerfectPanel/img/bg-img1.png"
+              class="img-fluid about_us_img_left"
+              alt=""
+            />
+            <img
+              src="https://cdn.smmpanelbdlab.com/work/PerfectPanel/img/bg-img2.png"
+              class="img-fluid about_us_img_right"
+              alt=""
+            />
+          </div>
+          		    
+<!-- User Statistic Area -->
+  <div class="container-fluid">
+    <div class="row neworder_statistics_row">
+      <div class="col-lg-3 col-md-3 col-6">
+        <div class="card mb-3 statics_card" onclick="window.location.href='/addfunds'" style="cursor: pointer;">
+          <div class="card-body">
+            <div class="statics_card_inner">
+              <div class="icon">
+                <img
+                  src="https://storage.smmpanelbdlab.com/script/smmxz-v2/current-balance.png"
+                  class="img-fluid"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <h6>Solde actuel</h6>
+                <h3>{{ user["balance"] }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-6">
+        <div class="card mb-3 statics_card">
+          <div class="card-body">
+            <div class="statics_card_inner">
+              <div class="icon">
+                <img
+                  src="https://storage.smmpanelbdlab.com/script/smmxz-v2/spending-icon.png"
+                  class="img-fluid"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <h6>Depenses</h6>
+                <h3>{{ user["spent"] }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-6">
+        <div class="card mb-3 statics_card">
+          <div class="card-body">
+            <div class="statics_card_inner">
+              <div class="icon">
+                <img
+                  src="https://storage.smmpanelbdlab.com/script/smmxz-v2/total-orders.png"
+                  class="img-fluid"
+                  alt=""
+                />
+              </div>
+              <div class="text">
+                <h6>Total commandes</h6>
+                <h3>{{totalorders}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-6">
+        <div class="card mb-3 statics_card">
+          <div class="card-body">
+            <div class="statics_card_inner">
+              <div class="icon iconify_icon">
+               <iconify-icon icon="material-symbols:star"></iconify-icon>
+              </div>
+              <div class="text">
+                <h6>ID utilisateur</h6>
+                <h3>{{ user["client_id"]  }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- User Statistic Area -->
+
+  <!-- Guide Commander -->
+  <style>
+  .tl-guide{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:14px 16px;border-radius:14px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.18);margin-bottom:16px}
+  .tl-step{display:flex;align-items:center;gap:10px;flex:1;min-width:130px}
+  .tl-step-num{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .tl-step-body strong{display:block;font-size:13px;font-weight:800;color:var(--text)}
+  .tl-step-body span{display:block;font-size:11px;color:var(--muted);line-height:1.4}
+  .tl-step-arrow{color:rgba(59,130,246,.5);font-weight:900;font-size:18px;flex-shrink:0}
+  .tl-balance-alert{padding:12px 16px;border-radius:12px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);color:#c2410c;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;font-size:14px;font-weight:600}
+  .tl-balance-alert a{background:#f97316;color:#fff;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:800;text-decoration:none;white-space:nowrap}
+  body.daymode .tl-balance-alert{color:#9a3412}
+  .tl-link-hint{font-size:11px;color:var(--muted);margin-top:4px;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+  .tl-link-hint strong{color:var(--text)}
+  @media(max-width:640px){.tl-step-arrow{display:none}.tl-guide{gap:12px}.tl-step{min-width:110px}}
+  </style>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="tl-guide">
+          <div class="tl-step">
+            <div class="tl-step-num">1</div>
+            <div class="tl-step-body">
+              <strong>Rechargez</strong>
+              <span>Ajoutez des GNF via Orange Money</span>
+            </div>
+          </div>
+          <div class="tl-step-arrow">›</div>
+          <div class="tl-step">
+            <div class="tl-step-num">2</div>
+            <div class="tl-step-body">
+              <strong>Choisissez</strong>
+              <span>Cliquez sur Instagram, TikTok, etc.</span>
+            </div>
+          </div>
+          <div class="tl-step-arrow">›</div>
+          <div class="tl-step">
+            <div class="tl-step-num">3</div>
+            <div class="tl-step-body">
+              <strong>Collez le lien</strong>
+              <span>URL de votre profil ou publication</span>
+            </div>
+          </div>
+          <div class="tl-step-arrow">›</div>
+          <div class="tl-step">
+            <div class="tl-step-num">4</div>
+            <div class="tl-step-body">
+              <strong>Commandez</strong>
+              <span>Cliquez sur "Passer commande"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ### Guide Commander -->
+
+   <!-- Social Media filter -->
+   <div class="container-fluid">
+    <div class="row mb-3">
+      <div class="col-lg-12">
+        <div class="cat_filter_wrap" id="new-order-cats">
+        <button class="nwo-cat-btn filter_item brand-category" data-change-cat="instagram" onclick="filterStarted('instagram')">
+                           <span class="icons">
+              <img
+                src="https://storage.smmpanelbdlab.com/script/smmxz-v2/instagram-icon.png"
+                alt=""
+                class="img-fluid s_icon"
+              />
+            </span>
+                           <span class="text">
+                              Instagram
+                           </span>  
+                       </button>
+                       <button class="nwo-cat-btn filter_item brand-category"  data-change-cat="facebook" onclick="filterStarted('Facebook')">
+                           <span class="icons">
+              <img
+                src="https://storage.smmpanelbdlab.com/script/smmxz-v2/facebook-icon.png"
+                alt=""
+                class="img-fluid s_icon"
+              />
+            </span>
+                           <span class="text">
+                              Facebook
+                           </span> 
+                       </button>
+
+                       <button class="nwo-cat-btn filter_item brand-category" data-change-cat="youtube" onclick="filterStarted('youtube')">
+                           <span class="icons">
+              <img
+                src="https://storage.smmpanelbdlab.com/script/smmxz-v2/youtube-icon.png"
+                alt=""
+                class="img-fluid s_icon"
+              />
+            </span>
+                           <span class="text">
+                             Youtube
+                           </span> 
+                       </button>
+{# Twitter — desactive (non utilise sur ToutLike) #}
+                       {# Spotify — desactive (non utilise sur ToutLike) #}
+
+                       <button class="nwo-cat-btn  filter_item brand-category" data-change-cat="tiktok" onclick="filterStarted('Tiktok')"> 
+                          <span class="icons">
+              <img
+                src="https://storage.smmpanelbdlab.com/script/smmxz-v2/tiktok-icon.png"
+                alt=""
+                class="img-fluid s_icon"
+              />
+            </span>
+                           <span class="text">
+                                 Tiktok
+                           </span> 
+                       </button>
+
+                       <button class="nwo-cat-btn  filter_item brand-category" data-change-cat="telegram" onclick="filterStarted('Telegram')">
+                           <span class="icons">
+              <img
+                src="https://storage.smmpanelbdlab.com/script/smmxz-v2/telegram-icon.png"
+                alt=""
+                class="img-fluid s_icon"
+              />
+            </span>
+                           <span class="text">
+                              Telegram
+                           </span> 
+                       </button>
+
+{# LinkedIn — desactive (non utilise sur ToutLike) #}
+                       {# Trafic Web — desactive (non utilise sur ToutLike) #}
+                       {# SoundCloud — desactive (non utilise sur ToutLike) #}
+                       {# Discord — desactive (non utilise sur ToutLike) #}
+                       <button class="nwo-cat-btn  filter_item brand-category" data-change-cat="" onclick="filterStarted('everything')">
+                        <i class="far fa-ball-pile"></i>
+                        <span class="text">
+                           Tout
+                        </span>      
+                     </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Social Media filter -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12">
+        <!-- Card Type 1 -->
+        <div class="card card_auth_1 mb-3">
+          <div class="card-header">
+            <div class="header_buttons py-2">
+              <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="pills-home-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-home"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-home"
+                    aria-selected="true"
+                  >
+                    <div class="icon">
+                      <iconify-icon
+                        icon="mdi:cart-check"
+                      ></iconify-icon>
+                    </div>
+                    <div class="text">Nouvelle commande</div>
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="pills-profile-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-profile"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-profile"
+                    aria-selected="false"
+                    onclick="window.location.href='/addfunds'"
+                  >
+                    <div class="icon">
+                      <iconify-icon icon="healthicons:money-bag"></iconify-icon>
+                    </div>
+                    <div class="text d-bl">Ajouter des fonds</div>
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="pills-rule-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-rule"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-rule"
+                    aria-selected="true"
+                  >
+                    <div class="icon">
+                      <i class=" fal fa-ballot-check"></i>
+                    </div>
+                    <div class="text d-bl">Regles</div>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content" id="pills-tabContent">
+              <div
+                class="tab-pane fade show active"
+                id="pills-home"
+                role="tabpanel"
+                aria-labelledby="pills-home-tab"
+                tabindex="0"
+              >
+<style>
+/* ===== ToutLike : popup compact mobile-first (commande) ===== */
+.tl-popup-overlay{
+  position:fixed;inset:0;z-index:99998;
+  background:rgba(15,23,42,.55);
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:12px;
+  animation:tlPopupFadeIn .22s ease-out;
+}
+.tl-popup{
+  position:relative;width:100%;max-width:420px;
+  background:#fff;color:#0f172a;
+  border:1px solid rgba(148,163,184,.25);
+  border-radius:20px 20px 22px 22px;
+  box-shadow:0 20px 60px -10px rgba(0,0,0,.40);
+  overflow:hidden;
+  padding-bottom:env(safe-area-inset-bottom,0);
+  animation:tlPopupSlideUp .28s cubic-bezier(.34,1.56,.64,1);
+}
+body.dark-mode .tl-popup{background:#0f172a;color:#f1f5f9;border-color:rgba(148,163,184,.18)}
+.tl-popup-header{
+  display:flex;align-items:center;gap:12px;
+  padding:18px 56px 10px 20px;
+}
+.tl-popup-ico{
+  width:46px;height:46px;border-radius:14px;flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:20px;color:#fff;
+}
+.tl-popup.ok .tl-popup-ico{background:linear-gradient(135deg,#10B981,#06B6D4);box-shadow:0 10px 22px rgba(16,185,129,.35)}
+.tl-popup.err .tl-popup-ico{background:linear-gradient(135deg,#EF4444,#FB7185);box-shadow:0 10px 22px rgba(239,68,68,.35)}
+.tl-popup-title{font-size:16px;font-weight:800;line-height:1.3;margin:0;flex:1;min-width:0;color:inherit}
+.tl-popup-sub{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-top:2px}
+body.dark-mode .tl-popup-sub{color:#94a3b8}
+.tl-popup-close{
+  position:absolute;top:12px;right:12px;
+  width:34px;height:34px;min-width:34px;border:0;cursor:pointer;
+  border-radius:10px;background:rgba(148,163,184,.14);color:inherit;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:15px;line-height:1;transition:all .15s ease;
+}
+.tl-popup-close:hover{background:rgba(148,163,184,.28)}
+body.dark-mode .tl-popup-close{background:rgba(148,163,184,.18);color:#e2e8f0}
+.tl-popup-body{
+  padding:2px 20px 14px;font-size:14px;line-height:1.55;
+  color:#475569;word-break:break-word;
+}
+body.dark-mode .tl-popup-body{color:#cbd5e1}
+.tl-popup-body strong{color:#0f172a;font-weight:800}
+body.dark-mode .tl-popup-body strong{color:#f1f5f9}
+.tl-popup-list{display:flex;flex-direction:column;gap:6px;margin:12px 0 2px}
+.tl-popup-list .r{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:9px 12px;border-radius:10px;
+  background:rgba(15,23,42,.04);
+}
+body.dark-mode .tl-popup-list .r{background:rgba(148,163,184,.08)}
+.tl-popup-list .r .k{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#64748b}
+.tl-popup-list .r .v{font-size:13px;font-weight:700;color:#0f172a;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:ltr}
+body.dark-mode .tl-popup-list .r .v{color:#f1f5f9}
+body.dark-mode .tl-popup-list .r .k{color:#94a3b8}
+.tl-popup-actions{
+  display:flex;gap:8px;padding:12px 16px 16px;
+  border-top:1px solid rgba(148,163,184,.18);
+  background:rgba(248,250,252,.6);
+}
+body.dark-mode .tl-popup-actions{background:rgba(15,23,42,.35);border-top-color:rgba(148,163,184,.14)}
+.tl-popup-btn{
+  flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:12px 14px;border-radius:12px;font-weight:800;font-size:13px;
+  text-decoration:none;border:0;cursor:pointer;transition:all .15s ease;
+  min-height:44px;line-height:1;
+}
+.tl-popup-btn.g{background:rgba(148,163,184,.18);color:#0f172a}
+body.dark-mode .tl-popup-btn.g{background:rgba(148,163,184,.22);color:#e2e8f0}
+.tl-popup-btn.g:hover{background:rgba(148,163,184,.28)}
+.tl-popup.ok .tl-popup-btn.p{background:linear-gradient(135deg,#10B981,#06B6D4);color:#fff;box-shadow:0 10px 22px rgba(16,185,129,.30)}
+.tl-popup.err .tl-popup-btn.p{background:linear-gradient(135deg,#EF4444,#FB7185);color:#fff;box-shadow:0 10px 22px rgba(239,68,68,.30)}
+.tl-popup-btn.p:hover{filter:brightness(1.08)}
+@keyframes tlPopupFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes tlPopupSlideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes tlPopupFadeOut{to{opacity:0}}
+@keyframes tlPopupSlideDown{to{transform:translateY(100%);opacity:0}}
+.tl-popup-overlay.-closing{animation:tlPopupFadeOut .2s ease-in forwards}
+.tl-popup-overlay.-closing .tl-popup{animation:tlPopupSlideDown .2s ease-in forwards}
+/* Desktop : modal centré avec scale */
+@media (min-width:640px){
+  .tl-popup-overlay{align-items:center;padding:24px}
+  .tl-popup{border-radius:20px;animation:tlPopupScale .22s cubic-bezier(.34,1.56,.64,1)}
+  .tl-popup-overlay.-closing .tl-popup{animation:tlPopupScaleOut .18s ease-in forwards}
+  @keyframes tlPopupScale{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+  @keyframes tlPopupScaleOut{to{transform:scale(.96);opacity:0}}
+}
+</style>
+
+{% if error %}
+  <div class="tl-popup-overlay" id="tl-popup-order" role="presentation">
+    <div class="tl-popup err" role="dialog" aria-modal="true" aria-labelledby="tlPopupOrderTitle">
+      <button type="button" class="tl-popup-close" onclick="tlClosePopupOrder()" aria-label="Fermer">✕</button>
+      <div class="tl-popup-header">
+        <div class="tl-popup-ico"><i class="fa fa-exclamation-triangle"></i></div>
+        <div style="flex:1;min-width:0">
+          <h3 class="tl-popup-title" id="tlPopupOrderTitle">Commande impossible</h3>
+          <span class="tl-popup-sub">Erreur lors de la soumission</span>
+        </div>
+      </div>
+      <div class="tl-popup-body">{{ errorText }}</div>
+      <div class="tl-popup-actions">
+        <button type="button" class="tl-popup-btn g" onclick="tlClosePopupOrder()">Fermer</button>
+        {% if errorText matches '/[Ss]olde insuffisant|not enough|notenough/' %}
+          <a class="tl-popup-btn p" href="/addfunds"><i class="fa fa-wallet"></i> Recharger</a>
+        {% else %}
+          <button type="button" class="tl-popup-btn p" onclick="tlClosePopupOrder()"><i class="fa fa-check"></i> Compris</button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% if data["order"]["success"] == 1 %}
+  <div class="tl-popup-overlay" id="tl-popup-order" role="presentation">
+    <div class="tl-popup ok" role="dialog" aria-modal="true" aria-labelledby="tlPopupOrderTitle">
+      <button type="button" class="tl-popup-close" onclick="tlClosePopupOrder()" aria-label="Fermer">✕</button>
+      <div class="tl-popup-header">
+        <div class="tl-popup-ico"><i class="fa fa-check"></i></div>
+        <div style="flex:1;min-width:0">
+          <h3 class="tl-popup-title" id="tlPopupOrderTitle">Commande #{{ data['order']['id'] }} envoyée</h3>
+          <span class="tl-popup-sub">Prise en compte avec succès</span>
+        </div>
+      </div>
+      <div class="tl-popup-body">
+        Votre commande a bien été enregistrée. Suivez son avancement dans <strong>Mes commandes</strong>.
+        <div class="tl-popup-list">
+          <div class="r"><span class="k">{{ lang["neworder.success.service"] }}</span><span class="v" title="{{ data['order']['service'] }}">{{ data['order']['service'] }}</span></div>
+          <div class="r"><span class="k">{{ lang["neworder.success.quantity"] }}</span><span class="v">{{ data['order']['quantity'] }}</span></div>
+          <div class="r"><span class="k">{{ lang["neworder.success.charge"] }}</span><span class="v">{{ data['order']['price'] }}</span></div>
+          <div class="r"><span class="k">{{ lang["neworder.success.balance"] }}</span><span class="v">{{ data['order']['balance'] }}</span></div>
+        </div>
+      </div>
+      <div class="tl-popup-actions">
+        <button type="button" class="tl-popup-btn g" onclick="tlClosePopupOrder()">Continuer</button>
+        <a class="tl-popup-btn p" href="/orders"><i class="fa fa-list"></i> Mes commandes</a>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% if data["order"]["success"] == 2 %}
+  <div class="tl-popup-overlay" id="tl-popup-order" role="presentation">
+    <div class="tl-popup ok" role="dialog" aria-modal="true" aria-labelledby="tlPopupOrderTitle">
+      <button type="button" class="tl-popup-close" onclick="tlClosePopupOrder()" aria-label="Fermer">✕</button>
+      <div class="tl-popup-header">
+        <div class="tl-popup-ico"><i class="fa fa-sync-alt"></i></div>
+        <div style="flex:1;min-width:0">
+          <h3 class="tl-popup-title" id="tlPopupOrderTitle">Abonnement #{{ data['order']['id'] }} créé</h3>
+          <span class="tl-popup-sub">Diffusion programmée activée</span>
+        </div>
+      </div>
+      <div class="tl-popup-body">
+        Votre abonnement est actif. La diffusion démarrera automatiquement selon vos paramètres.
+        <div class="tl-popup-list">
+          <div class="r"><span class="k">{{ lang["neworder.success.service"] }}</span><span class="v" title="{{ data['order']['service'] }}">{{ data['order']['service'] }}</span></div>
+          <div class="r"><span class="k">{{ lang["neworder.success.username"] }}</span><span class="v">{{ data['order']['link'] }}</span></div>
+          <div class="r"><span class="k">{{ lang["neworder.success.quantity"] }}</span><span class="v">{{ data['order']['min'] }} – {{ data['order']['max'] }}</span></div>
+          <div class="r"><span class="k">{{ lang["neworder.success.posts"] }}</span><span class="v">{{ data['order']['posts'] }}</span></div>
+        </div>
+      </div>
+      <div class="tl-popup-actions">
+        <button type="button" class="tl-popup-btn g" onclick="tlClosePopupOrder()">Continuer</button>
+        <a class="tl-popup-btn p" href="/subscriptions"><i class="fa fa-sync-alt"></i> Mes abonnements</a>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<script>
+(function(){
+  var el = document.getElementById('tl-popup-order');
+  if(!el) return;
+  window.tlClosePopupOrder = function(){
+    if(!el || el.classList.contains('-closing')) return;
+    el.classList.add('-closing');
+    setTimeout(function(){
+      if(el && el.parentNode) el.parentNode.removeChild(el);
+      document.body.style.overflow = '';
+    }, 220);
+  };
+  document.body.style.overflow = 'hidden';
+  el.addEventListener('click', function(e){ if(e.target === el) tlClosePopupOrder(); });
+  document.addEventListener('keydown', function onKey(e){
+    if(e.key === 'Escape'){ tlClosePopupOrder(); document.removeEventListener('keydown', onKey); }
+  });
+})();
+</script>
+              <form  action="/" method="post" id="order-form">
+                {{ csrf_field() }}
+
+                <!-- Alerte solde insuffisant -->
+                <div class="tl-balance-alert" id="tl-low-balance" style="display:none">
+                  <span>⚠ Votre solde est à 0 — rechargez avant de commander.</span>
+                  <a href="/addfunds">Recharger maintenant</a>
+                </div>
+                <script>
+                (function(){
+                  var rawBal = document.querySelector('.statics_card .text h3');
+                  if(rawBal){
+                    var txt = rawBal.textContent.replace(/[^0-9.,]/g,'').replace(',','.');
+                    var val = parseFloat(txt);
+                    if(!isNaN(val) && val <= 0){
+                      var el = document.getElementById('tl-low-balance');
+                      if(el) el.style.display = 'flex';
+                    }
+                  }
+                })();
+                </script>
+                <!-- ### Alerte solde -->
+
+                                    <div class="mb-3">
+                    <label for="orderform-category" class="control-label">Categorie</label>
+                    <select class="form-control" id="neworder_category" name="categories" data-select="true" data-select-search="true" data-select-search-placeholder="Rechercher" data-select-container="#select-category-container" tabindex="-1" aria-hidden="true">
+{{ category_html_simplify|raw }}
+
+</select>
+                  </div>
+                <div class="mb-3">
+                  <label for="orderform-service" class="control-label">Service</label>
+                <select class="form-control" id="neworder_services" name="services" data-select="true" data-select-search="true" data-select-search-placeholder="Rechercher" data-select-container="#select-service-container" tabindex="-1" aria-hidden="true">
+<option value="1">Aucun service trouve dans cette categorie</option>
+</select>
+                  <div class="tl-link-hint">Après avoir choisi un service, <strong>collez l'URL exacte</strong> de votre profil ou publication (ex : <em>https://www.tiktok.com/@votrecompte</em>). Ne partagez jamais votre mot de passe.</div>
+                </div>
+                <div class="mb-3 fields" id="service_description" style="display: none!important;">
+                  <label for="service_description" class="control-label">Description</label>
+                  <div class="panel-body border-solid border-rounded" >
+                      
+                  </div>
+                </div>
+      <div id="neworder_fields"></div>
+      
+                <div class="mb-3">
+                  <label for="charge" class="control-label">Cout</label>
+                 <input type="text" class="form-control" id="charge" readonly>
+                </div>
+      
+       
+                <button type="submit" class="btn btn-primary w-100">Passer commande</button>
+              </form>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="pills-profile"
+                role="tabpanel"
+                aria-labelledby="pills-profile-tab"
+                tabindex="0"
+              >
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Redirection vers la page d'ajout de fonds...
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+              
+             </div>
+              <div
+                class="tab-pane fade"
+                id="pills-rule"
+                role="tabpanel"
+                aria-labelledby="pills-rule-tab"
+                tabindex="0"
+              >
+            
+                
+<style>
+.tl-rules{display:flex;flex-direction:column;gap:10px;padding:4px 0}
+.tl-rule{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+.tl-rule .ri{font-size:18px;flex-shrink:0;margin-top:1px}
+.tl-rule .rt{font-size:13px;line-height:1.6;color:var(--text)}
+.tl-rule .rt strong{display:block;font-weight:800;margin-bottom:2px}
+.tl-rule.warn{background:rgba(249,115,22,.07);border-color:rgba(249,115,22,.25)}
+.tl-rule.ok{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2)}
+.tl-rule.info{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.2)}
+.tl-rule-title{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.tl-qty-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.tl-qty-box{padding:10px 12px;border-radius:10px;font-size:12px;line-height:1.6}
+.tl-qty-box.good{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2)}
+.tl-qty-box.bad{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2)}
+.tl-qty-box strong{display:block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.tl-qty-box.good strong{color:#16a34a}
+.tl-qty-box.bad strong{color:#dc2626}
+</style>
+<div class="tl-rules">
+
+  <div class="tl-rule-title">📋 Règles de commande</div>
+
+  <div class="tl-rule warn">
+    <span class="ri">⚠️</span>
+    <div class="rt">
+      <strong>Lien incorrect = pas de remboursement</strong>
+      Vérifiez soigneusement votre lien avant de passer commande. Si vous commandez sur un mauvais lien, aucun remplacement ni remboursement ne sera effectué.
+    </div>
+  </div>
+
+  <div class="tl-rule warn">
+    <span class="ri">🔒</span>
+    <div class="rt">
+      <strong>Une seule commande à la fois sur le même lien</strong>
+      Attendez que votre commande soit terminée avant d'en passer une nouvelle sur le même lien ou profil.
+    </div>
+  </div>
+
+  <div class="tl-rule warn">
+    <span class="ri">🔄</span>
+    <div class="rt">
+      <strong>Commande marquée terminée si le lien change</strong>
+      Si vous modifiez, masquez ou supprimez votre lien ou compte pendant la livraison, la commande sera clôturée sans remboursement.
+    </div>
+  </div>
+
+  <div class="tl-rule info">
+    <span class="ri">📸</span>
+    <div class="rt">
+      <strong>Instagram — désactivez la fonction Flag</strong>
+      Depuis août 2024, vous devez désactiver l'option « Flag » (demande d'abonnement) pour recevoir des abonnés automatiquement. Si elle reste activée, les abonnés arriveront en attente de validation manuelle.
+    </div>
+  </div>
+
+  <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/uxph45qyaek5njd5.jpg" alt="Instagram Flag" class="img-fluid" style="border-radius:10px;margin:4px 0">
+
+  <div class="tl-rule ok">
+    <span class="ri">✅</span>
+    <div class="rt">
+      <strong>Types de garantie</strong>
+      <span>Pas de remplacement : aucune garantie.</span>
+      <span>Remplacement : remboursé si baisse constatée.</span>
+      <span>Non Drop : service de qualité supérieure, sans chute.</span>
+      <span>À vie : service entièrement garanti sans limite de durée.</span>
+    </div>
+  </div>
+
+  <div class="tl-rule info">
+    <span class="ri">🔢</span>
+    <div class="rt">
+      <strong>Quantités recommandées</strong>
+      <div class="tl-qty-grid">
+        <div class="tl-qty-box good"><strong>✔ À faire</strong>100, 200, 300, 500, 1000, 5000, 10000</div>
+        <div class="tl-qty-box bad"><strong>✘ À éviter</strong>55, 61, 77, 122, 788, 1023, 5079</div>
+      </div>
+      Privilégiez des chiffres ronds pour de meilleurs résultats et une livraison plus rapide.
+    </div>
+  </div>
+
+  <div class="tl-rule ok">
+    <span class="ri">🏆</span>
+    <div class="rt">
+      <strong>Conseil ToutLike</strong>
+      Pour les meilleurs résultats, choisissez les services marqués <em>Non Drop</em> ou <em>Garanti à vie</em>. En cas de problème, contactez le support.
+    </div>
+  </div>
+
+</div>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="pills-forder"
+                role="tabpanel"
+                aria-labelledby="pills-forder-tab"
+                tabindex="0"
+              >
+                ...
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Card Type 1 -->
+      </div>
+{# Carte Notes supprimee (ToutLike) #}
+    </div>
+  </div>
+</main>
+
+            </div>
+      </section>
+ 
+
+{% if contentText2 %}
+{{ contentText2 }}
+{% endif %}
+
+{% include 'footer.twig' %}
+ 
+<script>
+const _0x8cb7c=_0x4289;(function(_0x44ce59,_0x18222c){const _0xb6a44b=_0x4289,_0x1fd6e4=_0x44ce59();while(!![]){try{const _0x25ade8=parseInt(_0xb6a44b(0x158))/0x1+-parseInt(_0xb6a44b(0x15a))/0x2+parseInt(_0xb6a44b(0x14b))/0x3+parseInt(_0xb6a44b(0x14c))/0x4+parseInt(_0xb6a44b(0x14f))/0x5+-parseInt(_0xb6a44b(0x148))/0x6*(parseInt(_0xb6a44b(0x15f))/0x7)+parseInt(_0xb6a44b(0x159))/0x8*(-parseInt(_0xb6a44b(0x138))/0x9);if(_0x25ade8===_0x18222c)break;else _0x1fd6e4['push'](_0x1fd6e4['shift']());}catch(_0x2facbc){_0x1fd6e4['push'](_0x1fd6e4['shift']());}}}(_0x4c2c,0x8ac17));const newOrderCats=document[_0x8cb7c(0x139)](_0x8cb7c(0x13b));function _0x4289(_0x3c1831,_0x2bcc08){const _0x4c2cdc=_0x4c2c();return _0x4289=function(_0x4289df,_0x3a1238){_0x4289df=_0x4289df-0x136;let _0x449dc5=_0x4c2cdc[_0x4289df];return _0x449dc5;},_0x4289(_0x3c1831,_0x2bcc08);}function _0x4c2c(){const _0x27fe5b=['725816IVHwTw','forEach','#neworder_category-copy\x20option','none','push','133IwTXDA','join','block','innerHTML','12840507XEXsRq','getElementById','data-change-cat','new-order-cats','noc-wrapper','style','active','includes','display','insertBefore','outerHTML','setAttribute','neworder_category-copy','classList','.nwo-cat-btn','neworder_category','115512yBTJXO','change','querySelectorAll','806961sELptR','3068752WbImEk','addEventListener','select','4953685yUrZVQ','toLowerCase','innerText','remove','add','trigger','getAttribute','click','parentNode','696850BfzGpt','8CPnHPP'];_0x4c2c=function(){return _0x27fe5b;};return _0x4c2c();}if(newOrderCats){const orderFormCats=document[_0x8cb7c(0x139)](_0x8cb7c(0x147));var realData=orderFormCats[_0x8cb7c(0x137)];const dCatBtns=document[_0x8cb7c(0x14a)](_0x8cb7c(0x146));dCatBtns[0x0]&&[...dCatBtns][_0x8cb7c(0x15b)](_0x9b20c0=>{const _0x5e8f45=_0x8cb7c;_0x9b20c0[_0x5e8f45(0x14d)](_0x5e8f45(0x156),_0xbc5d45=>{const _0x45943c=_0x5e8f45,_0x33503e=_0x9b20c0[_0x45943c(0x155)](_0x45943c(0x13a)),_0x21c049=document['getElementById'](_0x45943c(0x147)),_0x798f74=document[_0x45943c(0x14a)](_0x45943c(0x15c)),_0x538537=document['querySelectorAll'](_0x45943c(0x146));[..._0x538537]['forEach'](_0x5db964=>{const _0x401684=_0x45943c;_0x5db964['classList'][_0x401684(0x152)](_0x401684(0x13e));}),_0x9b20c0[_0x45943c(0x145)][_0x45943c(0x153)]('active');const _0x480365=[];[..._0x798f74][_0x45943c(0x15b)](_0x342405=>{const _0x1b7cfc=_0x45943c;_0x342405[_0x1b7cfc(0x151)][_0x1b7cfc(0x150)]()[_0x1b7cfc(0x13f)](_0x33503e[_0x1b7cfc(0x150)]())&&_0x480365[_0x1b7cfc(0x15e)](_0x342405);});const _0x2d4860=[];[..._0x480365][_0x45943c(0x15b)](_0x1d608a=>{const _0x1ed324=_0x45943c;_0x2d4860['push'](_0x1d608a[_0x1ed324(0x142)]);}),_0x21c049[_0x45943c(0x137)]=_0x2d4860[_0x45943c(0x160)](''),$('#neworder_category')[_0x45943c(0x154)](_0x45943c(0x149));});});setTimeout(()=>{const _0x5f06b3=_0x8cb7c,_0x14c256=document['createElement'](_0x5f06b3(0x14e));_0x14c256[_0x5f06b3(0x143)]('id',_0x5f06b3(0x144)),_0x14c256['style'][_0x5f06b3(0x140)]=_0x5f06b3(0x15d),_0x14c256[_0x5f06b3(0x137)]=realData,orderFormCats[_0x5f06b3(0x157)][_0x5f06b3(0x141)](_0x14c256,orderFormCats);},0x3e8);const nocWrapper=document['getElementById'](_0x8cb7c(0x13c));nocWrapper[_0x8cb7c(0x13d)][_0x8cb7c(0x140)]=_0x8cb7c(0x15d),setTimeout(()=>{const _0x541131=_0x8cb7c;nocWrapper['style'][_0x541131(0x140)]=_0x541131(0x136);},0x3e9);}
+</script>

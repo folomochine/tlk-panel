@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+{% for lang in site['languages'] %}
+{% if lang['active'] %}
+<html lang="{{ lang['code'] }}" data-bs-theme="dark" >
+{% endif %}
+{% endfor %}
+<head>
+  <base href="{{ site['url'] }}">
+  
+  
+  <title>{% if pagetitle %}  {{ pagetitle }}  {% else %} {{ title }} {% endif %} </title>
+  <meta property="og:title" content="{% if pagetitle %}  {{ pagetitle }}  {% else %} {{ title }} {% endif %}" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="{% if pagekeywords %} {{ pagekeywords }} {% else %} {{ site["keywords"]}}  {% endif %}">
+  <meta name="description" content="{% if pagedescription %} {{ pagedescription }} {% else %} {{ site['description'] }}  {% endif %}">
+  <meta property="og:description" content="{% if pagedescription %} {{ pagedescription }} {% else %} {{ site['description'] }}  {% endif %}" />
+  {% if site['favicon'] %}
+    <link rel="shortcut icon" type="image/ico" href="{{ site['favicon'] }}" />
+  {% endif %}
+  
+  <script src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/js/jg3snaiwp8i0azse.js"></script>
+
+        <!-- Swiper JS -->
+        <link
+        rel="stylesheet"
+        href="https://cdn.smmpanelbdlab.com/smmscript/smmrx/css/s5th8h1ldru6n4px.css"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+        />
+
+        <!-- Iconify Icon -->
+        <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
+
+        <!-- Swiper JS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.smmpanelbdlab.com/smmscript/smmrx/css/lkjbopbkiee3pel4.css">
+					<link rel="stylesheet" type="text/css" href="https://cdn.smmpanelbdlab.com/smmscript/smmrx/css/go2u33qhqj7bkfdo.css">
+					<link rel="stylesheet" type="text/css" href="https://storage.perfectcdn.com/libs/bootstrap-datetimepicker/4.17.47/bootstrap-datetimepicker.min.css">
+					<link rel="stylesheet" type="text/css" href="https://storage.perfectcdn.com/css/font-awesome/css/all.min.css">
+					<link rel="stylesheet" type="text/css" href="https://cdn.smmpanelbdlab.com/smmscript/smmrx/css/w1ak29btsbdhu8s0.css">
+					<link rel="stylesheet" type="text/css" href="https://cdn.smmpanelbdlab.com/smmscript/smmrx/css/cao32di3zo8u7xgq.css">
+		      
+     
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css" />
+		<script>
+			window.modules = {};</script>
+
+       <link rel="stylesheet" defer="" type="text/css" href="https://cdn.fsksoft.com/css/masterv3/bootstrap-datetimepicker.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/js/tempus-dominus.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/css/tempus-dominus.min.css" crossorigin="anonymous">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+        />
+        <style>
+                 .bg_sidebars {
+  position: absolute;
+  bottom: -155px;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: -1;
+}
+@media only screen and (max-width: 992px) {
+    #dashboard #sidebar {
+        width: 275px !important;
+    }
+}
+                   @media only screen and (max-width: 550px) {
+                     .bg_sidebars {
+    bottom: -229px;
+    left: -14px;
+                     }}
+.offcanvas {
+    transform: translateX(-100%) !important;
+  left: 0 !important;
+  right: auto !important;
+  visibility: hidden  !important;
+    opacity: 0 !important;
+}
+.offcanvas-body .user_box, #dashboard #sidebar .user_box {
+    border: 1px solid #0099ff !important;
+}
+#dashboard #sidebar .sidebar_menu .menu_item .menu_link:hover {
+    background: #212529a3 !important;
+    border-bottom: none;
+    border-radius: 0px 50px 50px 0px;
+}
+.offcanvas.show {
+    transform: translateX(0) !important;
+  visibility: visible !important;
+    opacity: 1 !important;
+}
+          .daymode .navbar-nav li a, .daymode .text-white, .daymode .footer_main_info p, .daymode #counter .counter__item h4, .daymode .footer_main_info p, .daymode .footer_link_wrap h4, .daymode .footer_menu .footer_menu_item, .daymode .contact_item .contact_text, .daymode .contact_item .contact_text a, .daymode .copyright_text, .daymode .counter__item p {
+            color:var(--bs-body-bg) !important;
+          }
+                
+          .daymode .navbar-nav li a.active {
+            color:var(--primary-color) !important;
+          }
+         /* Counter Section */
+#counter {
+  background: transparent;
+}
+          .daymode #counter {
+           background: transparent !important;
+          }
+#counter .counter__item {
+  text-align: center;
+}
+
+#counter .counter__item .icon {
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  line-height: 90px;
+  border-radius: 90px;
+  margin-bottom: 15px;
+  background: var(--primary-color);
+  box-shadow: 0 0 10px #e0e0e000;
+}
+
+#counter .counter__item h4 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#counter .counter__item p {
+  font-size: 18px;
+  color: var(--white);
+  font-weight: 400;
+}
+
+/* Footer */
+footer {
+  background: var(--footer-bg) !important;
+  padding: 70px 0px !important;
+}
+
+.footer_main_info .logo-white {
+  margin-bottom: 10px !important;
+}
+
+.footer_main_info p {
+  font-size: 16px !important;
+  color: #e4e4e4 !important;
+  margin-bottom: 20px !important;
+}
+
+.social_media_links {
+  display: flex !important;
+  list-style-type: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 10px !important;
+}
+
+.social_media_links .social_link {
+  display: inline-block !important;
+  min-width: 40px !important;
+  height: 40px !important;
+  text-align: center !important;
+  line-height: 38px !important;
+  background: #e4e4e4 !important;
+  border-radius: 50px !important;
+  cursor: pointer !important;
+  transition: 0.5s ease !important;
+}
+
+.social_media_links .social_link:hover {
+  transform: translateY(-2px) !important;
+}
+
+.footer_link_wrap h4 {
+  color: #e4e4e4 !important;
+  font-size: 20px !important;
+  font-weight: 700;
+  font-family: var(--text-font) !important;
+  margin-bottom: 10px !important;
+}
+.footer_menu {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style-type: none !important;
+}
+.footer_menu .footer_menu_item {
+  display: block !important;
+  color: #e4e4e4 !important;
+  font-size: 16px !important;
+  text-decoration: none !important;
+  margin-bottom: 4px !important;
+  transition: 0.5s !important;
+}
+.footer_menu .footer_menu_item:hover {
+  transform: translateX(5px) !important;
+}
+.contact_item {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
+  margin-bottom: 20px !important;
+}
+
+.contact_item .contact_icon {
+  min-width: 60px !important;
+  height: 60px !important;
+  background: var(--primary-color) !important;
+  line-height: 60px !important;
+  text-align: center;
+  border-radius: 60px !important;
+}
+
+.contact_item .contact_text {
+  font-size: 16px !important;
+  color: #e4e4e4 !important;
+}
+
+.contact_item .contact_text a {
+  color: #e4e4e4 !important;
+}
+.copyright_text {
+  color: #e4e4e4 !important;
+  text-align: center !important;
+  margin-bottom: 0px !important;
+}
+
+
+.contact-us-page-links {
+  display: flex !important;
+  gap: 20px !important;
+  align-items: center !important;
+  list-style-type: none !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+}
+
+.contact-us-page-links li a {
+  text-decoration: none !important;
+  background: #fff !important;
+  color: var(--black-title) !important;
+  padding: 10px 20px !important;
+  border-radius: 7px !important;
+  box-shadow: 0 0 10px #ddd !important;
+  transition: 0.5s !important;
+}
+
+.contact-us-page-links li a:hover {
+  background: var(--primary-color) !important;
+  color: var(--white) !important;
+}
+          .d-none-tab, .d-none-ph {
+            display: none !important;
+          }
+          @media only screen and (min-width: 992px) {
+          .d-none-ph {
+            display: flex !important;
+          }
+            .ms-auto.nav_right {
+              display: flex !important; gap: 5px !important; float: right !important; right: 10px !important;left: auto !important;
+            }
+            
+          }
+@media only screen and (max-width: 1700px) {
+  .footer_main_info p {
+    font-size: 14px !important;
+  }
+  .count__2__type h3 {
+    font-size: 35px !important;
+  }
+  #followStep .followStep-image img {
+    height: 500px !important;
+    margin-top: 60px !important;
+  }
+   #counter .counter__item h4 {
+    font-size: 24px;
+  }
+  #counter .counter__item p {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 1440px) {
+ .footer_main_info p {
+    font-size: 14px !important;
+  }
+  .count__2__type h3 {
+    font-size: 35px !important;
+  }
+  #followStep .followStep-image img {
+    height: 500px !important;
+    margin-top: 60px !important;
+  }
+  #counter .counter__item h4 {
+    font-size: 24px;
+  }
+   #counter .counter__item p {
+    font-size: 16px;
+  }
+}
+          @media only screen and (max-width: 1200px) { 
+            
+            #counter .counter__item h4 {
+    font-size: 22px;
+  } 
+          }
+@media only screen and (max-width: 991px) { 
+ .footer_link_wrap,
+  .footer_main_info {
+    margin-bottom: 40px !important;
+  }
+  
+ #counter .counter__item h4 {
+    font-size: 24px;
+  }
+  #ourExpert .container > .row {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    text-align: center !important;
+  }
+  .expert_image {
+    margin-top: 30px !important;
+    text-align: center !important !important;
+  }
+  .expert_image img {
+    width: 400px !important;
+  }
+  .card_core_value {
+    margin-bottom: 35px !important;
+  }
+  #followStep .followStep-image {
+    position: relative !important;
+  }
+  .follow_step_get .container .row {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+  }
+  #followStep .followStep-image img {
+    height: auto !important;
+    border-radius: 20px !important;
+  }
+  #followStep .how_step_wrap {
+    padding: 0 !important;
+  }  
+   .d-none-tab {
+    display: flex !important;
+     
+  }
+  .right {
+   display: flex !important; gap: 5px !important; float: right !important; right: 10px !important;left: auto !important;
+    width: auto !important;
+  }
+}
+          @media only screen and (max-width: 786px) {
+            #counter .counter__item h4 {
+    font-size: 20px;
+  }
+          }
+  @media only screen and (max-width: 550px) {
+  .footer_main_info .logo-white {
+    text-align: center !important;
+  }
+    .logo_navbar {
+      width: 140px !important;
+    }
+     #counter {
+    padding: 45px 0px;
+  }
+    #counter .counter__item .icon {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+  }
+  #counter .counter__item .icon > img {
+    width: 40px;
+    height: 40px;
+  }
+  #counter .counter__item h4 {
+    font-size: 18px;
+  }
+    #counter .counter__item p {
+    font-size: 14px;
+  }
+  .footer_main_info p {
+    text-align: center !important;
+  }
+  .footer_main_info .logo-white > img {
+    width: 170px !important;
+  }
+  .social_media_links {
+    justify-content: center !important;
+  }
+  .count__2__type h3 {
+    font-size: 28px !important;
+  }
+  .card_core_value {
+    height: auto !important;
+  }
+  .card_core_value .core__icon.credit-card-icon img {
+    width: 120px !important;
+  }
+  .location_pin_find img {
+    width: 135px !important;
+  }
+  #page__title p {
+    width: 100% !important;
+  }
+  #page__title {
+    padding: 40px 0px 40px 0px !important;
+  }   
+}
+@media (max-width: 767.98px) {
+  .user_smmpanelbdlab_btn {
+    display: none !important;
+  }
+}
+        </style>
+{% if user['auth'] %}
+<body id="body" class="">
+		      <script>
+        if (localStorage.getItem("smmxzCurrentMode")) {
+          const bodyFire2 = document.getElementById("body");
+          const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+          document.documentElement.setAttribute('data-bs-theme', 'light');
+          bodyFire2.classList.add("daymode");
+        }
+      </script>
+      <section id="dashboard">
+      <div id="sidebar_active_blur" class="d-none"></div>
+      <div id="sidebar">
+        <a href="/" class="sider_logo">
+          <img
+            src="{{ site['logo'] }}"
+            class="img-fluid logo-white"
+            alt=""
+          />
+          <img
+            src="{{ site['logo'] }}"
+            class="img-fluid logo-color"
+            alt=""
+          />
+        </a>
+        <div class="user_box">
+          <div class="user_avatar">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/iqallc0kre1w1cbe.png"
+              class="img-fluid"
+              alt=""
+            />
+          </div>
+          <h4>@{{ user["username"]  }}</h4>
+          <h6>Solde : {{ user["balance"] }}</h6>
+        </div>
+        <ul class="sidebar_menu">
+
+                <!----------    <li class="menu_item">
+            <a href="https://t.me/smmpanelbdlab" class="menu_link "  target="_blank" >
+              <span class="icon">
+                                                  <i class="navbar-icon far fa-bell-on"></i>
+                                              </span>
+              <span class="menu_text"> Annonce </span>
+            </a>
+          </li>   ---------->
+                  <li class="menu_item">
+            <a {% if active_menu == "neworder" %} href="/" class="menu_link  active " {% endif %} class="menu_link" href="/">
+              <span class="icon">
+                                <iconify-icon
+                icon="solar:cart-large-minimalistic-bold-duotone"
+              ></iconify-icon>
+                              </span>
+              <span class="menu_text"> Nouvelle commande </span>
+            </a>
+          </li>
+                  <li class="menu_item">
+            <a {% if active_menu == "orders" %} href="/orders" class="menu_link active" {% endif %} class="menu_link" href="/orders">
+              <span class="icon">
+                                <span class="icon">
+                  <iconify-icon icon="solar:cart-bold"></iconify-icon>
+                </span>
+                              </span>
+              <span class="menu_text"> Commandes </span>
+            </a>
+          </li>
+                  <li class="menu_item">
+            <a {% if active_menu == "addfunds" %} href="/" class="menu_link  active " {% endif %} href="/addfunds" class="menu_link " >
+              <span class="icon">
+                                <iconify-icon icon="healthicons:money-bag"></iconify-icon>
+                              </span>
+              <span class="menu_text"> Ajouter des fonds </span>
+            </a>
+          </li>
+          
+{# Tickets — masque de la sidebar (ToutLike) #}
+          
+                  <li class="menu_item">
+            <a {% if active_menu == "services" %} href="/" class="menu_link  active " {% endif %} href="/services" class="menu_link " >
+              <span class="icon">
+                                <iconify-icon
+                icon="fluent:wrench-settings-20-regular"
+              ></iconify-icon>
+                              </span>
+              <span class="menu_text"> Services </span>
+            </a>
+          </li>
+{# Commande en masse — masque de la sidebar (ToutLike) #}
+                  {# Panel enfant — masque de la sidebar (ToutLike) #}
+                  {# API — masque de la sidebar (ToutLike) #}
+                  <li class="menu_item">
+            <a {% if active_menu == "updates" %} href="/" class="menu_link  active " {% endif %} href="/updates" class="menu_link " >
+              <span class="icon">
+                                <iconify-icon
+                icon="clarity:line-chart-solid-badged"
+                ></iconify-icon>
+                              </span>
+              <span class="menu_text"> Mises a jour </span>
+            </a>
+          </li>
+{# FAQ — masque de la sidebar (ToutLike) #}
+        </ul>
+{# bg_sidebars — image de fond supprimee pour liberer l'espace dans la sidebar #}
+      </div>
+      <div id="content">
+        <!-- Main Content Area -->
+        <header id="header">
+          <div class="header_left">
+            <button class="sidebar_button" id="SidebarButton">
+              <iconify-icon icon="ic:sharp-menu"></iconify-icon>
+            </button>
+            <div class="header_logo d-none-desk">
+              <a href="/" class="sider_logo">
+                <img
+                  src="{{ site['logo'] }}"
+                  class="img-fluid logo-white"
+                  alt=""
+                />
+                <img
+                  src="{{ site['logo'] }}"
+                  class="img-fluid logo-color"
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+          <div class="header_right d-none-ph d-none-tab">
+          <!--  <a href="https://t.me/smmpanelbdlab" target="_blank" class="menu_btn telegram">
+              <img src="https://storage.smmpanelbdlab.com/script/smmxz-v2/telegram-logo.png" alt="" />
+            </a>
+             <a href="" class="menu_btn">
+              <img src="https://storage.smmpanelbdlab.com/script/smmxz-v2/bell-icon.png" alt="" />
+            </a> -->
+
+             <a
+              href="javascript:void(0)"
+              class="day_night_btn d-none-ph d-none-tab"
+              onclick="toggleThemeMode()"
+            >
+              <span class="active_circle"></span>
+              <span class="day_mode"
+                ><iconify-icon icon="ph:sun-duotone"></iconify-icon
+              ></span>
+              <span class="night_mode">
+                <iconify-icon icon="ph:moon-duotone"></iconify-icon>
+              </span>
+            </a>
+{% if site_currency_converter == "1" %}
+                        <div class="btn-group currency_btn">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm dropdown-toggle currency_button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                             {{ user["currency_type"] }}
+                            </button>
+              <ul class="dropdown-menu dropdown-menu-end" id="currencies-list">
+                								{{ currencies_dropdown|raw }}
+								              </ul>
+            </div>{% else %}{% endif %}
+                        <!-- Example single danger button -->
+            <div class="btn-group user_menu_wrap">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm dropdown-toggle user_smmpanelbdlab_btn user_access_btn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/iqallc0kre1w1cbe.png"
+                  class="img-fluid user_avatar"
+                  alt=""
+                />
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-end pb-0 overflow-hidden"
+              >
+                <li>
+                  <a class="dropdown-item" href="/account">
+                    <div class="icon">
+                      <iconify-icon icon="ph:user-duotone"></iconify-icon>
+                    </div>
+                    <div class="text">Mon compte</div>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/addfunds">
+                    <div class="icon">
+                      <iconify-icon icon="healthicons:money-bag"></iconify-icon>
+                    </div>
+                    <div class="text">Ajouter des fonds</div>
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item bg-danger" href="/logout">
+                    <div class="icon">
+                      <iconify-icon icon="uis:signout"></iconify-icon>
+                    </div>
+                    <div class="text">Deconnexion</div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="header_right d-none-desk">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm dropdown-toggle user_access_btn"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+              >
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/iqallc0kre1w1cbe.png"
+                  class="img-fluid user_avatar"
+                  alt=""
+                />
+              </button>
+          </div>
+        </header>
+        <!-- Sidebar Offcanvas -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+              <a href="/" class="sider_logo">
+                                <img src="{{ site['logo'] }}" width="170px" class="img-fluid logo-white" alt="{{ site['site_name'] }}" />
+                <img
+                  src="{{ site['logo'] }}"
+                  class="img-fluid logo-color" width="170px"
+                  alt=""
+                />
+                            </a>
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+           
+            <div class="user_box">
+              <div class="user_avatar">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/iqallc0kre1w1cbe.png"
+                  class="img-fluid"
+                  alt=""
+                />
+              </div>
+              <h4>@{{ user["username"]  }}</h4>
+              <h6>Solde : {{ user["balance"] }}</h6>
+            </div>
+
+            <div class="user_sidebar mb-3">
+              <!--<a href="https://t.me/smmpanelbdlab" target="_blank" class="menu_btn telegram">
+                <img src="https://storage.smmpanelbdlab.com/script/smmxz-v2/telegram-logo.png" alt="" />
+              </a>
+               <a href="" class="menu_btn">
+                <img src="https://storage.smmpanelbdlab.com/script/smmxz-v2/bell-icon.png" alt="" />
+              </a> -->
+  
+              <a
+                href="javascript:void(0)"
+                class="day_night_btn"
+                onclick="toggleThemeMode()"
+              >
+                <span class="active_circle"></span>
+                <span class="day_mode"
+                  ><iconify-icon icon="ph:sun-duotone"></iconify-icon
+                ></span>
+                <span class="night_mode">
+                  <iconify-icon icon="ph:moon-duotone"></iconify-icon>
+                </span>
+              </a>
+  {% if site_currency_converter == "1" %}
+                            <div class="btn-group currency_btn">
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm dropdown-toggle currency_button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                                  {{ user["currency_type"] }}
+                                </button>
+                <ul class="dropdown-menu dropdown-menu-end" id="currencies-list">
+                                     {{ currencies_dropdown|raw }}
+                                  </ul>
+              </div>{% else %}{% endif %}
+                            <!-- Example single danger button -->
+            </div>
+            
+            <div class="user_sidebar_menu">
+              <ul>
+                <li>
+                  <a class="sidebar-user-item" href="/account">
+                    <div class="icon">
+                      <iconify-icon icon="ph:user-duotone"></iconify-icon>
+                    </div>
+                    <div class="text">Mon compte</div>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-user-item" href="/addfunds">
+                    <div class="icon">
+                      <iconify-icon icon="healthicons:money-bag"></iconify-icon>
+                    </div>
+                    <div class="text">Ajouter des fonds</div>
+                  </a>
+                </li>
+                <li>
+                  <a class="sidebar-user-item" href="/logout">
+                    <div class="icon">
+                      <iconify-icon icon="uis:signout"></iconify-icon>
+                    </div>
+                    <div class="text">Deconnexion</div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+		
+{% else %}
+	<body id="body" class="">
+      
+      <script>
+        if (localStorage.getItem("smmrxCurrentMode")) {
+          const bodyFire2 = document.getElementById("body");
+          const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+          document.documentElement.setAttribute('data-bs-theme', 'light');
+          bodyFire2.classList.add("daymode");
+        }
+      </script>
+		         <!-- Without Login Header -->
+            <header class="fixed-top navbar-login">
+                <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="/">
+                    <div class="logo_navbar">
+                                                <img src="{{ site['logo'] }}" class="img-fluid" alt="{{ site['site_name'] }}" />
+                                            </div>
+                    </a>
+                  <div class="right">
+                    <a
+              href="javascript:void(0)"
+              class="day_night_btn d-none-tab" id="toggleButton" 
+              onclick="toggleThemeMode()"
+            >
+              <span class="active_circle"></span>
+              <span class="day_mode"
+                ><iconify-icon icon="ph:sun-duotone"></iconify-icon
+              ></span>
+              <span class="night_mode">
+                <iconify-icon icon="ph:moon-duotone"></iconify-icon>
+              </span>
+            </a>  
+                    <button
+                    class="navbar-toggler nav_btn"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    href="#offcanvasExample"
+                    role="button"
+                    aria-controls="offcanvasExample"
+                    >
+                    <span class="icon">
+                        <iconify-icon icon="fe:bar"></iconify-icon>
+                    </span>
+                    <!--<span class="text">Menu</span>-->
+                  </button></div>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                     
+                                      
+                      								<li class="nav-item" >
+									<a {% if active_menu == "about-us" %} href="/about-us" class="nav-link active" {% endif %}  class="nav-link " href="/about-us" >
+																					<i class="navbar-icon far fa-address-card"></i>
+																				A propos
+									</a>
+								</li>
+															<li class="nav-item" >
+									<a {% if active_menu == "contact-us" %} href="/contact-us" class="nav-link active" {% endif %} class="nav-link " href="/contact-us" >
+																					<i class="navbar-icon fas fa-id-card-alt"></i>
+																				Contactez-nous
+									</a>
+								</li>
+															<li class="nav-item" >
+									<a {% if active_menu == "blog" %} href="/blog" class="nav-link active" {% endif %} class="nav-link " href="/blog" >
+																					<i class="navbar-icon fas fa-rss-square"></i>
+																				Blog
+									</a>
+								</li>
+															<li class="nav-item" >
+									<a {% if active_menu == "services" %} href="/services" class="nav-link active" {% endif %} class="nav-link " href="/services" >
+																					<i class="navbar-icon far fa-award"></i>
+																				Services
+									</a>
+								</li>
+							                      
+                     
+                                                                        </ul>
+                      
+                    <div class="ms-auto nav_right "> <a
+              href="javascript:void(0)"
+              class="day_night_btn d-none-ph" id="toggleButton" 
+              onclick="toggleThemeMode()"
+            >
+              <span class="active_circle"></span>
+              <span class="day_mode"
+                ><iconify-icon icon="ph:sun-duotone"></iconify-icon
+              ></span>
+              <span class="night_mode">
+                <iconify-icon icon="ph:moon-duotone"></iconify-icon>
+              </span>
+            </a>  
+                   <a href="/#login" class="btn nav_right_btn btn_white_outline"
+                        >Sign In</a
+                        >
+                        <a href="/signup" class="btn nav_right_btn btn_signup"
+                >Inscription</a>
+
+                    </div>
+                      
+                      
+                      
+                    </div>
+                </div>
+                </nav>
+            </header>
+        
+            <div
+                class="offcanvas offcanvas-end mobile_menu_sidebar"
+                tabindex="-1"
+                id="offcanvasExample"
+                aria-labelledby="offcanvasExampleLabel"
+            >
+                <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                    <a href="/">
+                                                <img src="{{ site['logo'] }}" width="170px" class="img-fluid" alt="Meilleur fournisseur de panel de services en Guinee - ToutLike - {{ site['site_name'] }}" />
+                                            </a>
+                </h5>
+                  
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                ></button>
+                </div>
+                <div class="offcanvas-body mobile_menu_body">
+                <div class="mobile_nav_menu">
+                    <ul class="navbar-nav mb-3">
+                                                                       								<li class="nav-item" >
+									<a {% if active_menu == "about-us" %} href="/about-us" class="nav-link active" {% endif %} class="nav-link " href="/about-us" >
+																					<i class="navbar-icon far fa-address-card"></i>
+																				A propos
+									</a>
+								</li>
+															<li class="nav-item" >
+									<a {% if active_menu == "contact-us" %} href="/contact-us" class="nav-link active" {% endif %} class="nav-link " href="/contact-us" >
+																					<i class="navbar-icon fas fa-id-card-alt"></i>
+																				Contactez-nous
+									</a>
+								</li>
+															<li class="nav-item" >
+									<a {% if active_menu == "blog" %} href="/blog" class="nav-link active" {% endif %} class="nav-link " href="/blog" >
+																					<i class="navbar-icon fas fa-rss-square"></i>
+																				Blog
+									</a>
+								</li>
+															<li class="nav-item" >
+									<a {% if active_menu == "services" %} href="/services" class="nav-link active" {% endif %} class="nav-link " href="/services" >
+																					<i class="navbar-icon far fa-award"></i>
+																				Services
+									</a>
+								</li>
+							                                                                        </ul>
+                </div>
+                <div class="ms-auto nav_right">
+                    <a href="/#login" class="btn nav_right_btn btn_white_outline"
+                    >Sign In</a
+                    >
+                    <a href="/signup" class="btn nav_right_btn btn_signup"
+                    >Sign Up</a
+                    >
+                  
+                </div>
+                  <div class="bg_sidebars">
+                <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/6rsnywjway9sc7cl.webp" alt="ToutLike Sidebar">
+            </div>
+                </div>
+                <div class="offcanvas-footer">
+              <div class="p-3 text-white text-center">{{ site['site_name'] }}</div>
+                </div>
+            </div>
+            <!-- #### Without Login Header -->
+
+{% endif %}

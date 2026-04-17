@@ -1,0 +1,151 @@
+{% include 'header.twig' %}
+
+    <!-- Main variables *content* -->
+        <main class="auth">
+                    <div class="about_us_effect">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/bg-img1.png"
+              class="img-fluid about_us_img_left"
+              alt=""
+            />
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/img/bg-img2.png"
+              class="img-fluid about_us_img_right"
+              alt=""
+            />
+          </div>
+          		    
+<section id="myAccount">
+    <div class="container-fluid">
+        <div class="row">
+            {% if error %}
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ errorText }}
+        </div>
+      {% endif %}
+      {% if success %}
+        <div class="alert alert-dismissible alert-success">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ successText }}
+        </div>
+      {% endif %}
+
+            <div class="col-lg-12">
+                               </div>
+
+            <div class="col-lg-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="user_card_wrap">
+                            <div class="user_card_left">
+                                <div class="icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="text">
+                                    <h6>Nom d'utilisateur</h6>
+                                    <h3>{{ user["username"]  }}</h3>
+                                </div>
+                            </div>
+                            <div class="user_card_right">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                                                 <form method="post" action="account">
+                {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-12 mb-ph-3">
+                                    <input type="password" class="form-control" id="current"
+                                        name="current_password"
+                                        placeholder="Mot de passe actuel">
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-12 mb-ph-3">
+                                    <input type="password" class="form-control" id="new" name="password"
+                                        placeholder="Nouveau mot de passe">
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-12 mb-ph-3">
+                                    <input type="password" class="form-control" id="confirm"
+                                        name="confirm_password"
+                                        placeholder="Confirmer le nouveau mot de passe">
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-12">
+                                    <button type="submit" class="btn btn-primary w-100">{{ lang['account.password.button'] }}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="changeEmailError"
+             class="error-summary alert alert-dismissible alert-danger hidden"></div>
+                        <form id="changeEmailForm" class="modal-content" method="post" action="">
+                {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-lg-3 mb-ph-3">
+                                    <span class="form-control" id="current-email" disabled>{{ user['username'] }}</span>
+                                </div>
+                                <div class="col-lg-3 mb-ph-3">
+                                    <span class="form-control" id="current-email" disabled>{{ user['email'] }}</span>
+                                </div>
+                                <div class="col-lg-3 mb-ph-3">
+                                    <span class="form-control" id="current-email" disabled>{{ user["balance"] }}</span>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        
+ <div class="col-lg-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                       <form class="component_form_group" action="/account/newapikey" method="post">
+                {{ csrf_field() }}
+                            <div class="row d-flex align-items-center">
+                                <div class="col-lg-2 col-md-4 col-12 mb-ph-3">
+                                    <h3>API key</h3>
+                                    <div style=" display: none; "
+                                            class="alert alert-dismissible alert-danger ">
+                                        <button type="button" class="close">&times;</button>
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-md-4 col-12 mb-ph-3">
+                                                                            <input type="text" class="form-control" id="api_key" value="********************************" readonly>
+                                                                    </div>
+                                <div class="col-lg-3 col-md-4 col-12">
+                                    <button type="submit" class="btn btn-primary w-100">Generer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+        </main>
+
+            </div>
+      </section>
+      
+        		
+
+{% include 'footer.twig' %}
+
+    

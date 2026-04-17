@@ -1,0 +1,50 @@
+{% extends 'public_base.twig' %}
+{% block title %}FAQ - {{ site['site_name'] }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="page-header anim">
+    <h1>Questions fr&eacute;quentes</h1>
+    <p>Trouvez rapidement les r&eacute;ponses &agrave; vos questions sur nos services.</p>
+  </div>
+
+  <div class="anim">
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>Qu'est-ce que {{ site['site_name'] }} ?</span><span class="arr">&#9660;</span></div>
+      <div class="faq-a"><p>{{ site['site_name'] }} est une plateforme de services marketing en ligne qui vous aide &agrave; d&eacute;velopper votre pr&eacute;sence sur les r&eacute;seaux sociaux en fournissant des likes, followers, vues et commentaires de qualit&eacute;.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>Vos services sont-ils s&ucirc;rs ?</span><span class="arr">&#9660;</span></div>
+      <div class="faq-a"><p>Oui, la s&eacute;curit&eacute; de nos clients est notre priorit&eacute;. Nous utilisons des m&eacute;thodes conformes aux directives des plateformes.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>Comment ajouter des fonds ?</span><span class="arr">&#9660;</span></div>
+      <div class="faq-a"><p>Cr&eacute;ez un compte, allez dans "Ajouter des fonds" et payez via LengoPay (Orange Money, MTN Mobile Money, PayCard).</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>Puis-je obtenir un remboursement ?</span><span class="arr">&#9660;</span></div>
+      <div class="faq-a"><p>Oui, nous offrons une garantie de remboursement si vous n'&ecirc;tes pas satisfait. Contactez notre support.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>Qu'est-ce que la commande en masse ?</span><span class="arr">&#9660;</span></div>
+      <div class="faq-a"><p>La commande en masse permet de passer plusieurs commandes en une seule fois pour gagner du temps.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>Comment fonctionne la diffusion programm&eacute;e ?</span><span class="arr">&#9660;</span></div>
+      <div class="faq-a"><p>La diffusion programm&eacute;e permet de recevoir vos services progressivement. Par exemple, 100 likes par jour pendant 10 jours au lieu de 1000 d'un coup.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>Mon compte risque-t-il d'&ecirc;tre suspendu ?</span><span class="arr">&#9660;</span></div>
+      <div class="faq-a"><p>Nos strat&eacute;gies respectent les directives des r&eacute;seaux sociaux pour minimiser tout risque.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>Que signifie &laquo; rechargement &raquo; (refill) ?</span><span class="arr">&#9660;</span></div>
+      <div class="faq-a"><p>Si vous perdez des followers ou des likes apr&egrave;s une commande avec garantie de rechargement, nous les rempla&ccedil;ons automatiquement et gratuitement.</p></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:32px">
+    <p style="color:var(--muted);font-size:14px;margin-bottom:12px">Vous avez d'autres questions ?</p>
+    <a href="/contact-us" class="btn">Contactez notre support</a>
+  </div>
+</div>
+{% endblock %}

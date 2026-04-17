@@ -1,0 +1,3240 @@
+{% include 'header.twig' %}
+<!-- Main variables *content* -->
+<style>
+/* === TOUTLIKE MODERN LOGIN PAGE === */
+
+/* Animated gradient background for banner */
+#banner {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(-45deg, #0a0e27, #1a1a3e, #0d2137, #0a1628);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating particles */
+#banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.15), transparent),
+    radial-gradient(2px 2px at 40% 70%, rgba(255,255,255,0.1), transparent),
+    radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.12), transparent),
+    radial-gradient(1px 1px at 80% 50%, rgba(255,255,255,0.08), transparent),
+    radial-gradient(2px 2px at 10% 80%, rgba(255,255,255,0.1), transparent),
+    radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,0.12), transparent),
+    radial-gradient(2px 2px at 50% 50%, rgba(255,255,255,0.06), transparent),
+    radial-gradient(1px 1px at 30% 90%, rgba(255,255,255,0.1), transparent),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.08), transparent),
+    radial-gradient(2px 2px at 15% 55%, rgba(255,255,255,0.07), transparent);
+  animation: particlesFloat 20s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes particlesFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50px); }
+}
+
+/* Glassmorphism login card */
+.banner_login_part {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 24px !important;
+  padding: 40px 30px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+  transition: transform 0.4s ease, box-shadow 0.4s ease !important;
+}
+.banner_login_part:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.15) !important;
+}
+.banner_login_part h4 {
+  background: linear-gradient(135deg, #fff, #a8c0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+/* Modern inputs */
+.banner_login_part .form-control {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 14px !important;
+  color: #fff !important;
+  padding: 14px 16px 14px 50px !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease !important;
+}
+.banner_login_part .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+.banner_login_part .form-control:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(100, 180, 255, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(100, 180, 255, 0.15), 0 0 20px rgba(100, 180, 255, 0.1) !important;
+  outline: none !important;
+}
+
+/* Input icons */
+.banner_login_part .form-group.has_icon .icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+.banner_login_part .form-group.has_icon:focus-within .icon {
+  opacity: 1;
+}
+
+/* Shimmer button */
+.banner_login_part .btn-primary,
+.al .btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #4f8cff, #6c5ce7) !important;
+  border: none !important;
+  border-radius: 14px !important;
+  padding: 14px 28px !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(79, 140, 255, 0.35) !important;
+}
+.banner_login_part .btn-primary:hover,
+.al .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 140, 255, 0.5) !important;
+}
+.banner_login_part .btn-primary::after,
+.al .btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 3s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { left: -60%; }
+  100% { left: 140%; }
+}
+
+/* Banner content text */
+.banner_content h1 {
+  background: linear-gradient(135deg, #ffffff, #c8d6ff, #ffffff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShine 4s linear infinite;
+  font-weight: 800 !important;
+}
+@keyframes textShine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+.banner_content p {
+  color: rgba(255, 255, 255, 0.7) !important;
+  line-height: 1.8 !important;
+}
+.banner_content small {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* === ENTRANCE ANIMATIONS === */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.anim-fade-up { animation: fadeInUp 0.8s ease both; }
+.anim-fade-left { animation: fadeInLeft 0.8s ease both; }
+.anim-fade-right { animation: fadeInRight 0.8s ease both; }
+.anim-scale-in { animation: scaleIn 0.6s ease both; }
+.anim-fade-in { animation: fadeIn 0.8s ease both; }
+
+.anim-delay-1 { animation-delay: 0.1s; }
+.anim-delay-2 { animation-delay: 0.2s; }
+.anim-delay-3 { animation-delay: 0.3s; }
+.anim-delay-4 { animation-delay: 0.4s; }
+.anim-delay-5 { animation-delay: 0.5s; }
+.anim-delay-6 { animation-delay: 0.6s; }
+.anim-delay-7 { animation-delay: 0.7s; }
+.anim-delay-8 { animation-delay: 0.8s; }
+
+/* Scroll-triggered animations */
+[data-tl-animate] {
+  opacity: 0;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+[data-tl-animate].tl-visible {
+  opacity: 1;
+}
+[data-tl-animate="fade-up"] {
+  transform: translateY(40px);
+}
+[data-tl-animate="fade-up"].tl-visible {
+  transform: translateY(0);
+}
+[data-tl-animate="fade-left"] {
+  transform: translateX(-40px);
+}
+[data-tl-animate="fade-left"].tl-visible {
+  transform: translateX(0);
+}
+[data-tl-animate="fade-right"] {
+  transform: translateX(40px);
+}
+[data-tl-animate="fade-right"].tl-visible {
+  transform: translateX(0);
+}
+[data-tl-animate="scale-up"] {
+  transform: scale(0.85);
+}
+[data-tl-animate="scale-up"].tl-visible {
+  transform: scale(1);
+}
+[data-tl-animate="fade-in"] {
+  transform: none;
+}
+
+/* === COUNTER SECTION === */
+#counter {
+  padding: 60px 0;
+  position: relative;
+}
+.counter__item {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px !important;
+  padding: 30px 15px !important;
+  transition: all 0.4s ease !important;
+}
+.counter__item:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+.counter__item .icon {
+  background: linear-gradient(135deg, #4f8cff, #6c5ce7) !important;
+  box-shadow: 0 4px 20px rgba(79, 140, 255, 0.3) !important;
+  transition: transform 0.3s ease !important;
+}
+.counter__item:hover .icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* === ABOUT SECTION === */
+#about_us {
+  padding: 80px 0;
+}
+#about_us .def_image img {
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease;
+}
+#about_us .def_image img:hover {
+  transform: scale(1.03);
+}
+#about_us h2 {
+  position: relative;
+  display: inline-block;
+}
+#about_us h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #4f8cff, #6c5ce7);
+  border-radius: 2px;
+}
+
+/* === SERVICES SECTION === */
+#services {
+  padding: 80px 0;
+  position: relative;
+}
+.social_media_btn.nav-link {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  padding: 12px 18px !important;
+  transition: all 0.3s ease !important;
+  position: relative;
+  overflow: hidden;
+}
+.social_media_btn.nav-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(79,140,255,0.15), rgba(108,92,231,0.15));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 16px;
+}
+.social_media_btn.nav-link:hover::before,
+.social_media_btn.nav-link.active::before {
+  opacity: 1;
+}
+.social_media_btn.nav-link.active {
+  border-color: rgba(79, 140, 255, 0.4) !important;
+  box-shadow: 0 0 20px rgba(79, 140, 255, 0.15) !important;
+}
+.social_media_btn.nav-link .icon {
+  transition: transform 0.3s ease;
+}
+.social_media_btn.nav-link:hover .icon {
+  transform: scale(1.15);
+}
+.box_item {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 20px !important;
+  transition: all 0.4s ease !important;
+  overflow: hidden;
+}
+.box_item:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(79, 140, 255, 0.2) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
+}
+.service_content h3 {
+  background: linear-gradient(135deg, #fff, #a8c0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === HOW IT WORKS SECTION === */
+#featuresOfSmmpanel {
+  padding: 80px 0;
+}
+.service_itemscard {
+  border-radius: 20px !important;
+  overflow: hidden;
+  transition: all 0.4s ease !important;
+}
+.service_card_inner {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 20px !important;
+  padding: 30px !important;
+  transition: all 0.4s ease !important;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.service_card_inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(180deg, #4f8cff, #6c5ce7);
+  border-radius: 0 2px 2px 0;
+  transition: height 0.5s ease;
+}
+.service_card_inner:hover::before {
+  height: 100%;
+}
+.service_card_inner:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(79, 140, 255, 0.2) !important;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+.service_card_inner .icon {
+  transition: transform 0.3s ease;
+}
+.service_card_inner:hover .icon {
+  transform: scale(1.15);
+}
+
+/* === WHOLESALE SECTION === */
+#wholesale {
+  padding: 80px 0;
+}
+#wholesale .box_item {
+  padding: 30px !important;
+  border-radius: 20px !important;
+}
+#wholesale .box_item:hover {
+  transform: translateY(-8px);
+}
+#wholesale .box_icon {
+  transition: transform 0.4s ease;
+}
+#wholesale .box_item:hover .box_icon {
+  transform: translateY(-6px);
+}
+
+/* === TESTIMONIALS SECTION === */
+#testimonials {
+  padding: 80px 0;
+}
+.testimonial_box {
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 20px !important;
+  padding: 30px !important;
+  transition: all 0.4s ease !important;
+}
+.testimonial_box:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(79, 140, 255, 0.2) !important;
+  transform: translateY(-4px);
+}
+.testimonials_slider_button .swiper-prev,
+.testimonials_slider_button .swiper-next {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease !important;
+  cursor: pointer;
+}
+.testimonials_slider_button .swiper-prev:hover,
+.testimonials_slider_button .swiper-next:hover {
+  background: rgba(79, 140, 255, 0.15) !important;
+  border-color: rgba(79, 140, 255, 0.3) !important;
+  transform: scale(1.1);
+}
+
+/* === WHY CHOOSE US === */
+#whyChooseUs {
+  padding: 80px 0;
+}
+.type_item_1 {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+  transition: all 0.4s ease !important;
+}
+.type_item_1:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(79, 140, 255, 0.2) !important;
+  transform: translateX(8px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+.type_item_1 .icon {
+  transition: transform 0.3s ease;
+}
+.type_item_1:hover .icon {
+  transform: rotate(10deg) scale(1.1);
+}
+#whyChooseUs .def_content h2 {
+  position: relative;
+  display: inline-block;
+}
+#whyChooseUs .def_content h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #4f8cff, #6c5ce7);
+  border-radius: 2px;
+}
+
+/* === EASY & ACCESSIBLE === */
+#easyAndAccessible {
+  padding: 80px 0;
+}
+#easyAndAccessible .def_image img {
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease;
+}
+#easyAndAccessible .def_image img:hover {
+  transform: scale(1.03) rotate(1deg);
+}
+
+/* === FEATURES SECTION === */
+.features_box_item {
+  padding: 24px !important;
+}
+
+/* === PAYMENT METHODS === */
+#payment_methods {
+  padding: 60px 0;
+}
+.payment_logo {
+  opacity: 0.5;
+  transition: all 0.3s ease !important;
+  filter: grayscale(50%);
+}
+.payment_logo:hover {
+  opacity: 1 !important;
+  filter: grayscale(0%);
+  transform: scale(1.15);
+}
+
+/* === BENEFITS SECTION === */
+#benifits {
+  padding: 80px 0;
+}
+.box_benifits {
+  border-radius: 20px !important;
+  padding: 30px !important;
+  transition: all 0.4s ease !important;
+}
+.box_benifits:hover {
+  transform: translateY(-10px) !important;
+}
+.box_benifits.mid_box:hover {
+  transform: translateY(-12px) !important;
+}
+.box_benifits .box_icon {
+  transition: transform 0.3s ease;
+}
+.box_benifits:hover .box_icon {
+  transform: scale(1.1) translateY(-4px);
+}
+
+/* === FAQ SECTION === */
+#faq {
+  padding: 80px 0;
+}
+.faq_accordion .accordion-item {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 16px !important;
+  margin-bottom: 12px !important;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.faq_accordion .accordion-item:hover {
+  border-color: rgba(79, 140, 255, 0.2) !important;
+}
+.faq_accordion .accordion-button {
+  background: transparent !important;
+  color: #fff !important;
+  font-weight: 600;
+  padding: 18px 24px !important;
+  box-shadow: none !important;
+}
+.faq_accordion .accordion-button:not(.collapsed) {
+  background: rgba(79, 140, 255, 0.08) !important;
+  color: #a8c0ff !important;
+}
+.faq_accordion .accordion-button::after {
+  filter: brightness(0) invert(1);
+}
+.faq_accordion .accordion-body {
+  background: rgba(255, 255, 255, 0.02) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  padding: 16px 24px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+#faq .def_content h2 {
+  position: relative;
+  display: inline-block;
+}
+#faq .def_content h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #4f8cff, #6c5ce7);
+  border-radius: 2px;
+}
+
+/* === RESELLER SECTION === */
+#whatWeDo {
+  padding: 80px 0;
+}
+#whatWeDo .box_item {
+  padding: 30px !important;
+  border-radius: 20px !important;
+  transition: all 0.4s ease !important;
+}
+#whatWeDo .box_item:hover {
+  transform: translateY(-6px);
+  border-color: rgba(79, 140, 255, 0.2) !important;
+}
+
+/* === SECTION HEADINGS === */
+.def_content h2 {
+  position: relative;
+  display: inline-block;
+}
+.def_content.text-center h2::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #4f8cff, #6c5ce7);
+  border-radius: 2px;
+}
+
+/* === GENERAL ENHANCEMENTS === */
+.btn-primary {
+  background: linear-gradient(135deg, #4f8cff, #6c5ce7) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(79, 140, 255, 0.25) !important;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 140, 255, 0.4) !important;
+}
+
+/* Day mode adjustments */
+.daymode .banner_login_part {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+.daymode .banner_login_part h4 {
+  background: linear-gradient(135deg, #1a1a3e, #4f8cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.daymode .banner_login_part .form-control {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #1a1a3e !important;
+}
+.daymode .banner_login_part .form-control::placeholder {
+  color: rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-tl-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 991px) {
+  .banner_login_part {
+    margin-top: 30px;
+    padding: 30px 20px !important;
+  }
+  .banner_content {
+    text-align: center !important;
+  }
+  .banner_content h1 {
+    font-size: 1.8rem !important;
+  }
+}
+@media (max-width: 575px) {
+  .banner_login_part {
+    padding: 24px 16px !important;
+    border-radius: 18px !important;
+  }
+  .counter__item {
+    padding: 20px 10px !important;
+    margin-bottom: 12px;
+  }
+}
+
+/* Glow effect for section separators */
+section {
+  position: relative;
+}
+section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79, 140, 255, 0.15), transparent);
+}
+section:last-of-type::after {
+  display: none;
+}
+</style>
+
+       	            <main class="no_auth">
+          		     <!-- Banner Section -->
+ <section id="banner">
+  <div class="banner_bg_effect">
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/ln8x4fsqd7nhg7q0.png"
+      class="img-fluid bg_banner_left_effect"
+      alt="bg left"
+    />
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/0h19wpmlpznb1kq7.png"
+      class="img-fluid bg_banner_right_effect"
+      alt="bg right"
+    />
+  </div>
+
+      
+		<style>
+    .size {
+     width: 100% !important;
+     white-space: nowrap !important;
+     margin-top: -7px !important;
+     padding: 10px !important;
+     margin-bottom: 0px !important;
+     display: flex !important;
+     z-index: 9999999 !important;
+   }
+  
+  .d-flex {
+    display: flex !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+.google-login-wrap {
+	position: relative;
+	border-radius: 10px;
+	background-color: var(--primary-color);
+	border-color: var(--primary-color-deep);
+	align-items: center;
+	align-content: center;
+}
+  .google-login {
+	color: #FFF;
+	font-size: 14px;
+	font-weight: 500;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	align-content: center;
+}
+  .google-btn {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 55px;
+	width: 100%;
+	overflow: hidden;
+	opacity: 0;
+}
+  .google-login svg {
+	width: 20px;
+	display: inline-block;
+	margin-left: 8px;
+}
+.btn-secondary {
+    --bs-btn-bg: #6c757d00 !important;
+    --bs-btn-border-color: #6c757d00 !important;
+}
+@media (max-width:591.98px) {
+    .nav_servicess .nav-link .text {
+       display: none !important;
+	}
+}
+ 
+  .al, .nav_servicess .nav-link {
+    align-items: center !important;
+    justify-content: flex !important;
+    text-align: center !important;
+  }
+/* Typewriter effect 1 */
+@keyframes typing {
+  0%, 10% { content: ""; }
+  10%, 20% { content: "O"; }
+  25%, 40% { content: "Ou"; }
+  50%, 65% { content: "Our"; }
+  75%, 80% { content: "Our Si"; }
+  100%, 100% { content: "Our Site"; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.typewriter {
+  --caret: currentcolor;
+} 
+.typewriter::before {
+  content: "";
+  animation: typing 1s steps(9, end) infinite; /* Faster typing animation */
+}
+.typewriter::after {
+  content: "";
+  border-right: 1px solid var(--caret);
+  animation: blink 0.3s linear infinite;
+}
+.typewriter.thick::after {
+  border-right: 1ch solid var(--caret);
+}
+.typewriter.nocaret::after {
+  border-right: 0;
+}
+   body .tp {
+    margin-top: 10px !important;
+  }
+  /*.nav_servicess .nav-link {
+    border-radius: 30px !important;
+    background: var(--form-input-bg) !important;
+    border: 1px solid var(--card-bg) !important;
+    color: #fff !important;
+    padding-left: 4px !important;
+  }
+.daymode .nav_servicess .nav-link {
+    background-color: #F2FFFF !important;
+  border: 1px solid #D4FFFF !important;
+    color: var(--form-input-bg) !important;
+  }
+ body .nav_servicess .nav-link .text, .daymode .nav_servicess .nav-link.active .text {
+   color: #fff !important; 
+  }
+  html body .social_media_wrap .nav-link.active {
+     border: 1px solid var(--primary-color) !important;
+    color: #fff !important;
+  }
+  .daymode .nav_servicess .nav-link .text {
+   color: var(--form-input-bg) !important; 
+  }
+  body .nav_servicess {
+    background: #232323 !important;
+   padding: 12px !important;
+   
+  }*/
+   html body .social_media_wrap .nav-link.active {
+     border: 1px solid var(--primary-color) !important;
+    
+  }
+@media (prefers-reduced-motion) {
+  .typewriter::after {
+    animation: none;
+  }
+  @keyframes sequencePopup {
+    0%, 100% { content: "{{ site['site_name'] }}}"; }
+    25% { content: "{{ site['site_name'] }}}"; }
+    50% { content: "{{ site['site_name'] }}}"; }
+    75% { content: "{{ site['site_name'] }}}"; }
+  }
+  .typewriter::before {
+    content: "developer";
+    animation: sequencePopup 3s linear infinite;
+  }
+}
+  
+ html body .abh {
+   color: var(--primary-color) !important; 
+  }
+/**/
+</style>
+<div class="container" id="topsec">
+    <div class="row">
+      <div class="col-lg-6 text-center">
+          <div class="banner_content anim-fade-left anim-delay-2">
+            <h4>
+             <small> Bienvenue sur <span class="text-primary blue-txt typewriter thick"></span> </small> </h4><h1>
+                Gagnez en visibilite en Guinee
+             </h1>
+              <p>
+                 Attirez plus de vues, plus d'abonnes, plus d'impact. {{ site['site_name'] }}} peut etre votre premier choix pour developper votre presence en ligne. 
+                  Nous fournissons un service de qualite superieure a un prix abordable. Boostez votre croissance sur les reseaux sociaux et stimulez votre entreprise.
+
+              </p>
+          </div></div>
+          <div class="col-lg-6  text-center">
+          <div class="login_box_area">
+            <div class="banner_login_part anim-fade-right anim-delay-3" id="login">
+              <h4>Connectez-vous au tableau de bord</h4>
+        <form   method="post" action="/" id="loginForm">
+                   
+                            
+                <div class="form-group has_icon mb-3">
+                  <div class="icon">
+                    <img
+                      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/bzbhqus2njwjeu5z.png"
+                      class="img-fluid"
+                      alt="{{ site['site_name'] }}} Username"
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nom d`utilisateur"
+                    id="username" 
+                    name="username"
+                  />
+                </div>
+                <div class="form-group has_icon">
+                  <div class="icon">
+                    <img
+                      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/y01r6j3udn3i37mi.png"
+                      class="img-fluid"
+                      alt="{{ site['site_name'] }}} Password"
+                    />
+                  </div>
+
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Mot de passe"
+                    id="password"
+                  />
+                  <div class="pass_eye">
+                    <button
+                      class="pss-btn-sh"
+                      id="pwdBtn"
+                      type="button"
+                      onclick="passwordShowHide('pwdBtn','password')"
+                    >
+                      <span class="eye-open">
+                        <iconify-icon icon="ph:eye"></iconify-icon>
+                      </span>
+                      <div class="eye-close">
+                        <iconify-icon
+                          icon="ph:eye-slash-duotone"
+                        ></iconify-icon>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+          <br>
+          
+                <div class="py-3 d-flex justify-content-between">
+                  <div class="f_group">
+                    <label for="remember">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="remember"
+                        name="LoginForm[remember]" value="1" 
+                      />
+                      Se souvenir de moi
+                    </label>
+                  </div>
+                                    <div class="f_group">
+                                                <a href="/resetpassword" class="form_link text-white"
+                              >Mot de passe oublie ?</a
+                          >
+                                        </div>                  </div>
+          <div class="al d-flex">
+          
+                <button class="btn btn-primary btn_has_icon mb-3" type="submit">
+                  <span class="btn_text">Se connecter</span>
+                  <!--<div class="btn_icon">
+                    <img
+                      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/315b9s2n2rmyzpwg.png"
+                      class="img-fluid"
+                      alt="{{ site['site_name'] }}} Sign in Arrow"
+                    />
+                  </div>-->
+             </button>
+          
+         
+                      <center>
+        
+                        <div class="google-login-wrap btn btn-primary btn_has_icon mb-3">
+                         {{ google_login_content }}
+             </div>
+              </center>
+                </div>
+            
+                <div class="text-center text-white">
+                                    Vous n'avez pas de compte ?
+                  <a href="/signup" class="text-whited abh">S'inscrire</a>
+            </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+</section>
+<!-- #### Banner Section -->
+
+
+
+<!-- Counter Section -->
+<section id="counter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="counter__item" data-tl-animate="fade-up" data-tl-delay="0">
+                    <div class="icon">
+                        <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/c9ges47tsz7czzlq.png" class="img-fluid"
+                            alt="{{ site['site_name'] }}} order-completed-of-smm-panel">
+                    </div>
+                    <h4 data-counter="576835">0</h4>
+                    <p>Commandes terminees</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="counter__item" data-tl-animate="fade-up" data-tl-delay="100">
+                    <div class="icon">
+                        <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/690ak6zn8wxmpcii.png" class="img-fluid"
+                            alt="{{ site['site_name'] }}} active-services-of-smm-panel">
+                    </div>
+                    <h4 data-counter="4688">0</h4>
+                    <p>Services actifs</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="counter__item" data-tl-animate="fade-up" data-tl-delay="200">
+                    <div class="icon">
+                        <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/t264ciyt3awl95ns.png" class="img-fluid"
+                            alt="{{ site['site_name'] }}} active-user-of-smm-panel">
+                    </div>
+                    <h4 data-counter="30116">0</h4>
+                    <p>Utilisateurs actifs</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="counter__item" data-tl-animate="fade-up" data-tl-delay="300">
+                    <div class="icon">
+                        <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/y6yn4ewohq8wnkpk.png" class="img-fluid"
+                            alt="{{ site['site_name'] }}} world-wide-rank-smm-panel">
+                    </div>
+                    <h4>#1</h4>
+                    <p>Classement mondial</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- #### counter Section -->
+
+<!-- A propos de Us -->
+<section id="about_us" data-tl-animate="fade-up">
+  <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="def_content" data-tl-animate="fade-left">
+              <h2>A propos de {{ site['site_name'] }}}</h2>
+              <p>
+                {{ site['site_name'] }}}, fonde en 2020, est l'une des meilleures plateformes pour developper votre visibilite en Guinee. Nous proposons des services abordables pour vous aider a tirer le meilleur parti des reseaux sociaux pour votre entreprise. De Facebook et YouTube a LinkedIn et TikTok, nous offrons les meilleures solutions pour votre croissance en ligne.
+<br />
+Nous sommes fiers d'etre le revendeur le moins cher en Guinee. Pour assurer une forte presence sur les reseaux sociaux pour votre marque, il n'y a pas d'alternative a choisir la meilleure solution. {{ site['site_name'] }}} devrait etre votre premier choix ! L'accessibilite et l'engagement envers la qualite sont nos priorites absolues.
+              </p>
+              <a href="/signup" class="btn btn-primary mt-3">S'inscrire</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="def_image" data-tl-animate="fade-right">
+              <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/1963iaqziisp9mcd.webp" class="img-fluid" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Services Section -->
+
+
+
+
+<section id="services" data-tl-animate="fade-up">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="def_content text-center" data-tl-animate="fade-up">
+          <h2>
+           Services abordables que nous proposons en Guinee
+          </h2>
+          <p>
+           En tant que fournisseur le moins cher en Guinee, chacun de nos services est concu pour vous offrir les meilleurs resultats en marketing sur les reseaux sociaux.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-4">
+          <div class="row">
+            <div class="col-lg-12 navhh">
+              <div
+                class="social_media_wrap mb-3"
+                id="v-pills-tab"
+                role="tablist"
+                aria-orientation="vertical"
+              >
+                <button
+                  class="social_media_btn nav-link active"
+                  id="v-pills-instagram-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-instagram"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-instagram"
+                  aria-selected="true"
+                >
+                  <div class="icon">
+                    <img
+                      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/3fpow8wsdakfuhxc.png"
+                      class="img-fluid"
+                      alt="{{ site['site_name'] }}} the Best panel"
+                    />
+                  </div>
+                  <div class="media_name">Instagram</div>
+                </button>
+
+                <button
+                  class="social_media_btn nav-link"
+                  id="v-pills-Facebook-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-Facebook"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-Facebook"
+                  aria-selected="false"
+                >
+                  <div class="icon">
+                    <img
+                      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/y1cz4pswkrne92m7.png"
+                      class="img-fluid"
+                      alt="{{ site['site_name'] }}} Instagram panel"
+                    />
+                  </div>
+                  <div class="media_name">Facebook</div>
+                </button>
+
+                <button
+                  class="social_media_btn nav-link"
+                  id="v-pills-youtube-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-youtube"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-youtube"
+                  aria-selected="false"
+                >
+                  <div class="icon">
+                    <img
+                      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/cpirbsemrodq8beb.png"
+                      class="img-fluid"
+                      alt="{{ site['site_name'] }}} Youtube Icon"
+                    />
+                  </div>
+                  <div class="media_name">Youtube</div>
+                </button>
+
+                <!--<button
+                class="social_media_btn nav-link"
+                id="v-pills-snapchat-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#v-pills-snapchat"
+                type="button"
+                role="tab"
+                aria-controls="v-pills-snapchat"
+                aria-selected="false"
+              >
+                <div class="icon">
+                  <img
+                    src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/slrjdewy336j2cy7.png"
+                    class="img-fluid"
+                    alt="snapchat panel"
+                  />
+                </div>
+                <div class="media_name">Snapchat</div>
+              </button>-->
+
+              <button
+              class="social_media_btn nav-link"
+              id="v-pills-tiktok-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-tiktok"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-tiktok"
+              aria-selected="false"
+            >
+              <div class="icon">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/n6esa3pjnkashu4i.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Tiktok panel Icon"
+                />
+              </div>
+              <div class="media_name">TikTok</div>
+            </button>
+
+                <button
+                  class="social_media_btn nav-link"
+                  id="v-pills-twitter-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-twitter"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-twitter"
+                  aria-selected="false"
+                >
+                  <div class="icon">
+                    <img
+                      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/c0h1tdr2up1erx8t.png"
+                      class="img-fluid"
+                      alt="{{ site['site_name'] }}} Twitter panel Icon"
+                    />
+                  </div>
+                  <div class="media_name">Twitter</div>
+                </button>
+
+                <button
+                  class="social_media_btn nav-link"
+                  id="v-pills-spotify-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-spotify"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-spotify"
+                  aria-selected="false"
+                >
+                  <div class="icon">
+                    <img
+                      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2eatmfjcr1td10i3.png"
+                      class="img-fluid"
+                      alt="{{ site['site_name'] }}} Spotify panel Icon"
+                    />
+                  </div>
+                  <div class="media_name">Spotify</div>
+                </button>
+
+                <button
+                class="social_media_btn nav-link"
+                id="v-pills-telegram-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#v-pills-telegram"
+                type="button"
+                role="tab"
+                aria-controls="v-pills-telegram"
+                aria-selected="false"
+              >
+                <div class="icon">
+                  <img
+                    src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/rh8um80yqi0y7mjh.png"
+                    class="img-fluid"
+                    alt="{{ site['site_name'] }}} Telegram panel Icon"
+                  />
+                </div>
+                <div class="media_name">Telegram</div>
+              </button>
+              
+              <button
+              class="social_media_btn nav-link"
+              id="v-pills-linkedin-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-linkedin"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-linkedin"
+              aria-selected="false"
+            >
+              <div class="icon">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/tq1pj8k9fca9y671.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Linkedin panel Icon"
+                />
+              </div>
+              <div class="media_name">Linkedin</div>
+            </button>              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="box_item">
+              <div class="tab-content" id="v-pills-tabContent">
+               
+
+
+
+
+                <div
+                  class="tab-pane fade show active"
+                  id="v-pills-instagram"
+                  role="tabpanel"
+                  aria-labelledby="v-pills-instagram-tab"
+                  tabindex="0"
+                >
+                  <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                      <div class="service_content">
+                        <h3>Services Instagram
+</h3>
+                        <hr />
+                        <p>
+                        Vous pouvez obtenir une grande quantite de likes et de partages avec nos services Instagram. Nous nous concentrons sur les reels Instagram (videos courtes) et les stories. Nous travaillons la-dessus pour que vous puissiez obtenir plus de visibilite et d'engagement. Notre service de stories en vedette vous permet d'etre visible a tout moment.
+ 
+                        </p>
+                        <a href="/instagram-smm-panel" class="btn btn-primary btn-sm"
+                          >Nos services</a
+                        >
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                      <div class="service_icon">
+                        <img
+                          src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/p6qibx4jdc2pen7m.webp"
+                          class="img-fluid"
+                          alt="instagram panel"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+               
+  
+<div
+                  class="tab-pane fade"
+                  id="v-pills-Facebook"
+                  role="tabpanel"
+                  aria-labelledby="v-pills-Facebook-tab"
+                  tabindex="0"
+                >
+                  <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                      <div class="service_content">
+                        <h3>Services Facebook
+</h3>
+                        <hr />
+                        <p>
+                          Avec nos meilleurs services Facebook en Guinee, vous obtiendrez la portee souhaitee sur votre page Facebook. Nous concevons nos offres en fonction de l'interet du public pour votre categorie d'entreprise. Notre strategie vise a garantir plus de likes, de commentaires et de partages sur votre page Facebook professionnelle.
+
+                        </p>
+                        <a href="/facebook-smm-panel" class="btn btn-primary btn-sm"
+                          >Nos services</a
+                        >
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                      <div class="service_icon">
+                        <img
+                          src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/czhpg3hlq08lgmoe.webp"
+                          class="img-fluid"
+                          alt="{{ site['site_name'] }}} Facebook panel Services Icon"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+           
+   
+<div
+                  class="tab-pane fade"
+                  id="v-pills-youtube"
+                  role="tabpanel"
+                  aria-labelledby="v-pills-youtube-tab"
+                  tabindex="0"
+                >
+                  <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                      <div class="service_content">
+                        <h3>Services YouTube
+</h3>
+                        <hr />
+                        <p>
+                          Plus de vues YouTube, plus d'engagement client ! Nous fournissons des vues YouTube ainsi que des vues de diffusions en direct YouTube. Avec nos services les moins chers en Guinee, les videos YouTube de votre marque atteindront vos prospects cibles. Vous pouvez egalement obtenir plus de likes et commentaires YouTube grace a nos services et ainsi atteindre vos objectifs de vente.
+
+                        </p>
+                        <a href="/youtube-smm-panel" class="btn btn-primary btn-sm">
+                          Nos services</a
+                        >
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                      <div class="service_icon">
+                        <img
+                          src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/7274s95nfre3f4gd.png"
+                          class="img-fluid"
+                          alt="{{ site['site_name'] }}} Youtube panel Services Icon"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                
+
+
+                <div
+                class="tab-pane fade"
+                id="v-pills-snapchat"
+                role="tabpanel"
+                aria-labelledby="v-pills-snapchat-tab"
+                tabindex="0"
+              >
+                <div class="row">
+                  <div class="col-lg-8 col-md-12">
+                    <div class="service_content">
+                      <h3>Services Snapchat</h3>
+                      <hr />
+                      <p>
+                        {{ site['site_name'] }}} est un fournisseur de services Snapchat de confiance en Guinee. Nous offrons des solutions de marketing sur les reseaux sociaux efficaces qui vous aident a developper votre presence sur Snapchat facilement. Nos services sont concus pour stimuler l'engagement et la portee, offrant une croissance abordable et fiable pour les entreprises et les particuliers cherchant a renforcer leur impact sur les reseaux sociaux. 
+                      </p>
+                      <a href="/services" class="btn btn-primary btn-sm">
+                        Nos services</a
+                      >
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-12">
+                    <div class="service_icon">
+                      <img
+                        src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/tg1razfwsgmjoyxc.png"
+                        class="img-fluid"
+                        alt="{{ site['site_name'] }}} Snapchat panel Services Icon"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                
+
+
+
+                <div
+                class="tab-pane fade"
+                id="v-pills-tiktok"
+                role="tabpanel"
+                aria-labelledby="v-pills-tiktok-tab"
+                tabindex="0"
+              >
+                <div class="row">
+                  <div class="col-lg-8 col-md-12">
+                    <div class="service_content">
+                      <h3>Services TikTok
+</h3>
+                      <hr />
+                      <p>
+                       Our TikTok service includes hashtag optimization so that the TikTok videos of your business get the desired views. We ensure your content on TikTok goes with trends. To increase users� engagement, we feature duet and stitches service to invite more people to get engaged with your brand.  We provide TikTok follower service to boost your business.
+
+                      </p>
+                      <a href="/tiktok-smm-panel" class="btn btn-primary btn-sm">
+                        Nos services</a
+                      >
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-12">
+                    <div class="service_icon">
+                      <img
+                        src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/oc95pdookui4igy4.webp"
+                        class="img-fluid"
+                        alt="{{ site['site_name'] }}} Tiktok panel Services Icon"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                
+
+
+
+                <div
+                  class="tab-pane fade"
+                  id="v-pills-twitter"
+                  role="tabpanel"
+                  aria-labelledby="v-pills-twitter-tab"
+                  tabindex="0"
+                >
+                  <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                      <div class="service_content">
+                        <h3>Services Twitter</h3>
+                        <hr />
+                        <p>
+                          {{ site['site_name'] }}} est un fournisseur de confiance de services Twitter en Guinee. Nous offrons des solutions personnalisees pour stimuler vos abonnes Twitter, l'engagement et la visibilite. Nos services abordables et efficaces aident les entreprises et les particuliers a developper leur presence en ligne, garantissant une interaction accrue et du succes sur Twitter avec des strategies eprouvees adaptees a vos besoins.
+                        </p>
+                        <a href="/services" class="btn btn-primary btn-sm">
+                          Nos services</a
+                        >
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                      <div class="service_icon">
+                        <img
+                          src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/jzt8w9sllll955ce.png"
+                          class="img-fluid"
+                          alt="{{ site['site_name'] }}} Twitter panel Services Icon"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                  <div
+                  class="tab-pane fade"
+                  id="v-pills-spotify"
+                  role="tabpanel"
+                  aria-labelledby="v-pills-spotify-tab"
+                  tabindex="0"
+                >
+                  <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                      <div class="service_content">
+                        <h3>Services Spotify</h3>
+                        <hr />
+                        <p>
+                          {{ site['site_name'] }}} propose des services Spotify en Guinee, aidant les clients a augmenter leurs streams, abonnes et engagement. Nos services sont concus pour ameliorer votre presence sur Spotify avec des strategies efficaces et des solutions abordables. Nous nous concentrons sur la livraison de resultats reels, garantissant que les particuliers et les entreprises peuvent developper leur audience et leur visibilite sur la plateforme. 
+                        </p>
+                        <a href="/services" class="btn btn-primary btn-sm">
+                          Nos services</a
+                        >
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                      <div class="service_icon">
+                        <img
+                          src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/f102dapozxsb994u.png"
+                          class="img-fluid"
+                          alt="{{ site['site_name'] }}} Spotify panel Services Icon"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+               
+<div
+                class="tab-pane fade"
+                id="v-pills-telegram"
+                role="tabpanel"
+                aria-labelledby="v-pills-telegram-tab"
+                tabindex="0"
+              >
+                <div class="row">
+                  <div class="col-lg-8 col-md-12">
+                    <div class="service_content">
+                      <h3>Services Telegram</h3>
+                      <hr />
+                      <p>
+                        {{ site['site_name'] }}} propose des services Telegram en Guinee, aidant les entreprises et les particuliers a augmenter leurs abonnes, leur engagement et leur visibilite. Nous fournissons des solutions efficaces et abordables concues pour stimuler votre presence sur Telegram. Nos services offrent des resultats reels et mesurables, garantissant une croissance rapide et vous aidant a atteindre une audience plus large et plus ciblee pour votre chaine ou groupe.
+                      </p>
+                      <a href="/telegram-smm-panel" class="btn btn-primary btn-sm">
+                        Nos services</a
+                      >
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-12">
+                    <div class="service_icon">
+                      <img
+                        src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/lf22ol0nj2oca73g.webp"
+                        class="img-fluid"
+                        alt="{{ site['site_name'] }}} Telegram panel Services Icon"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                  <div
+                class="tab-pane fade"
+                id="v-pills-linkedin"
+                role="tabpanel"
+                aria-labelledby="v-pills-linkedin-tab"
+                tabindex="0"
+              >
+                <div class="row">
+                  <div class="col-lg-8 col-md-12">
+                    <div class="service_content">
+                      <h3>Services LinkedIn</h3>
+                      <hr />
+                      <p>
+                        {{ site['site_name'] }}} fournit des services LinkedIn en Guinee, offrant des solutions efficaces pour stimuler votre profil, vos connexions et votre engagement. Nous aidons les entreprises et les particuliers a ameliorer leur presence sur LinkedIn avec des strategies abordables et fiables. Nos services sont concus pour stimuler la croissance, garantissant que votre reseau s'agrandisse et que votre visibilite professionnelle augmente considerablement. 
+                      </p>
+                      <a href="/services" class="btn btn-primary btn-sm">
+                        Nos services</a
+                      >
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-12">
+                    <div class="service_icon">
+                      <img
+                        src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/mx7c5b5qhk7hxgc3.webp"
+                        class="img-fluid"
+                        alt="{{ site['site_name'] }}} Linkedin panel Services Icon"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <p class="text-center">
+         <br> 
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="service_effect">
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/x7bwl7lio4pkekfx.png"
+      class="img-fluid services_effect_img"
+      alt="{{ site['site_name'] }}} color"
+    />
+  </div>
+</section>
+
+
+
+
+<!--<section id="affordable">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="title text-center">Our Affordable panel Services</h2>
+        <p class="txt text-center">As the best service provider, we offer some of the cheapest solutions to help you and your businesses grow online.</p>
+        <ul class="nav nav-tabs my-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#facebook" role="tab" aria-controls="home" aria-selected="true">
+              <span class="tabs-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47062 14 5.5 16 5.5H17.5V2.1401C17.1743 2.09685 15.943 2 14.6429 2C11.9284 2 10 3.65686 10 6.69971V9.5H7V13.5H10V22H14V13.5Z" fill="white"/>
+                </svg>
+              </span>
+              <span class="tabs-txt">Facebook</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#instagram" role="tab" aria-controls="profile" aria-selected="false">
+              <span class="tabs-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12.001 9C10.3436 9 9.00098 10.3431 9.00098 12C9.00098 13.6573 10.3441 15 12.001 15C13.6583 15 15.001 13.6569 15.001 12C15.001 10.3427 13.6579 9 12.001 9ZM12.001 7C14.7614 7 17.001 9.2371 17.001 12C17.001 14.7605 14.7639 17 12.001 17C9.24051 17 7.00098 14.7629 7.00098 12C7.00098 9.23953 9.23808 7 12.001 7ZM18.501 6.74915C18.501 7.43926 17.9402 7.99917 17.251 7.99917C16.5609 7.99917 16.001 7.4384 16.001 6.74915C16.001 6.0599 16.5617 5.5 17.251 5.5C17.9393 5.49913 18.501 6.0599 18.501 6.74915ZM12.001 4C9.5265 4 9.12318 4.00655 7.97227 4.0578C7.18815 4.09461 6.66253 4.20007 6.17416 4.38967C5.74016 4.55799 5.42709 4.75898 5.09352 5.09255C4.75867 5.4274 4.55804 5.73963 4.3904 6.17383C4.20036 6.66332 4.09493 7.18811 4.05878 7.97115C4.00703 9.0752 4.00098 9.46105 4.00098 12C4.00098 14.4745 4.00753 14.8778 4.05877 16.0286C4.0956 16.8124 4.2012 17.3388 4.39034 17.826C4.5591 18.2606 4.7605 18.5744 5.09246 18.9064C5.42863 19.2421 5.74179 19.4434 6.17187 19.6094C6.66619 19.8005 7.19148 19.9061 7.97212 19.9422C9.07618 19.9939 9.46203 20 12.001 20C14.4755 20 14.8788 19.9934 16.0296 19.9422C16.8117 19.9055 17.3385 19.7996 17.827 19.6106C18.2604 19.4423 18.5752 19.2402 18.9074 18.9085C19.2436 18.5718 19.4445 18.2594 19.6107 17.8283C19.8013 17.3358 19.9071 16.8098 19.9432 16.0289C19.9949 14.9248 20.001 14.5389 20.001 12C20.001 9.52552 19.9944 9.12221 19.9432 7.97137C19.9064 7.18906 19.8005 6.66149 19.6113 6.17318C19.4434 5.74038 19.2417 5.42635 18.9084 5.09255C18.573 4.75715 18.2616 4.55693 17.8271 4.38942C17.338 4.19954 16.8124 4.09396 16.0298 4.05781C14.9258 4.00605 14.5399 4 12.001 4ZM12.001 2C14.7176 2 15.0568 2.01 16.1235 2.06C17.1876 2.10917 17.9135 2.2775 18.551 2.525C19.2101 2.77917 19.7668 3.1225 20.3226 3.67833C20.8776 4.23417 21.221 4.7925 21.476 5.45C21.7226 6.08667 21.891 6.81333 21.941 7.8775C21.9885 8.94417 22.001 9.28333 22.001 12C22.001 14.7167 21.991 15.0558 21.941 16.1225C21.8918 17.1867 21.7226 17.9125 21.476 18.55C21.2218 19.2092 20.8776 19.7658 20.3226 20.3217C19.7668 20.8767 19.2076 21.22 18.551 21.475C17.9135 21.7217 17.1876 21.89 16.1235 21.94C15.0568 21.9875 14.7176 22 12.001 22C9.28431 22 8.94514 21.99 7.87848 21.94C6.81431 21.8908 6.08931 21.7217 5.45098 21.475C4.79264 21.2208 4.23514 20.8767 3.67931 20.3217C3.12348 19.7658 2.78098 19.2067 2.52598 18.55C2.27848 17.9125 2.11098 17.1867 2.06098 16.1225C2.01348 15.0558 2.00098 14.7167 2.00098 12C2.00098 9.28333 2.01098 8.94417 2.06098 7.8775C2.11014 6.8125 2.27848 6.0875 2.52598 5.45C2.78014 4.79167 3.12348 4.23417 3.67931 3.67833C4.23514 3.1225 4.79348 2.78 5.45098 2.525C6.08848 2.2775 6.81348 2.11 7.87848 2.06C8.94514 2.0125 9.28431 2 12.001 2Z" fill="white"/>
+                </svg>
+              </span>
+              <span class="tabs-txt">Instagram</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#twitter" role="tab" aria-controls="contact" aria-selected="false">
+              <span class="tabs-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M10.4883 14.651L15.25 21H22.25L14.3917 10.5223L20.9308 3H18.2808L13.1643 8.88578L8.75 3H1.75L9.26086 13.0145L2.31915 21H4.96917L10.4883 14.651ZM16.25 19L5.75 5H7.75L18.25 19H16.25Z" fill="white"/>
+                </svg>
+              </span>
+              <span class="tabs-txt">Twitter / X</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#telegram" role="tab" aria-controls="contact" aria-selected="false">
+              <span class="tabs-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M2.14753 11.8099C7.3949 9.52374 10.894 8.01654 12.6447 7.28833C17.6435 5.20916 18.6822 4.84799 19.3592 4.83606C19.5081 4.83344 19.8411 4.87034 20.0567 5.04534C20.2388 5.1931 20.2889 5.39271 20.3129 5.5328C20.3369 5.6729 20.3667 5.99204 20.343 6.2414C20.0721 9.08763 18.9 15.9947 18.3037 19.1825C18.0514 20.5314 17.5546 20.9836 17.0736 21.0279C16.0283 21.1241 15.2345 20.3371 14.2221 19.6735C12.6379 18.635 11.7429 17.9885 10.2051 16.9751C8.42795 15.804 9.58001 15.1603 10.5928 14.1084C10.8579 13.8331 15.4635 9.64397 15.5526 9.26395C15.5637 9.21642 15.5741 9.03926 15.4688 8.94571C15.3636 8.85216 15.2083 8.88415 15.0962 8.9096C14.9373 8.94566 12.4064 10.6184 7.50365 13.928C6.78528 14.4212 6.13461 14.6616 5.55163 14.649C4.90893 14.6351 3.67265 14.2856 2.7536 13.9869C1.62635 13.6204 0.730432 13.4267 0.808447 12.8044C0.849081 12.4803 1.29544 12.1488 2.14753 11.8099Z" fill="white"/>
+                </svg>
+              </span>
+              <span class="tabs-txt">Telegram</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#youtube" role="tab" aria-controls="contact" aria-selected="false">
+              <span class="tabs-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12.2439 4C12.778 4.00294 14.1143 4.01586 15.5341 4.07273L16.0375 4.09468C17.467 4.16236 18.8953 4.27798 19.6037 4.4755C20.5486 4.74095 21.2913 5.5155 21.5423 6.49732C21.942 8.05641 21.992 11.0994 21.9982 11.8358L21.9991 11.9884V11.9991C21.9991 11.9991 21.9991 12.0028 21.9991 12.0099L21.9982 12.1625C21.992 12.8989 21.942 15.9419 21.5423 17.501C21.2878 18.4864 20.5451 19.261 19.6037 19.5228C18.8953 19.7203 17.467 19.8359 16.0375 19.9036L15.5341 19.9255C14.1143 19.9824 12.778 19.9953 12.2439 19.9983L12.0095 19.9991H11.9991C11.9991 19.9991 11.9956 19.9991 11.9887 19.9991L11.7545 19.9983C10.6241 19.9921 5.89772 19.941 4.39451 19.5228C3.4496 19.2573 2.70692 18.4828 2.45587 17.501C2.0562 15.9419 2.00624 12.8989 2 12.1625V11.8358C2.00624 11.0994 2.0562 8.05641 2.45587 6.49732C2.7104 5.51186 3.45308 4.73732 4.39451 4.4755C5.89772 4.05723 10.6241 4.00622 11.7545 4H12.2439ZM9.99911 8.49914V15.4991L15.9991 11.9991L9.99911 8.49914Z" fill="white"/>
+                </svg>
+              </span>
+              <span class="tabs-txt">Youtube</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tiktok" role="tab" aria-controls="contact" aria-selected="false">
+              <span class="tabs-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M16 8.24537V15.5C16 19.0899 13.0899 22 9.5 22C5.91015 22 3 19.0899 3 15.5C3 11.9101 5.91015 9 9.5 9C10.0163 9 10.5185 9.06019 11 9.17393V12.3368C10.5454 12.1208 10.0368 12 9.5 12C7.567 12 6 13.567 6 15.5C6 17.433 7.567 19 9.5 19C11.433 19 13 17.433 13 15.5V2H16C16 4.76142 18.2386 7 21 7V10C19.1081 10 17.3696 9.34328 16 8.24537Z" fill="white"/>
+                </svg>
+              </span>
+              <span class="tabs-txt">Tiktok</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#spotify" role="tab" aria-controls="contact" aria-selected="false">
+              <span class="tabs-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12.001 2C17.551 2 22.001 6.5 22.001 12C22.001 17.5 17.501 22 12.001 22C6.50098 22 2.00098 17.5 2.00098 12C2.00098 6.5 6.50098 2 12.001 2ZM12.001 4C7.60555 4 4.00098 7.60457 4.00098 12C4.00098 16.3954 7.60555 20 12.001 20C16.3964 20 20.001 16.3954 20.001 12C20.001 7.58572 16.4276 4 12.001 4ZM15.751 16.65C13.401 15.2 10.451 14.8992 6.95014 15.6992C6.60181 15.8008 6.30098 15.55 6.20098 15.25C6.10098 14.8992 6.35098 14.6 6.65098 14.5C10.451 13.6492 13.751 14 16.351 15.6C16.701 15.75 16.7501 16.1492 16.6018 16.45C16.4018 16.7492 16.0518 16.85 15.751 16.65ZM16.7501 13.95C14.051 12.3 9.95098 11.8 6.80098 12.8C6.40181 12.9 5.95098 12.7 5.85098 12.3C5.75098 11.9 5.95098 11.4492 6.35098 11.3492C10.001 10.25 14.501 10.8008 17.601 12.7C17.9018 12.8508 18.051 13.35 17.8018 13.7C17.551 14.05 17.101 14.2 16.7501 13.95ZM6.30098 9.75083C5.80098 9.9 5.30098 9.6 5.15098 9.15C5.00098 8.64917 5.30098 8.15 5.75098 7.99917C9.30098 6.94917 15.151 7.14917 18.8518 9.35C19.301 9.6 19.451 10.2 19.201 10.65C18.9518 11.0008 18.351 11.1492 17.9018 10.9C14.701 9 9.35098 8.8 6.30098 9.75083Z" fill="white"/>
+                </svg>
+              </span>
+              <span class="tabs-txt">Spotify</span>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade in active" id="facebook" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+              <div class="col-sm-7">
+                <h2 class="title tabs-content-title">Facebook panel</h2>
+                <p class="tab-txt txt">To grow your Telegram channel or group, we provide the best services for <br>that. It also helps you get more subscribers, reach, and impressions on your posts.</p>
+                <a href="/facebook-smm-panel" class="btn btn-primary icon-btn">
+                  <div class="btn-primary-wrap">
+                    <span class="icon-btn-txt">Explore more</span>
+                    <span class="icon-btn-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" viewBox="0 0 6 8" fill="none">
+                        <path d="M3.68351 4.00041L0.796143 1.11304L1.6211 0.288086L5.33341 4.00041L1.6211 7.71268L0.796143 6.88773L3.68351 4.00041Z" fill="white"></path>
+                      </svg>
+                    </span>  
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-5">
+                <img class="img-responsive tab-content-img" src="https://i.23robo.info/projects/growfollows/img/tab-fb.webp">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="instagram" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+              <div class="col-sm-7">
+                <h2 class="title tabs-content-title">Instagram panel</h2>
+                <p class="tab-txt txt">To grow your Telegram channel or group, we provide the best services for <br>that. It also helps you get more subscribers, reach, and impressions on your posts.</p>
+                <a href="/instagram-smm-panel" class="btn btn-primary icon-btn">
+                  <div class="btn-primary-wrap">
+                    <span class="icon-btn-txt">Explore more</span>
+                    <span class="icon-btn-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" viewBox="0 0 6 8" fill="none">
+                        <path d="M3.68351 4.00041L0.796143 1.11304L1.6211 0.288086L5.33341 4.00041L1.6211 7.71268L0.796143 6.88773L3.68351 4.00041Z" fill="white"></path>
+                      </svg>
+                    </span>  
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-5">
+                <img class="img-responsive tab-content-img" src="https://i.23robo.info/projects/growfollows/img/tab-insta.webp">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="twitter" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="row">
+              <div class="col-sm-7">
+                <h2 class="title tabs-content-title">Twitter panel</h2>
+                <p class="tab-txt txt">To grow your Telegram channel or group, we provide the best services for <br>that. It also helps you get more subscribers, reach, and impressions on your posts.</p>
+                <a href="/twitter-smm-panel" class="btn btn-primary icon-btn">
+                  <div class="btn-primary-wrap">
+                    <span class="icon-btn-txt">Explore more</span>
+                    <span class="icon-btn-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" viewBox="0 0 6 8" fill="none">
+                        <path d="M3.68351 4.00041L0.796143 1.11304L1.6211 0.288086L5.33341 4.00041L1.6211 7.71268L0.796143 6.88773L3.68351 4.00041Z" fill="white"></path>
+                      </svg>
+                    </span>  
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-5">
+                <img class="img-responsive tab-content-img" src="https://i.23robo.info/projects/growfollows/img/tab-twitter.webp">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="telegram" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="row">
+              <div class="col-sm-7">
+                <h2 class="title tabs-content-title">Telegram panel</h2>
+                <p class="tab-txt txt">To grow your Telegram channel or group, we provide the best services for <br>that. It also helps you get more subscribers, reach, and impressions on your posts.</p>
+                <a href="/signup" class="btn btn-primary icon-btn">
+                  <div class="btn-primary-wrap">
+                    <span class="icon-btn-txt">Explore more</span>
+                    <span class="icon-btn-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" viewBox="0 0 6 8" fill="none">
+                        <path d="M3.68351 4.00041L0.796143 1.11304L1.6211 0.288086L5.33341 4.00041L1.6211 7.71268L0.796143 6.88773L3.68351 4.00041Z" fill="white"></path>
+                      </svg>
+                    </span>  
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-5">
+                <img class="img-responsive tab-content-img" src="https://i.23robo.info/projects/growfollows/img/tab-telegram.webp">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="youtube" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="row">
+              <div class="col-sm-7">
+                <h2 class="title tabs-content-title">Youtube panel</h2>
+                <p class="tab-txt txt">To grow your Telegram channel or group, we provide the best services for <br>that. It also helps you get more subscribers, reach, and impressions on your posts.</p>
+                <a href="/youtube-smm-panel" class="btn btn-primary icon-btn">
+                  <div class="btn-primary-wrap">
+                    <span class="icon-btn-txt">Explore more</span>
+                    <span class="icon-btn-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" viewBox="0 0 6 8" fill="none">
+                        <path d="M3.68351 4.00041L0.796143 1.11304L1.6211 0.288086L5.33341 4.00041L1.6211 7.71268L0.796143 6.88773L3.68351 4.00041Z" fill="white"></path>
+                      </svg>
+                    </span>  
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-5">
+                <img class="img-responsive tab-content-img" src="https://i.23robo.info/projects/growfollows/img/tab-yt.webp">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="tiktok" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="row">
+              <div class="col-sm-7">
+                <h2 class="title tabs-content-title">Tiktok panel</h2>
+                <p class="tab-txt txt">To grow your Tiktok channel or group, we provide the best services for <br>that. It also helps you get more subscribers, reach, and impressions on your posts.</p>
+                <a href="/tiktok-smm-panel" class="btn btn-primary icon-btn">
+                  <div class="btn-primary-wrap">
+                    <span class="icon-btn-txt">Explore more</span>
+                    <span class="icon-btn-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" viewBox="0 0 6 8" fill="none">
+                        <path d="M3.68351 4.00041L0.796143 1.11304L1.6211 0.288086L5.33341 4.00041L1.6211 7.71268L0.796143 6.88773L3.68351 4.00041Z" fill="white"></path>
+                      </svg>
+                    </span>  
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-5">
+                <img class="img-responsive tab-content-img" src="https://i.23robo.info/projects/growfollows/img/tab-tiktok.webp">
+              </div>
+            </div>
+
+          </div>
+          <div class="tab-pane fade" id="spotify" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="row">
+              <div class="col-sm-7">
+                <h2 class="title tabs-content-title">Spotify panel</h2>
+                <p class="tab-txt txt">To grow your Spotify channel or group, we provide the best services for <br>that. It also helps you get more subscribers, reach, and impressions on your posts.</p>
+                <a href="/spotify-smm-panel" class="btn btn-primary icon-btn">
+                  <div class="btn-primary-wrap">
+                    <span class="icon-btn-txt">Explore more</span>
+                    <span class="icon-btn-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" viewBox="0 0 6 8" fill="none">
+                        <path d="M3.68351 4.00041L0.796143 1.11304L1.6211 0.288086L5.33341 4.00041L1.6211 7.71268L0.796143 6.88773L3.68351 4.00041Z" fill="white"></path>
+                      </svg>
+                    </span>  
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-5">
+                <img class="img-responsive tab-content-img" src="https://i.23robo.info/projects/growfollows/img/tab-spotify.webp">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+
+<section id="featuresOfSmmpanel">
+  <div class="feature_effect">
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/x7bwl7lio4pkekfx.png"
+      class="img-fluid feature_effect_left"
+      alt=""
+    />
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/joiwhirmlmf3atgu.png"
+      class="img-fluid feature_effect_right"
+      alt=""
+    />
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="def_content text-center" data-tl-animate="fade-up">
+          <h2>Comment fonctionne notre {{ site['site_name'] }}} ?</h2>
+          <p>
+            Etapes simples pour promouvoir votre entreprise ou votre page personnelle 
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12 mb-3">
+        <div class="service_itemscard" data-tl-animate="fade-up" data-tl-delay="0">
+          <div class="service_card_inner">
+            <div class="serv_card_top">
+              <div class="icon">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/myr2xadtqsfqle3o.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Sign up"
+                />
+              </div>
+              <h3>Sign Up</h3>
+            </div>
+            <div class="serv_card_top">
+              <p class="mb-0">
+                Vous pouvez vous inscrire sur notre plateforme avec vos identifiants (email et mot de passe unique requis). Aucun depot n'est requis au moment de l'inscription. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-12 mb-3">
+        <div class="service_itemscard" data-tl-animate="fade-up" data-tl-delay="100">
+          <div class="service_card_inner">
+            <div class="serv_card_top">
+              <div class="icon">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/nsdaw3c5p8mmge2j.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Add Fund"
+                />
+              </div>
+              <h3>Add Funds</h3>
+            </div>
+            <div class="serv_card_top">
+              <p class="mb-0">
+                Pour commencer a utiliser les services de {{ site['site_name'] }}}, vous devez ajouter des fonds a votre compte. Nous acceptons plusieurs methodes de paiement. Apres avoir ajoute des fonds, votre compte sera active. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-12 mb-3">
+        <div class="service_itemscard" data-tl-animate="fade-up" data-tl-delay="200">
+          <div class="service_card_inner">
+            <div class="serv_card_top">
+              <div class="icon">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2f52h2peszkuq927.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Choose Services"
+                />
+              </div>
+              <h3>Choose service</h3>
+            </div>
+            <div class="serv_card_top">
+              <p class="mb-0">
+                Maintenant, vous pouvez explorer nos services et choisir celui qui vous convient. Nous proposons plusieurs formules pour differentes plateformes de reseaux sociaux. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-12 mb-3">
+        <div class="service_itemscard" data-tl-animate="fade-up" data-tl-delay="300">
+          <div class="service_card_inner">
+            <div class="serv_card_top">
+              <div class="icon">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/lwqeob589m63zrqt.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Enjoy popularity"
+                />
+              </div>
+              <h3>
+                Enjoy popularity
+              </h3>
+            </div>
+            <div class="serv_card_top">
+              <p class="mb-0">
+                Avec {{ site['site_name'] }}}, il est temps de devenir populaire sur les reseaux sociaux. Nous suivons chaque campagne que vous lancez avec nous. Votre forte presence sur les reseaux sociaux est notre engagement. 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>   
+</section>
+
+<!-- ### Services Section -->
+    
+<!-- Whole Sale Sections -->
+<section id="wholesale">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="def_content text-center" data-tl-animate="fade-up">
+          <h2>
+            Le N1 des services de gros en Guinee
+<br />
+           
+          </h2>
+          <p>
+            Augmentez la popularite de votre entreprise en passant une commande en gros avec nous. Nos services de gros couvrent trois categories principales pour tous vos besoins sur les reseaux sociaux.
+
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-12 mb-3">
+        <div class="box_item" data-tl-animate="fade-up" data-tl-delay="0">
+          <div class="box_icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/0x9opmbkfj8h4u6k.png"
+              class="img-fluid"
+              alt="{{ site['site_name'] }}} wholesale-child-panel"
+            />
+          </div>
+          <div class="box_content">
+            <h3>Compte enfant en gros</h3>
+            <p>
+              Avec un compte enfant, vous pouvez vendre nos services a vos propres prix et obtenir un beau pourcentage de profit. Ce forfait vous permet de creer une plateforme entierement fonctionnelle sous votre propre marque ; nous fournissons simplement des services en gros a des prix imbattables. 
+ 
+            </p>
+            <p>
+             
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-12 mb-3">
+        <div class="box_item" data-tl-animate="fade-up" data-tl-delay="100">
+          <div class="box_icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/55k3pa3zc3qrwe02.png"
+              class="img-fluid"
+              alt="Panel revendeur en gros"
+            />
+          </div>
+          <div class="box_content">
+            <h3>Revendeur en gros</h3>
+            <p>
+              Si vous avez deja une entreprise ou souhaitez maximiser vos services, notre offre de revendeur en gros pourrait etre le choix parfait. Nous offrons l'acces a notre immense catalogue de services avec des prix flexibles, une livraison rapide et une integration fluide. 
+
+            </p>
+            <p>
+            
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-12 mb-3">
+        <div class="box_item" data-tl-animate="fade-up" data-tl-delay="200">
+          <div class="box_icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/myr2xadtqsfqle3o.png"
+              class="img-fluid"
+              alt="{{ site['site_name'] }}} Wholesale api panel"
+            />
+          </div>
+          <div class="box_content">
+            <h3>API en gros</h3>
+            <p>
+              Si vous cherchez a automatiser votre entreprise, qu'il s'agisse d'une plateforme, d'un service de revente ou du traitement de commandes en lot, notre API en gros prend en charge une integration fluide.
+            </p>
+            <p>
+             Vous pouvez gerer facilement des milliers de commandes grace a notre infrastructure solide et notre support 24h/24 et 7j/7 a des prix competitifs. <br>
+             
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wholesale_effect">
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/jebhok5fhen1dhsj.png"
+      class="img-fluid effect-image"
+      alt=""
+    />
+  </div>
+</section>
+<!-- ### Whole Sale Sections -->
+
+<!-- Testimonials Sections -->
+<section id="testimonials">
+  <div class="testimonial_effect">
+    <img
+      src=""
+      class="img-fluid test_effect"
+      alt=""
+    />
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="def_content text-center" data-tl-animate="fade-up">
+          <h2>Temoignages et avis de nos clients satisfaits</h2>
+          <p>
+            Decouvrez de vrais temoignages et avis de nos clients, partageant leurs experiences positives avec nos services et les resultats que nous livrons regulierement.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Slider main container -->
+      <div class="testimonialSlider swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide">
+            <div class="box_item testimonial_box">
+              <div class="box_icon text-center">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2cz37mdswpn51ih0.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Review"
+                />
+              </div>
+              <div class="box_content testimonial_content text-center">
+                <p>
+                  The {{ site['site_name'] }}} dashboard is incredibly user-friendly and efficient. It allows me to easily monitor and manage all my social media accounts from a single place. It�s a fantastic tool that has streamlined my workflow.
+                </p>
+                <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/i280o9pf37mbk7de.png" alt="{{ site['site_name'] }}} Star" class="img-fluid" />
+                <h3>Meilleur service de croissance Facebook en Guinee -Rahim Hossain</h3>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="box_item testimonial_box">
+              <div class="box_icon text-center">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2cz37mdswpn51ih0.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Review"
+                />
+              </div>
+              <div class="box_content testimonial_content text-center">
+                <p>
+                  I�ve been using {{ site['site_name'] }}} for my Facebook page, and the results have been amazing! I�ve seen a rapid increase in engagement and followers. Their services are affordable, and the team is responsive. Highly recommended.
+                </p>
+                <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/i280o9pf37mbk7de.png" alt="{{ site['site_name'] }}} Star" class="img-fluid" />
+                <h3>Augmenter ma presence Instagram sans effort -Sabrina Karim</h3>
+              </div>
+            </div>
+          </div>
+          
+          <div class="swiper-slide">
+            <div class="box_item testimonial_box">
+              <div class="box_icon text-center">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2cz37mdswpn51ih0.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} REVIEW"
+                />
+              </div>
+              <div class="box_content testimonial_content text-center">
+                <p>
+                  {{ site['site_name'] }}} helped me gain organic followers and engagement on Instagram. My reach has increased significantly, and I�ve gained real followers who interact with my posts. Their service is fast and reliable. 
+                </p>
+                <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/i280o9pf37mbk7de.png" alt="{{ site['site_name'] }}} Review" class="img-fluid" />
+                <h3>Croissance de chaine YouTube comme jamais auparavant -Tanvir Alam</h3>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="swiper-slide">
+            <div class="box_item testimonial_box">
+              <div class="box_icon text-center">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2cz37mdswpn51ih0.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Review"
+                />
+              </div>
+              <div class="box_content testimonial_content text-center">
+                <p>
+                  {{ site['site_name'] }}}�s Instagram service has exceeded my expectations. It has effectively increased my followers and engagement, and the results are visible. The process is straightforward, and the service is highly reliable.
+                </p>
+                <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/i280o9pf37mbk7de.png" alt="{{ site['site_name'] }}} Star" class="img-fluid" />
+                <h3>Engagement et abonnes TikTok fiables -Sharmin Akter</h3>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="swiper-slide">
+            <div class="box_item testimonial_box">
+              <div class="box_icon text-center">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2cz37mdswpn51ih0.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Review"
+                />
+              </div>
+              <div class="box_content testimonial_content text-center">
+                <p>
+                  {{ site['site_name'] }}} gave my TikTok account a major boost. I gained followers quickly and saw more interactions with my videos. Their service is reliable, and they�re always on top of their game.
+                </p>
+                <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/i280o9pf37mbk7de.png" alt="{{ site['site_name'] }}} Review" class="img-fluid" />
+                <h3>Activite du groupe Telegram considerablement amelioree -Jahidul Islam</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="box_item testimonial_box">
+              <div class="box_icon text-center">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2cz37mdswpn51ih0.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Review"
+                />
+              </div>
+              <div class="box_content testimonial_content text-center">
+                <p>
+                  {{ site['site_name'] }}} a aide a developper mon groupe Telegram en un rien de temps. J'ai obtenu de vrais membres actifs qui s'engagent avec le contenu. Leur service est exceptionnel pour stimuler l'activite du groupe.
+                </p>
+                <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/i280o9pf37mbk7de.png" alt="{{ site['site_name'] }}} Review" class="img-fluid" />
+                <h3>Resultats incroyables pour ma page Facebook professionnelle -Meherun Nisa</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="box_item testimonial_box">
+              <div class="box_icon text-center">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2cz37mdswpn51ih0.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Review"
+                />
+              </div>
+              <div class="box_content testimonial_content text-center">
+                <p>
+                  Depuis que j'utilise {{ site['site_name'] }}}, ma page Facebook professionnelle a gagne de vrais abonnes et un engagement plus eleve. Leur service m'a aide a atteindre efficacement mon public cible. Vraiment a essayer.
+                </p>
+                <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/i280o9pf37mbk7de.png" alt="{{ site['site_name'] }}} Review" class="img-fluid" />
+                <h3>Resultats incroyables sur mon marketing Instagram -Salah Uddin</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="box_item testimonial_box">
+              <div class="box_icon text-center">
+                <img
+                  src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2cz37mdswpn51ih0.png"
+                  class="img-fluid"
+                  alt="{{ site['site_name'] }}} Review"
+                />
+              </div>
+              <div class="box_content testimonial_content text-center">
+                <p>
+                  {{ site['site_name'] }}} helped me grow my Instagram page�s followers and engagement. Their team offers professional services, and I�ve seen real growth. I will continue to use them for my Instagram marketing..
+                </p>
+                <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/i280o9pf37mbk7de.png" alt="" class="img-fluid" />
+                <h3>Services YouTube tres efficaces -Nadia Akter</h3>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <!-- If we need navigation buttons -->
+      </div>
+    </div>
+  </div>
+  <div class="testimonials_slider_button">
+    <div class="swiper-prev">
+      <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/tn6srhouf7a7mhts.png" class="img-fluid" alt="{{ site['site_name'] }}} Review arrow" />
+    </div>
+    <div class="swiper-next">
+      <img src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/04kg2loz89qemjz4.png" alt="{{ site['site_name'] }}} Review arrow" class="img-fluid" />
+    </div>
+  </div>
+</section>
+<!-- ### Testimonials Sections -->
+
+<!-- Pourquoi choisir Us -->
+<section id="whyChooseUs">
+  <div class="why_choose_effect">
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/x7bwl7lio4pkekfx.png"
+      class="img-fluid choose_effect_left"
+      alt=""
+    />
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/joiwhirmlmf3atgu.png"
+      class="img-fluid choose_effect_right"
+      alt=""
+    />
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-12">
+        <div class="def_content" data-tl-animate="fade-left">
+          <h2>
+            Pourquoi choisir {{ site['site_name'] }}}
+          </h2>
+          <p>
+            Voici les raisons pour lesquelles vous devriez nous choisir :
+
+          </p>
+          <a href="/signup" class="btn btn-primary mt-3"
+            >Creer un compte</a
+          >
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 col-12">
+        <div class="type_item_1 mb-4" data-tl-animate="fade-right" data-tl-delay="0">
+          <div class="icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/0o5jlqqyfkjy0xkd.png"
+              alt="{{ site['site_name'] }}} Prices"
+              class="img-fluid"
+            />
+          </div>
+          <div class="type_content">
+            <h3>Tarifs abordables et competitifs</h3>
+            <p>
+              Nous nous engageons a stimuler votre presence sur les reseaux sociaux a moindre cout. C'est pourquoi nous proposons des forfaits rentables. Nous avons differents tarifs pour que vous puissiez choisir celui qui vous convient. Nos prix sont inferieurs a ceux des autres fournisseurs.  
+ 
+
+            </p>
+          </div>
+        </div>
+
+        <div class="type_item_1 mb-4" data-tl-animate="fade-right" data-tl-delay="100">
+          <div class="icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/kba5cxnddth65ey3.png"
+              alt="{{ site['site_name'] }}}  Support"
+              class="img-fluid"
+            />
+          </div>
+          <div class="type_content">
+            <h3>Support client 24h/24 et 7j/7
+</h3>
+            <p>
+              La satisfaction client est notre priorite absolue. C'est pourquoi nous fournissons un support client 24h/24 et 7j/7 pour que vous puissiez obtenir une assistance immediate chaque fois que vous rencontrez un probleme. Nous disposons egalement d'une equipe de support client dediee. 
+
+            </p>
+          </div>
+        </div>
+
+        <div class="type_item_1 mb-4" data-tl-animate="fade-right" data-tl-delay="200">
+          <div class="icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/kpm74syewz1qh16k.png"
+              alt="{{ site['site_name'] }}} Quick Groth"
+              class="img-fluid"
+            />
+          </div>
+          <div class="type_content">
+            <h3>Resultats rapides et croissance</h3>
+            <p>
+              Nos services vous donneront un depart solide sur les reseaux sociaux. Ainsi, vous obtiendrez une croissance rapide de vos profils professionnels sur differentes plateformes de reseaux sociaux et atteindrez vos clients cibles. 
+
+            </p>
+          </div>
+        </div>
+
+        <div class="type_item_1 mb-4" data-tl-animate="fade-right" data-tl-delay="300">
+          <div class="icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/pxnk2479hseg6orh.png"
+              alt="{{ site['site_name'] }}}  easy to use"
+              class="img-fluid"
+            />
+          </div>
+          <div class="type_content">
+            <h3>Interface facile a utiliser</h3>
+            <p>
+              Nous, {{ site['site_name'] }}}, proposons l'interface utilisateur la plus pratique. Vous pouvez vous inscrire chez nous en moins de 5 minutes puis trouver facilement le forfait de service souhaite. Notre site est facile a naviguer, vous aurez donc une excellente experience utilisateur.    
+
+            </p>
+          </div>
+        </div>
+
+        <div class="type_item_1 mb-4" data-tl-animate="fade-right" data-tl-delay="400">
+          <div class="icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/l4um6zmgf8j0wah2.png"
+              alt="{{ site['site_name'] }}}  Targrt Audinace"
+              class="img-fluid"
+            />
+          </div>
+          <div class="type_content">
+            <h3>Public cible avec service securise</h3>
+            <p>
+             Tous nos services sont concus pour atteindre votre public cible. De plus, vous ne rencontrerez aucun probleme de securite en utilisant nos services. Nous veillons a ce que nos clients obtiennent le bon public.
+
+            </p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ### Pourquoi choisir Us -->
+
+<!-- Easy and Accessible -->
+<section id="easyAndAccessible">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="def_image" data-tl-animate="fade-left">
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/isg8y73ud15newr6.webp"
+            class="img-fluid"
+            alt="{{ site['site_name'] }}} Resister Today"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="def_content" data-tl-animate="fade-right">
+          <h2>Inscrivez-vous aujourd'hui</h2>
+          <p>
+            Ne perdez plus de temps et inscrivez-vous des aujourd'hui sur {{ site['site_name'] }}} pour optimiser vos reseaux sociaux. L'inscription est extremement simple et rapide, et surtout, elle est gratuite. Tout ce dont vous avez besoin est de vous inscrire avec votre e-mail et vous aurez acces a un grand nombre de services necessaires pour augmenter votre audience.
+
+          </p>
+          <a href="/signup" class="btn btn-primary mt-3"
+            >Creer un compte</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- #### Easy and Accessible -->
+
+<!-- Features Of Our panel -->
+<section id="featuresOfSmmpanel">
+  <div class="feature_effect">
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/x7bwl7lio4pkekfx.png"
+      class="img-fluid feature_effect_left"
+      alt=""
+    />
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/joiwhirmlmf3atgu.png.png"
+      class="img-fluid feature_effect_right"
+      alt=""
+    />
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="def_content text-center" data-tl-animate="fade-up">
+          <h2>Avantages de nos services en Guinee
+</h2>
+          <p>
+            Si vous choisissez nos services abordables, vous pouvez obtenir plusieurs avantages. En voici quelques-uns.
+
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-12">
+        <div class="box_item features_box_item mb-3" data-tl-animate="fade-left" data-tl-delay="0">
+          <div class="type_item_1">
+            <div class="icon">
+              <img
+                src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/umdoe19uxdjt79e0.png"
+                alt="{{ site['site_name'] }}}  Faster Grith"
+                class="img-fluid"
+              />
+            </div>
+            <div class="type_content">
+              <h3>Croissance plus rapide sur les reseaux sociaux</h3>
+              <p>
+               La meilleure solution en Guinee vous offrira la croissance la plus rapide sur les reseaux sociaux pour votre entreprise. Vous obtiendrez les vues ciblees de votre entreprise grace a nos services. De plus, vous pouvez lancer une campagne efficace via notre plateforme.
+
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="box_item features_box_item mb-3" data-tl-animate="fade-left" data-tl-delay="100">
+          <div class="type_item_1">
+            <div class="icon">
+              <img
+                src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/mmwdk7fsstg7glcn.png"
+                alt="{{ site['site_name'] }}}  Affordable panel"
+                class="img-fluid"
+              />
+            </div>
+            <div class="type_content">
+              <h3>Abordable pour tous
+</h3>
+              <p>
+               L'accessibilite est le principal avantage de nos services. Vous pouvez obtenir un engagement massif a un tres faible cout pour vos pages de reseaux sociaux, qu'il s'agisse de Facebook, Instagram, TikTok ou YouTube. Nous fournissons egalement une grande quantite de likes et d'abonnes. {{ site['site_name'] }}} est une solution abordable.
+
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="box_item features_box_item mb-3" data-tl-animate="fade-left" data-tl-delay="200">
+          <div class="type_item_1">
+            <div class="icon">
+              <img
+                src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/zlrnpniooceyrg7f.png"
+                alt="{{ site['site_name'] }}}  Time Save panel"
+                class="img-fluid"
+              />
+            </div>
+            <div class="type_content">
+              <h3>Gagnez du temps
+</h3>
+              <p>
+               Il est chronophage de rechercher des solutions de marketing pour chaque plateforme de reseaux sociaux separement. Notre plateforme vous permet d'obtenir des solutions de marketing en un seul endroit. Ainsi, cela vous fait gagner beaucoup de temps et vous simplifie la vie.
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 col-12">
+        <div class="box_item features_box_item mb-3" data-tl-animate="fade-right" data-tl-delay="0">
+          <div class="type_item_1">
+            <div class="icon">
+              <img
+                src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/71kescoszicgu7s9.png"
+                alt="{{ site['site_name'] }}}  Increase Brand Icon"
+                class="img-fluid"
+              />
+            </div>
+            <div class="type_content">
+              <h3> Augmente la visibilite de votre marque
+</h3>
+              <p>
+               Vous devez creer une forte visibilite en ligne pour votre marque grace aux reseaux sociaux. {{ site['site_name'] }}} peut vous donner l'avantage a cet egard. Nos services garantissent la croissance organique de vos pages de reseaux sociaux et augmentent ainsi l'engagement des utilisateurs.
+
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="box_item features_box_item mb-3" data-tl-animate="fade-right" data-tl-delay="100">
+          <div class="type_item_1">
+            <div class="icon">
+              <img
+                src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/8dki3wf4pa3zgpbp.png"
+                alt="{{ site['site_name'] }}}  Built the trust"
+                class="img-fluid"
+              />
+            </div>
+            <div class="type_content">
+              <h3> Gagner facilement la confiance
+</h3>
+              <p>
+              Rien ne peut battre les problemes de confiance dans toute entreprise. Seule une forte presence sur les reseaux sociaux peut inspirer confiance a votre entreprise. La meilleure solution en Guinee peut instaurer la confiance chez vos clients en garantissant une croissance adequate de vos plateformes et pages de reseaux sociaux.
+
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="box_item features_box_item mb-3" data-tl-animate="fade-right" data-tl-delay="200">
+          <div class="type_item_1">
+            <div class="icon">
+              <img
+                src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/qjna8qqo45dero4k.png"
+                alt="{{ site['site_name'] }}}  Target Aduance panel"
+                class="img-fluid"
+              />
+            </div>
+            <div class="type_content">
+              <h3> Cibler le bon public
+</h3>
+              <p>
+               Cibler le bon public est la premiere chose a faire dans votre campagne sur les reseaux sociaux. Une solution fiable en Guinee peut vous aider a cibler le bon public pour votre entreprise. Nos services fonctionnent en fonction de l'interet de l'audience.
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- #### Features Of Our panel -->
+
+<!-- Easy and Accessible -->
+<section id="easyAndAccessible">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="def_image">
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/xbhte1bn887uzeir.png"
+            class="img-fluid"
+            alt="{{ site['site_name'] }}}  SgnUp Now"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="def_content">
+          <h2>Obtenez les meilleurs services avec {{ site['site_name'] }}}</h2>
+          <p>
+            {{ site['site_name'] }}} propose des services abordables pour ameliorer votre presence sur les reseaux sociaux. De l'augmentation des abonnes au boost des likes et des vues, profitez de solutions rapides et fiables adaptees a vos besoins. Developpez-vous plus intelligemment avec {{ site['site_name'] }}} !
+          </p>
+          <a href="/signup" class="btn btn-primary mt-3"
+            >Creer un compte</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Payment methods -->
+<section id="payment_methods">
+  <div class="payment_methods_effect">
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/jebhok5fhen1dhsj.png"
+      class="img-fluid payment_effect"
+      alt=""
+    />
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="def_content text-center mb-2" data-tl-animate="fade-up">
+          <h2>Nombre maximum de modes de paiement sur notre site</h2>
+        </div>
+        <div class="payment_methods_logo">
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/1rtff2hmbho0d3ng.png"
+            alt="{{ site['site_name'] }}} master card"
+            class="img-fluid payment_logo"
+          />
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/4o08icigfhgkasn0.png"
+            alt="{{ site['site_name'] }}} visa card"
+            class="img-fluid payment_logo"
+          />
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/cuoplrt66xxs2aty.png"
+            alt="{{ site['site_name'] }}} payoneer"
+            class="img-fluid payment_logo"
+          />
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/4k4x75kjk8qhpb3y.png"
+            alt="{{ site['site_name'] }}} Binance"
+            class="img-fluid payment_logo"
+          />
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/cwy7eqrhxndayocj.png"
+            alt="{{ site['site_name'] }}} payeer"
+            class="img-fluid payment_logo"
+          />
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/kyau0peshq9rjjmd.png"
+            alt="{{ site['site_name'] }}} perfect money"
+            class="img-fluid payment_logo"
+          />
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/aghypsmnhemw2807.png"
+            alt="{{ site['site_name'] }}}  paytm"
+            class="img-fluid payment_logo"
+          />
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/ix0so31w7budz5ey.png"
+            alt="{{ site['site_name'] }}} airtm"
+            class="img-fluid payment_logo"
+          />
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/dlk84431rwykhb5u.png"
+            alt="{{ site['site_name'] }}} g-cash"
+            class="img-fluid payment_logo"
+          />
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/r471c7xox3kiqabb.png"
+            alt="{{ site['site_name'] }}}  nagad"
+            class="img-fluid payment_logo"
+          />
+          <img
+            src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/nmj4ynxoufzsj7sa.png"
+            alt="{{ site['site_name'] }}} bkash"
+            class="img-fluid payment_logo"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ####### Payment methods -->
+
+<!-- Benefits of panel Services Section -->
+<section id="benifits">
+  <div class="benifits_effects">
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/jebhok5fhen1dhsj.png"
+      class="img-fluid benifits_left_img"
+      alt="{{ site['site_name'] }}} using benifit"
+    />
+    <img
+      src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/joiwhirmlmf3atgu.png"
+      class="img-fluid benifits_right_img"
+      alt="{{ site['site_name'] }}} using benifit"
+    />
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="def_content text-center" data-tl-animate="fade-up">
+          <h2>Qui peut beneficier de nos services en Guinee</h2>
+          <p>
+           
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <div class="box_item text-center box_benifits" data-tl-animate="fade-up" data-tl-delay="0">
+          <div class="box_icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/2f52h2peszkuq927.png"
+              class="img-fluid"
+              alt="{{ site['site_name'] }}} small businessman"
+            />
+          </div>
+          <div class="box_content">
+            <h3>Petits entrepreneurs</h3>
+            <p>
+              Bien que tous les types d'entreprises puissent en beneficier, les petites entreprises sont les premieres concernees. Elles ont besoin d'une forte presence en ligne pour creer une identite de marque solide. En tant que petit entrepreneur, vous pouvez facilement cibler votre public local grace a nos services de confiance en Guinee.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12 mb-4">
+        <div class="box_item text-center box_benifits mid_box" data-tl-animate="scale-up" data-tl-delay="100">
+          <div class="box_icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/lwqeob589m63zrqt.png"
+              class="img-fluid"
+              alt="{{ site['site_name'] }}} startup"
+            />
+          </div>
+          <div class="box_content">
+            <h3 class="has_underline">
+              <span class="text">Startups</span>
+            </h3>
+            <p>
+              En tant que startup, il est difficile d'atteindre le public cible. {{ site['site_name'] }}} vous aide a explorer le monde des reseaux sociaux et a obtenir la portee souhaitee. Quel que soit votre secteur d'activite, vous trouverez tous les types de services dont vous avez besoin.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <div class="box_item text-center box_benifits" data-tl-animate="fade-up" data-tl-delay="200">
+          <div class="box_icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/nsdaw3c5p8mmge2j.png"
+              class="img-fluid"
+              alt="{{ site['site_name'] }}} e-commerce owner"
+            />
+          </div>
+          <div class="box_content">
+            <h3>Proprietaires de e-commerce</h3>
+            <p>
+              En 2023, il y a plus de 60 millions d'utilisateurs Facebook en Guinee. Les utilisateurs de YouTube, TikTok et Instagram augmentent egalement dans le pays. Il n'y a donc pas d'alternative au marketing sur les reseaux sociaux pour une entreprise de e-commerce. {{ site['site_name'] }}} est pret a booster votre e-commerce !
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <div class="box_item text-center box_benifits" data-tl-animate="fade-up" data-tl-delay="300">
+          <div class="box_icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/ox99tiqo9npamx3o.png"
+              class="img-fluid"
+              alt="{{ site['site_name'] }}} best for freelance"
+            />
+          </div>
+          <div class="box_content">
+            <h3>Freelances</h3>
+            <p>
+              Les reseaux sociaux sont un excellent moyen de trouver des clients. De plus, chaque freelance doit avoir une forte presence sur les reseaux sociaux pour atteindre des clients. Nos services sont concus pour repondre aux besoins uniques des freelances.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12 mb-4">
+        <div class="box_item text-center box_benifits mid_box" data-tl-animate="scale-up" data-tl-delay="400">
+          <div class="box_icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/564qp80688qrecuy.png"
+              class="img-fluid"
+              alt="{{ site['site_name'] }}} content creater"
+            />
+          </div>
+          <div class="box_content">
+            <h3 class="has_underline">
+              <span class="text">Createurs de contenu & Influenceurs</span>
+            </h3>
+            <p>
+              Que vous soyez createur de contenu ou influenceur, vous devez avoir des pages de reseaux sociaux correctement optimisees. Une forte presence sur les reseaux sociaux, meme quand vous ne publiez pas de contenu, peut vous apporter un grand nombre de vues. Nos services peuvent vous y aider considerablement.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12 mb-4">
+        <div class="box_item text-center box_benifits" data-tl-animate="fade-up" data-tl-delay="500">
+          <div class="box_icon">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/3i15tls6qpje7ha8.png"
+              class="img-fluid"
+              alt="{{ site['site_name'] }}} for musician and artist"
+            />
+          </div>
+          <div class="box_content">
+            <h3>Musiciens & Artistes</h3>
+            <p>
+              Nous aidons les musiciens et les artistes a gagner en visibilite, a attirer de nouveaux fans et a developper leur presence en ligne. Nos services augmentent l'engagement, les streams et la visibilite en ligne sur toutes les plateformes, facilitant ainsi la mise en valeur du talent et l'atteinte d'un public mondial sans effort.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ### Benefits of panel Services Section -->
+
+<!-- Questions frequentes -->
+<section id="faq">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="def_content" data-tl-animate="fade-left">
+          <h2>Questions frequentes
+</h2>
+          <p>
+           Chez {{ site['site_name'] }}}, nous proposons des services abordables pour augmenter votre presence en ligne. Consultez notre FAQ pour en savoir plus sur nos services, la livraison et les paiements.
+
+
+          </p>
+          <a href="/signup" class="btn btn-primary mt-3">Creer un compte gratuit</a>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="faq_accordion" data-tl-animate="fade-right">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                 Qu'est-ce que {{ site['site_name'] }}} ?
+                </button>
+              </h3>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <p>
+                   {{ site['site_name'] }}} est une plateforme en ligne proposant des services de marketing sur les reseaux sociaux abordables, comme l'augmentation des abonnes, des likes et des vues, pour stimuler l'engagement sur des plateformes comme Facebook, Instagram, TikTok, et bien d'autres.
+
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                 Comment fonctionne {{ site['site_name'] }}} ?
+                </button>
+              </h3>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <p>
+                    {{ site['site_name'] }}} fonctionne en fournissant des services automatises de reseaux sociaux. Selectionnez simplement un service, passez une commande et regardez vos comptes de reseaux sociaux grandir avec un engagement authentique dans les delais promis.
+
+
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                 Est-il sur d'utiliser {{ site['site_name'] }}} ?
+                </button>
+              </h3>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <p>
+                   Oui, {{ site['site_name'] }}} est totalement sur. Nous utilisons des processus securises et veillons a ce que vos donnees restent confidentielles. Nos services sont concus pour respecter les directives des plateformes pour une croissance sans risque.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour"
+                  aria-expanded="false"
+                  aria-controls="collapseFour"
+                >
+                 Puis-je personnaliser les services que je commande ?
+
+                </button>
+              </h3>
+              <div
+                id="collapseFour"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <p>
+                   Oui, vous pouvez personnaliser les services selon vos besoins. Selectionnez le forfait, la quantite et la plateforme pour adapter votre strategie de croissance sur les reseaux sociaux pour des resultats optimaux.
+
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFive"
+                  aria-expanded="false"
+                  aria-controls="collapseFive"
+                >
+                 Puis-je suivre la progression de mes commandes ?
+                </button>
+              </h3>
+              <div
+                id="collapseFive"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <p>
+                   Oui, {{ site['site_name'] }}} offre un suivi en temps reel de vos commandes. Vous pouvez surveiller la progression directement depuis votre tableau de bord apres avoir passe une commande.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseSix"
+                  aria-expanded="false"
+                  aria-controls="collapseSix"
+                >
+                 Quelles methodes de paiement acceptez-vous ?
+
+                </button>
+              </h3>
+              <div
+                id="collapseSix"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <p>
+                    Nous acceptons plusieurs methodes de paiement, y compris les virements bancaires et d'autres passerelles de paiement en ligne securisees, garantissant la commodite pour tous les utilisateurs.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseSeven"
+                  aria-expanded="false"
+                  aria-controls="collapseSeven"
+                >
+                 Mon compte sera-t-il suspendu si j'utilise vos services ?
+
+
+                </button>
+              </h3>
+              <div
+                id="collapseSeven"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <p>
+                    Nos services sont concus pour etre surs. Cependant, l'utilisation de services de mauvaise qualite ou la violation des regles de la plateforme peut risquer la suspension du compte.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseEight"
+                  aria-expanded="false"
+                  aria-controls="collapseEight"
+                >
+                 Comment puis-je contacter le support client ?
+                </button>
+              </h3>
+              <div
+                id="collapseEight"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <p>
+                   Les coordonnees de notre support client sont disponibles sur la page Contactez-nous de notre site web. Vous pouvez egalement nous joindre par e-mail, Telegram ou WhatsApp.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseNine"
+                  aria-expanded="false"
+                  aria-controls="collapseNine"
+                >
+                 Puis-je obtenir un remboursement si je ne vois aucun resultat ?
+                </button>
+              </h3>
+              <div
+                id="collapseNine"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <p>
+                    Oui, {{ site['site_name'] }}} offre des remboursements pour les commandes incompletes ou non livrees. Veuillez consulter notre politique de remboursement et contacter le support pour resoudre rapidement tout probleme.
+
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ### Questions frequentes -->
+
+<!-- What we do -->
+<section id="whatWeDo">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="def_content text-center" data-tl-animate="fade-up">
+          <h2>Opportunite de revendeur avec {{ site['site_name'] }}}</h2>
+          <p>
+            {{ site['site_name'] }}} est le revendeur le moins cher du marche, offrant des services pour toutes les plateformes de reseaux sociaux. Nous permettons aux particuliers de devenir revendeurs, offrant un acces facile a des services de haute qualite. Suivez quelques etapes simples pour nous rejoindre.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="box_item" data-tl-animate="fade-left">
+          <div class="box_content">
+            <h3>
+               Qu'est-ce qu'un revendeur ?
+            </h3>
+            <p>
+               Etre revendeur signifie acheter des services en gros et les revendre a votre propre clientele. {{ site['site_name'] }} fournit une solution de revente complete. Nous proposons l'offre de revendeur la moins chere en Guinee. 
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="box_item" data-tl-animate="fade-right">
+          <div class="box_content">
+            <h3>Partenaire fiable pour la revente - Processus rapide et securise</h3>
+            <p>
+              <p>
+              Vous pouvez etre un partenaire revendeur de {{ site['site_name'] }}}. Nous fournissons la meilleure solution de revente en Guinee. Votre activite de revente sera securisee et pratique avec nous.
+     <p>
+Nous croyons en la transparence. Nous fournissons donc un support client 24h/24 et 7j/7 a nos revendeurs. Plus important encore, notre solution de revente est abordable. 
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+          <a href="/signup" class="btn btn-primary mt-4">
+            Creer un compte</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="whatWeDo">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-12">     
+
+  </div>
+    </div>
+      </div></div></div></section>
+<!-- ### What we do -->
+<section id="whatWeDo">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-12">     
+
+  </div>
+    </div>
+      </div></div></section>
+<!-- ### What we do -->
+        </main> 
+
+<script>
+(function() {
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion) {
+    document.querySelectorAll('[data-tl-animate]').forEach(function(el) {
+      el.classList.add('tl-visible');
+    });
+    document.querySelectorAll('[data-counter]').forEach(function(el) {
+      var target = el.getAttribute('data-counter');
+      el.textContent = Number(target).toLocaleString('fr-FR');
+    });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var delay = parseInt(entry.target.getAttribute('data-tl-delay') || '0', 10);
+        setTimeout(function() {
+          entry.target.classList.add('tl-visible');
+        }, delay);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('[data-tl-animate]').forEach(function(el) {
+    observer.observe(el);
+  });
+
+  var counterObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-counter]').forEach(function(el) {
+    counterObserver.observe(el);
+  });
+
+  function animateCounter(el) {
+    var target = parseInt(el.getAttribute('data-counter'), 10);
+    var duration = 2000;
+    var start = 0;
+    var startTime = null;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.floor(eased * target);
+      el.textContent = current.toLocaleString('fr-FR');
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target.toLocaleString('fr-FR');
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  document.querySelectorAll('.social_media_btn.nav-link').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var tabPane = document.querySelector(this.getAttribute('data-bs-target'));
+      if (tabPane) {
+        tabPane.style.opacity = '0';
+        tabPane.style.transform = 'translateY(10px)';
+        setTimeout(function() {
+          tabPane.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          tabPane.style.opacity = '1';
+          tabPane.style.transform = 'translateY(0)';
+        }, 50);
+      }
+    });
+  });
+})();
+</script>
+
+{% include 'footer.twig' %}

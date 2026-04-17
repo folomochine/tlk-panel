@@ -1,0 +1,295 @@
+{% include 'header.twig' %}
+	<!-- Main variables *content* -->
+        <main class="auth">
+                    <div class="about_us_effect">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/bg-img1.png"
+              class="img-fluid about_us_img_left"
+              alt=""
+            />
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/bg-img2.png"
+              class="img-fluid about_us_img_right"
+              alt=""
+            />
+          </div>
+          		 
+<style>
+.om-card{border-radius:18px;overflow:hidden;border:2px solid rgba(249,115,22,.3);background:var(--card)}
+.om-header{background:linear-gradient(135deg,#ff6600 0%,#ff9900 100%);padding:22px 24px;display:flex;align-items:center;gap:16px}
+.om-logo-wrap{width:60px;height:60px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.om-logo-wrap img{width:52px;height:52px;object-fit:contain}
+.om-header-text h3{color:#fff;font-size:20px;font-weight:900;margin:0 0 4px}
+.om-header-text p{color:rgba(255,255,255,.85);font-size:13px;margin:0}
+.om-body{padding:22px 24px}
+.om-solde-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);color:#f97316;font-size:13px;font-weight:700;margin-bottom:18px}
+.om-solde-chip span{font-size:15px;font-weight:900}
+.om-amount-label{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px}
+.om-amount-wrap{position:relative;margin-bottom:16px}
+.om-amount-wrap input{font-size:22px;font-weight:900;padding:14px 16px;border-radius:12px;border:2px solid rgba(249,115,22,.3);background:rgba(249,115,22,.04);color:var(--text);width:100%;outline:none;transition:.2s}
+.om-amount-wrap input:focus{border-color:#f97316;background:rgba(249,115,22,.07)}
+.om-amount-unit{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:800;color:#f97316;pointer-events:none}
+.om-quick-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.om-quick-btn{padding:7px 14px;border-radius:8px;border:1px solid rgba(249,115,22,.25);background:rgba(249,115,22,.06);color:#f97316;font-size:13px;font-weight:700;cursor:pointer;transition:.15s}
+.om-quick-btn:hover{background:rgba(249,115,22,.15)}
+.om-fee-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 16px}
+.om-fee-card label{font-size:12px;font-weight:800;color:var(--muted);margin-bottom:6px;display:block}
+.om-fee-card input{font-size:18px;font-weight:800;padding:12px 14px;border-radius:12px;border:1px solid rgba(249,115,22,.2);background:rgba(249,115,22,.04)}
+.om-submit{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#ff6600,#ff9900);color:#fff;font-size:15px;font-weight:900;cursor:pointer;transition:.2s;box-shadow:0 6px 20px rgba(249,115,22,.3)}
+.om-submit:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(249,115,22,.4)}
+.om-note{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.6;display:flex;gap:8px;align-items:flex-start}
+.om-top-actions{display:flex;justify-content:flex-end;align-items:center;margin-bottom:14px;width:100%}
+.om-history-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:9px 14px;border-radius:10px;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;max-width:100%}
+.om-history-modal .modal-content{background:linear-gradient(180deg,rgba(18,18,18,.98),rgba(26,26,26,.98));border:1px solid rgba(249,115,22,.18);border-radius:22px;overflow:hidden;box-shadow:0 18px 45px rgba(0,0,0,.38)}
+.om-history-modal .service_header{padding:20px 24px;background:linear-gradient(135deg,#ff6600 0%,#ff9900 100%);display:flex;align-items:center;justify-content:space-between}
+.om-history-modal #service_name{color:#fff;font-size:18px;font-weight:900}
+.om-history-modal .services_body{padding:22px 22px 18px}
+.om-history-list{display:flex;flex-direction:column;gap:12px}
+.om-history-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.om-history-main{display:flex;align-items:center;gap:14px;min-width:0}
+.om-history-id{width:52px;height:52px;border-radius:14px;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.24);display:flex;align-items:center;justify-content:center;color:#ff8a00;font-weight:900;font-size:14px;flex-shrink:0}
+.om-history-info{min-width:0}
+.om-history-method{font-size:17px;font-weight:800;color:#fff;line-height:1.4}
+.om-history-date{font-size:14px;color:var(--muted);margin-top:5px}
+.om-history-right{text-align:right;flex-shrink:0}
+.om-history-amount{font-size:20px;font-weight:900;color:#ffb347}
+.om-history-empty{padding:26px 18px;text-align:center;border-radius:16px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.1);color:var(--muted);font-size:15px}
+@media (max-width:575px){.om-fee-grid{grid-template-columns:1fr}.om-body{padding:18px 16px}.om-header{padding:18px 16px}.om-history-btn{width:100%;justify-content:center}}
+@media (max-width:767px){.om-history-item{flex-direction:column;align-items:flex-start}.om-history-right{text-align:left;width:100%}.om-history-method{font-size:16px}.om-history-date{font-size:13px}.om-history-amount{font-size:18px}}
+</style>
+<section id="addFundSections">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 col-md-8 col-12">
+        <div class="om-top-actions">
+          <button type="button" class="om-history-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <span>📜</span><span>Historique des paiements</span>
+          </button>
+        </div>
+
+        <div class="om-card">
+          <!-- En-tête Orange Money -->
+          <div class="om-header">
+            <div class="om-logo-wrap">
+              <img src="/img/orange-money.png" alt="Orange Money" onerror="this.style.display='none'">
+            </div>
+            <div class="om-header-text">
+              <h3>Orange Money</h3>
+              <p>Rechargez votre solde directement depuis votre téléphone &mdash; paiement en GNF</p>
+            </div>
+          </div>
+
+          <!-- Corps du formulaire -->
+          <div class="om-body">
+            <!-- Solde actuel -->
+            <div class="om-solde-chip">
+              💰 Solde actuel&nbsp;&nbsp;<span>{{ user["balance"] }}</span>
+            </div>
+
+            <form method="post" id="addfundsForm" action="/addfunds">
+              {{ csrf_field() }}
+              <!-- Champ méthode caché (Orange Money = seule méthode active) -->
+              <select class="form-control" id="payment_method" name="payment_type" style="display:none">
+                {% for method in site["paymentMethods"] %}
+                  <option value="{{ method['id'] }}" {% if method['id'] == 21 %}selected{% endif %}>{{ method['name'] }}</option>
+                {% endfor %}
+              </select>
+
+              <!-- Montant -->
+              <div class="om-amount-label">Montant à recharger</div>
+              <div id="addfunds_fields"></div>
+
+              <!-- Montants rapides -->
+              <div class="om-quick-btns" id="om-quick-btns">
+                <button type="button" class="om-quick-btn" onclick="setAmount(20000)">20 000</button>
+                <button type="button" class="om-quick-btn" onclick="setAmount(50000)">50 000</button>
+                <button type="button" class="om-quick-btn" onclick="setAmount(100000)">100 000</button>
+                <button type="button" class="om-quick-btn" onclick="setAmount(200000)">200 000</button>
+                <button type="button" class="om-quick-btn" onclick="setAmount(500000)">500 000</button>
+              </div>
+
+            </form>
+
+            <div id="formSubmitResponseMessage"></div>
+            <div id="formSubmitResponseContent"></div>
+
+            <div class="om-note">
+              <span>ℹ️</span>
+              <span>Le montant saisi est en GNF. Exemple : 20 000 GNF = 2 USD crédités sur votre solde avant bonus éventuel. Après validation, vous serez redirigé vers Orange Money et le crédit sera ajouté automatiquement.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+
+
+
+<!-- Modal For Showing Balance History -->
+<div class="modal fade om-history-modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content services_dsc_modal">
+            <div class="modal__close">
+                <button type="button" class="btn btn_modal_close" data-bs-dismiss="modal"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <div class="service_header">
+
+                <div><span id="service_name">Historique des paiements</span></div>
+            </div>
+            <div class="services_body">
+                <div class="om-history-list">
+                  {% if payments|length > 0 %}
+                    {% for payment in payments %}
+                      <div class="om-history-item">
+                        <div class="om-history-main">
+                          <div class="om-history-id">#{{ payment['id'] }}</div>
+                          <div class="om-history-info">
+                            <div class="om-history-method">{{ payment['name'] }}</div>
+                            <div class="om-history-date">{{ payment['date'] }}</div>
+                          </div>
+                        </div>
+                        <div class="om-history-right">
+                          <div class="om-history-amount">{{ payment['amount'] }}</div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  {% else %}
+                    <div class="om-history-empty">
+                      Aucun paiement enregistré pour le moment.
+                    </div>
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ### Modal For Showing Balance History -->
+
+
+{# Descriptions anglaises des methodes non utilisees supprimees (ToutLike Phase 6) #}
+
+        </main>
+
+            </div>
+      </section>
+      
+
+			{% include 'footer.twig' %}
+ <script type="text/javascript" src="/public/global/ch3915babussofa4.js">
+      </script>
+  <script type="text/javascript" src="/public/global/cgtptn05b64bwcs4.js">
+      </script>
+  <script type="text/javascript" src="/public/global/xcz59lmywkfdgsp4.js">
+      </script>
+  <script type="text/javascript" src="/public/global/wnzsoolloslhfumj.js">
+      </script>
+      <script type="text/javascript" src="/public/global/qri1ac173hshc2hdjc.js">
+</script>
+<script type="text/javascript" src="/public/global/newyear.js">
+</script>
+			<script>
+var paymentMethods = {{ site["paymentMethodsJSON"]|raw }};
+			</script>
+			<script>
+				const addfundsRoute = "/addfunds";
+function addfundsInit() {
+var fields = $("#addfunds_fields");
+var selectedMethod = $("#payment_method").val();
+var instructions = paymentMethods[selectedMethod] ? paymentMethods[selectedMethod][0].instructions : "";
+$.ajax({
+url: addfundsRoute,
+data: "action=getForm&selectedMethod=" + selectedMethod + "&_csrf_token={{ csrf_token() }}",
+type: "POST",
+success: function (json) {
+if (json.success == true) {
+if (instructions.length > 0) {
+var methodInstruction = '<div class="form-group"><label class="control-label">Instructions de paiement</label><div class="panel-body border-solid border-rounded">' + instructions + '</div></div>';
+} else {
+var methodInstruction = "";
+} fields.html(methodInstruction + json.content);
+extraFeeInit(selectedMethod);
+}
+}
+});
+}
+
+function extraFeeInit(method) {
+var fields = $("#fee_fields");
+var methodData = paymentMethods[method] ? paymentMethods[method][0] : null;
+var fee = methodData ? parseFloat(methodData.fee || 0) : 0;
+if (fee > 0) {
+fields.html('<div class="om-fee-grid"><div class="form-group om-fee-card"><label class="control-label">Frais Orange Money (' + fee.toFixed(2) + '%)</label><input type="text" class="form-control" id="methodExtraFee" disabled value="0" /></div><div class="form-group om-fee-card"><label class="control-label">Total à payer (GNF)</label><input type="text" id="totalAmount" class="form-control" disabled value="0" /></div></div>');
+} else {
+fields.html("");
+}
+}
+function preparePrice(t) {
+n = 2;
+var r = (t = $.trim(t.toString().replace(",", "."))).split(".");
+return void 0 !== r[1] && (r[1] = r[1].replace(/0+$/g, ""), r[1].length > n && (n = 2 < r[1].length ? 2 : r[1].length)),
+1e3 <= (t =( t = parseFloat(t)).toFixed(n)) && (t = t.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1" + "")),
+t = t.toString().replace(/\.(\d+)$/g, "." + "$1");
+return t.toFixed(n)
+}
+function formatGNFAmount(amount) {
+amount = Math.round(parseFloat(amount) || 0);
+return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+function setAmount(val) {
+  var input = document.getElementById('paymentAmount');
+  if (input) {
+    input.value = val;
+    if (window.jQuery) {
+      $(input).trigger("input").trigger("keyup");
+    } else {
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }
+}
+$(document).ready(function () {
+if (paymentMethods[21]) {
+$("#payment_method").val("21");
+}
+$(document).on("input keyup", "#paymentAmount", function () {
+var selectedMethod = $("#payment_method").val();
+var amount = parseFloat($(this).val());
+if (isNaN(amount) || amount < 0) {
+amount = 0;
+}
+var feePercentage = paymentMethods[selectedMethod] ? parseFloat(paymentMethods[selectedMethod][0].fee || 0) : 0;
+var feeInput = $("#methodExtraFee");
+var totalAmountInput = $("#totalAmount");
+var fee = amount * (feePercentage / 100);
+feeInput.val(formatGNFAmount(fee));
+totalAmountInput.val(formatGNFAmount(amount + fee));
+});
+addfundsInit();
+});
+$("#payment_method").change(function () {
+addfundsInit();
+});
+
+$("#addfundsForm").submit(function (e) {
+e.preventDefault();
+var data = $(this).serialize();
+
+$.ajax({
+url: addfundsRoute,
+data: data,
+type: "POST",
+success: function (json) {
+if (json.success == true) {
+var msgDiv = $("#formSubmitResponseMessage");
+msgDiv.html('<div class="alert alert-success alert-dismissible fade show mt-2" role="alert">' + json.message + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>');
+var contentDiv = $("#formSubmitResponseContent");
+contentDiv.html(json.content);
+} else {
+var msgDiv = $("#formSubmitResponseMessage");
+msgDiv.html('<div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">' + json.message + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button></div>');
+}
+}
+
+});
+});
+			</script>

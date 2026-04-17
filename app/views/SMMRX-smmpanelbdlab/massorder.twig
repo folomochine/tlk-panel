@@ -1,0 +1,156 @@
+{% include 'header.twig' %}
+
+ <!-- Main variables *content* -->
+        <main class="auth">
+                    <div class="about_us_effect">
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/bg-img1.png"
+              class="img-fluid about_us_img_left"
+              alt=""
+            />
+            <img
+              src="https://cdn.smmpanelbdlab.com/smmscript/smmrx/img/bg-img2.png"
+              class="img-fluid about_us_img_right"
+              alt=""
+            />
+          </div>
+          		    <!-- Mass Order Page -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 col-12">
+      <div class="card card_auth_1 mb-3">
+        <div class="card-header d-flex flex-column justify-content-center">
+          <h3>Commande en masse</h3>
+          <p>Commandes en masse pour commander en gros et gagner du temps.</p>
+        </div>
+        <div class="card-body">
+
+<style>
+/* Popup compact mobile-first (réutilise les classes .tl-popup définies dans neworder) */
+.tl-popup-overlay{position:fixed;inset:0;z-index:99998;background:rgba(15,23,42,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:flex;align-items:flex-end;justify-content:center;padding:12px;animation:tlPopupFadeIn .22s ease-out}
+.tl-popup{position:relative;width:100%;max-width:420px;background:#fff;color:#0f172a;border:1px solid rgba(148,163,184,.25);border-radius:20px 20px 22px 22px;box-shadow:0 20px 60px -10px rgba(0,0,0,.40);overflow:hidden;padding-bottom:env(safe-area-inset-bottom,0);animation:tlPopupSlideUp .28s cubic-bezier(.34,1.56,.64,1)}
+body.dark-mode .tl-popup{background:#0f172a;color:#f1f5f9;border-color:rgba(148,163,184,.18)}
+.tl-popup-header{display:flex;align-items:center;gap:12px;padding:18px 56px 10px 20px}
+.tl-popup-ico{width:46px;height:46px;border-radius:14px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:20px;color:#fff}
+.tl-popup.ok .tl-popup-ico{background:linear-gradient(135deg,#10B981,#06B6D4);box-shadow:0 10px 22px rgba(16,185,129,.35)}
+.tl-popup.err .tl-popup-ico{background:linear-gradient(135deg,#EF4444,#FB7185);box-shadow:0 10px 22px rgba(239,68,68,.35)}
+.tl-popup-title{font-size:16px;font-weight:800;line-height:1.3;margin:0;flex:1;min-width:0;color:inherit}
+.tl-popup-sub{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-top:2px}
+body.dark-mode .tl-popup-sub{color:#94a3b8}
+.tl-popup-close{position:absolute;top:12px;right:12px;width:34px;height:34px;min-width:34px;border:0;cursor:pointer;border-radius:10px;background:rgba(148,163,184,.14);color:inherit;display:inline-flex;align-items:center;justify-content:center;font-size:15px;line-height:1;transition:all .15s ease}
+.tl-popup-close:hover{background:rgba(148,163,184,.28)}
+body.dark-mode .tl-popup-close{background:rgba(148,163,184,.18);color:#e2e8f0}
+.tl-popup-body{padding:2px 20px 14px;font-size:14px;line-height:1.55;color:#475569;word-break:break-word}
+body.dark-mode .tl-popup-body{color:#cbd5e1}
+.tl-popup-actions{display:flex;gap:8px;padding:12px 16px 16px;border-top:1px solid rgba(148,163,184,.18);background:rgba(248,250,252,.6)}
+body.dark-mode .tl-popup-actions{background:rgba(15,23,42,.35);border-top-color:rgba(148,163,184,.14)}
+.tl-popup-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 14px;border-radius:12px;font-weight:800;font-size:13px;text-decoration:none;border:0;cursor:pointer;transition:all .15s ease;min-height:44px;line-height:1}
+.tl-popup-btn.g{background:rgba(148,163,184,.18);color:#0f172a}
+body.dark-mode .tl-popup-btn.g{background:rgba(148,163,184,.22);color:#e2e8f0}
+.tl-popup-btn.g:hover{background:rgba(148,163,184,.28)}
+.tl-popup.ok .tl-popup-btn.p{background:linear-gradient(135deg,#10B981,#06B6D4);color:#fff;box-shadow:0 10px 22px rgba(16,185,129,.30)}
+.tl-popup.err .tl-popup-btn.p{background:linear-gradient(135deg,#EF4444,#FB7185);color:#fff;box-shadow:0 10px 22px rgba(239,68,68,.30)}
+.tl-popup-btn.p:hover{filter:brightness(1.08)}
+@keyframes tlPopupFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes tlPopupSlideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes tlPopupFadeOut{to{opacity:0}}
+@keyframes tlPopupSlideDown{to{transform:translateY(100%);opacity:0}}
+.tl-popup-overlay.-closing{animation:tlPopupFadeOut .2s ease-in forwards}
+.tl-popup-overlay.-closing .tl-popup{animation:tlPopupSlideDown .2s ease-in forwards}
+@media (min-width:640px){
+  .tl-popup-overlay{align-items:center;padding:24px}
+  .tl-popup{border-radius:20px;animation:tlPopupScale .22s cubic-bezier(.34,1.56,.64,1)}
+  .tl-popup-overlay.-closing .tl-popup{animation:tlPopupScaleOut .18s ease-in forwards}
+  @keyframes tlPopupScale{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+  @keyframes tlPopupScaleOut{to{transform:scale(.96);opacity:0}}
+}
+</style>
+
+{% if error %}
+  <div class="tl-popup-overlay" id="tl-popup-massorder" role="presentation">
+    <div class="tl-popup err" role="dialog" aria-modal="true" aria-labelledby="tlPopupMassTitle">
+      <button type="button" class="tl-popup-close" onclick="tlClosePopupMass()" aria-label="Fermer">✕</button>
+      <div class="tl-popup-header">
+        <div class="tl-popup-ico"><i class="fa fa-exclamation-triangle"></i></div>
+        <div style="flex:1;min-width:0">
+          <h3 class="tl-popup-title" id="tlPopupMassTitle">Commande en masse impossible</h3>
+          <span class="tl-popup-sub">Vérifiez le format des lignes</span>
+        </div>
+      </div>
+      <div class="tl-popup-body">{{ errorText }}</div>
+      <div class="tl-popup-actions">
+        <button type="button" class="tl-popup-btn g" onclick="tlClosePopupMass()">Fermer</button>
+        <button type="button" class="tl-popup-btn p" onclick="tlClosePopupMass()"><i class="fa fa-check"></i> Compris</button>
+      </div>
+    </div>
+  </div>
+{% elseif success %}
+  <div class="tl-popup-overlay" id="tl-popup-massorder" role="presentation">
+    <div class="tl-popup ok" role="dialog" aria-modal="true" aria-labelledby="tlPopupMassTitle">
+      <button type="button" class="tl-popup-close" onclick="tlClosePopupMass()" aria-label="Fermer">✕</button>
+      <div class="tl-popup-header">
+        <div class="tl-popup-ico"><i class="fa fa-check"></i></div>
+        <div style="flex:1;min-width:0">
+          <h3 class="tl-popup-title" id="tlPopupMassTitle">Commandes en masse envoyées</h3>
+          <span class="tl-popup-sub">Prises en compte avec succès</span>
+        </div>
+      </div>
+      <div class="tl-popup-body">{{ successText }}</div>
+      <div class="tl-popup-actions">
+        <button type="button" class="tl-popup-btn g" onclick="tlClosePopupMass()">Continuer</button>
+        <a class="tl-popup-btn p" href="/orders"><i class="fa fa-list"></i> Mes commandes</a>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<script>
+(function(){
+  var el = document.getElementById('tl-popup-massorder');
+  if(!el) return;
+  window.tlClosePopupMass = function(){
+    if(!el || el.classList.contains('-closing')) return;
+    el.classList.add('-closing');
+    setTimeout(function(){
+      if(el && el.parentNode) el.parentNode.removeChild(el);
+      document.body.style.overflow = '';
+    }, 220);
+  };
+  document.body.style.overflow = 'hidden';
+  el.addEventListener('click', function(e){ if(e.target === el) tlClosePopupMass(); });
+  document.addEventListener('keydown', function onKey(e){
+    if(e.key === 'Escape'){ tlClosePopupMass(); document.removeEventListener('keydown', onKey); }
+  });
+})();
+</script>
+
+             <form method="post" action="massorder">
+                {{ csrf_field() }}
+                                
+                <div class="form-group">
+                    <label for="links" class="control-label">Une commande par ligne au format</label>
+                    <textarea type="text" class="form-control" id="mass" name="mass" value="{{ data['mass'] }}" placeholder="service_id | link | quantity" style="height: 450px;"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Mass Order Page -->
+
+        </main>
+
+            </div>
+      </section>
+      
+    
+ {% if contentText2 %}
+{{ contentText2 }}
+{% endif %}
+
+
+
+{% include 'footer.twig' %}

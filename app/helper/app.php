@@ -1,0 +1,62 @@
+<?php
+function controller($controllerName) {
+    $controllerName = $controllerName;
+   
+    return PATH . '/app/controller/' . $controllerName . '.php';
+}
+function view($viewName) {
+    $viewName = $viewName;
+    return PATH . '/app/views/' . $viewName;
+}
+function route($index) {
+    global $route;
+    if (isset($route[$index])) {
+        return $route[$index];
+    } else {
+     return false;
+    }
+}
+function site_url($url = false) {
+  //  $url = str_replace("admin","scriptlux-admin",$url);
+    return URL . '/' . $url;
+}
+/**
+ * Vérifie qu'un fichier uploadé est bien une image (MIME détecté par finfo).
+ */
+function toutlike_upload_is_allowed_image(array $file, array $allowedMime = null) {
+    if (empty($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
+        return false;
+    }
+    if (($file['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK) {
+        return false;
+    }
+    if (!function_exists('finfo_open')) {
+        return false;
+    }
+    $allowedMime = $allowedMime ?? ['image/jpeg', 'image/png', 'image/gif'];
+    $f = finfo_open(FILEINFO_MIME_TYPE);
+    if (!$f) {
+        return false;
+    }
+    $mime = finfo_file($f, $file['tmp_name']);
+    finfo_close($f);
+    return in_array($mime, $allowedMime, true);
+}
+
+function GetIP() {
+    if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown")) $ip = getenv("HTTP_CLIENT_IP");
+    else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown")) $ip = getenv("HTTP_X_FORWARDED_FOR");
+    else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown")) $ip = getenv("REMOTE_ADDR");
+    else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown")) $ip = $_SERVER['REMOTE_ADDR'];
+    else $ip = "unknown";
+    return ($ip);
+}
+
+function themeExtras($which) {
+    global $conn;
+    $theme = $conn->prepare("SELECT * FROM themes WHERE theme_dirname=:dir ");
+    $theme->execute(array('dir' => THEME));
+    $theme = $theme->fetch(PDO::FETCH_ASSOC);
+    return json_decode($theme["theme_extras"], true);
+}
+$stylesheet = themeExtras('stylesheets');

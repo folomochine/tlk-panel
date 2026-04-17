@@ -1,0 +1,35 @@
+{% extends 'public_base.twig' %}
+{% block title %}Conditions d'utilisation - {{ site['site_name'] }}{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="page-header anim">
+    <h1>Conditions d'utilisation</h1>
+    <p>Veuillez lire attentivement avant d'utiliser nos services.</p>
+  </div>
+  <div class="card anim">
+    {% if contentText %}
+      {{ contentText|raw }}
+    {% else %}
+      <div style="color:var(--muted);font-size:14px;line-height:1.9">
+        <h2>1. Acceptation des conditions</h2>
+        <p>En utilisant {{ site['site_name'] }}, vous acceptez ces conditions d'utilisation dans leur int&eacute;gralit&eacute;.</p>
+
+        <h2 style="margin-top:20px">2. Description du service</h2>
+        <p>{{ site['site_name'] }} fournit des services de marketing sur les r&eacute;seaux sociaux (likes, followers, vues, commentaires). Les r&eacute;sultats peuvent varier selon les services command&eacute;s.</p>
+
+        <h2 style="margin-top:20px">3. Paiements</h2>
+        <p>Tous les paiements sont effectu&eacute;s en Franc Guin&eacute;en (GNF) via LengoPay. Les fonds ajout&eacute;s &agrave; votre compte ne sont pas remboursables sauf en cas de probl&egrave;me technique av&eacute;r&eacute;.</p>
+
+        <h2 style="margin-top:20px">4. Utilisation acceptable</h2>
+        <p>Vous vous engagez &agrave; ne pas utiliser nos services &agrave; des fins ill&eacute;gales ou contraires aux conditions des plateformes de r&eacute;seaux sociaux.</p>
+
+        <h2 style="margin-top:20px">5. Limitation de responsabilit&eacute;</h2>
+        <p>{{ site['site_name'] }} ne peut &ecirc;tre tenu responsable des actions prises par les plateformes de r&eacute;seaux sociaux sur votre compte.</p>
+
+        <h2 style="margin-top:20px">6. Contact</h2>
+        <p>Pour toute question, contactez-nous &agrave; support@toutlike.com.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
