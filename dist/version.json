@@ -1,15 +1,13 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "date": "2026-04-17",
-  "zip_url": "https://github.com/folomochine/tlk-panel/releases/download/v1.0.0/update-1.0.0.zip",
-  "sha256": "d46ccc125ebe45e33f519728137910fe94d2884a1aa1cbd82ae68a7ed841a78f",
+  "zip_url": "https://github.com/folomochine/tlk-panel/releases/download/v1.1.0/update-1.1.0.zip",
+  "sha256": "cd0a6e79f18460a2c8385f406e21400dc603cd0136efa4c5489c916ebe2f62c7",
   "min_php": "7.4",
   "changelog": [
-    "Release initiale du panel ToutLike",
-    "Tableau de bord admin redesigne en GNF avec KPI colores et graphiques",
-    "Popup compact mobile-first pour la confirmation de commande",
-    "Page /updates traduite en francais avec badges colores",
-    "Modal methodes de paiement corrige",
-    "Systeme OTA de mise a jour integre depuis GitHub Releases"
+    "Devise par defaut : GNF pour tous les nouveaux comptes",
+    "Correction : suppression barre mobile 'Se connecter maintenant' sur page login",
+    "Correction : formulaire d'inscription remonte en haut sur mobile",
+    "Tous les utilisateurs existants migres vers GNF"
   ]
 }
